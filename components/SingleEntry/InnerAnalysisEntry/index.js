@@ -1,3 +1,11 @@
+import {
+  StyledH1,
+  StyledDate,
+  Header,
+  EntryContent,
+  StyledH2,
+} from "../SingleEntry.styled";
+
 export default function InnerAnalysisEntry({ entry }) {
   const {
     title,
@@ -16,32 +24,36 @@ export default function InnerAnalysisEntry({ entry }) {
 
   return (
     <>
-      <h1>{title}</h1>
-      <p>{date}</p>
-      <h2>Beschreibung</h2>
-      <p>{description}</p>
-      <h2>Interpretation</h2>
-      <ol>
-        {interpretations.map((interpretation) => {
-          return <li>{interpretation}</li>;
-        })}
-      </ol>
-      <h2>Verhalten</h2>
-      <p>{behavior}</p>
-      <h2>Endergebnis</h2>
-      <p>{actualResult}</p>
-      <h2>Gewünschtes Ergebnis</h2>
-      <p>{desiredResult}</p>
-      <h2>Ergebnisvergleich</h2>
-      <p>{comparison}</p>
-      <h2>Revision</h2>
-      <p>{revision}</p>
-      <h2>Verhaltensänderung</h2>
-      <p>{behaviorChange}</p>
-      <h2>implementierung</h2>
-      <p>{implementation}</p>
-      <h2>Transfer</h2>
-      <p>{transfer}</p>
+      <Header>
+        <StyledH1>{title}</StyledH1>
+        <StyledDate>{date}</StyledDate>
+      </Header>
+      <EntryContent>
+        <StyledH2>Beschreibung</StyledH2>
+        <p>{description}</p>
+        <StyledH2>Interpretation</StyledH2>
+        <ol>
+          {interpretations.map((interpretation) => {
+            return <li>{interpretation}</li>;
+          })}
+        </ol>
+        <StyledH2>Verhalten</StyledH2>
+        <p>{behavior}</p>
+        <StyledH2>Endergebnis</StyledH2>
+        <p>{actualResult}</p>
+        <StyledH2>Gewünschtes Ergebnis</StyledH2>
+        <p>{desiredResult}</p>
+        <StyledH2>Ergebnisvergleich</StyledH2>
+        <p>{comparison}</p>
+        <StyledH2>Revision</StyledH2>
+        <p>{revision}</p>
+        <StyledH2>Verhaltensänderung</StyledH2>
+        <p>{behaviorChange}</p>
+        <StyledH2>implementierung</StyledH2>
+        <p>{implementation}</p>
+        <StyledH2>Transfer</StyledH2>
+        <p>{transfer}</p>
+      </EntryContent>
     </>
   );
 }

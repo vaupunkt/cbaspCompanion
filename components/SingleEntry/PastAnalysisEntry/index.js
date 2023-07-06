@@ -1,4 +1,10 @@
-import { Header, EntryContent } from "../SingleEntry.styled";
+import SubHeading from "@/components/SubHeading";
+import {
+  Header,
+  EntryContent,
+  StyledH1,
+  StyledDate,
+} from "../SingleEntry.styled";
 
 export default function PastAnalysisEntry({ entry }) {
   const {
@@ -18,33 +24,33 @@ export default function PastAnalysisEntry({ entry }) {
   return (
     <>
       <Header>
-        <h1>{title}</h1>
-        <p>{date}</p>
+        <StyledH1>{title}</StyledH1>
+        <StyledDate>{date}</StyledDate>
       </Header>
       <EntryContent>
-        <h2>Beschreibung</h2>
+        <SubHeading>Beschreibung</SubHeading>
         <p>{description}</p>
-        <h2>Interpretation</h2>
+        <SubHeading>Interpretation</SubHeading>
         <ol>
           {interpretations.map((interpretation) => {
             return <li>{interpretation}</li>;
           })}
         </ol>
-        <h2>Verhalten</h2>
+        <SubHeading>Verhalten</SubHeading>
         <p>{behavior}</p>
-        <h2>Endergebnis</h2>
+        <SubHeading>Endergebnis</SubHeading>
         <p>{actualResult}</p>
-        <h2>Gewünschtes Ergebnis</h2>
+        <SubHeading>Gewünschtes Ergebnis</SubHeading>
         <p>{desiredResult}</p>
-        <h2>Ergebnisvergleich</h2>
+        <SubHeading>Ergebnisvergleich</SubHeading>
         <p>{comparison}</p>
-        <h2>Revision</h2>
+        <SubHeading>Revision</SubHeading>
         <p>{revision}</p>
-        <h2>Verhaltensänderung</h2>
+        <SubHeading>Verhaltensänderung</SubHeading>
         <p>{behaviorChange}</p>
-        <h2>implementierung</h2>
+        <SubHeading>implementierung</SubHeading>
         <p>{implementation}</p>
-        <h2>Transfer</h2>
+        <SubHeading>Transfer</SubHeading>
         <p>{transfer}</p>
       </EntryContent>
     </>
