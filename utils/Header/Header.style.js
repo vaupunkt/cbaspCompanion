@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const Header = styled.div`
+export const StyledDiv = styled.div`
   background-color: var(--mainDarkColor);
   color: var(--mainLightColor);
   position: fixed;
@@ -20,9 +20,4 @@ export const StyledDate = styled.p`
   margin: 0 10px 10px 5px;
   font-size: 0.8em;
   text-align: right;
-`;
-
-export const EntryContent = styled.div`
-  margin: 0 10px;
-  margin-top: 90px;
 `;

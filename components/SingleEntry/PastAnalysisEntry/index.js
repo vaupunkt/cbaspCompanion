@@ -1,10 +1,6 @@
-import SubHeading from "@/components/SubHeading";
-import {
-  Header,
-  EntryContent,
-  StyledH1,
-  StyledDate,
-} from "../SingleEntry.styled";
+import SubHeading from "@/utils/SubHeading";
+import { EntryContent } from "../SingleEntry.style";
+import Header from "@/utils/Header";
 
 export default function PastAnalysisEntry({ entry }) {
   const {
@@ -23,10 +19,7 @@ export default function PastAnalysisEntry({ entry }) {
   } = entry;
   return (
     <>
-      <Header>
-        <StyledH1>{title}</StyledH1>
-        <StyledDate>{date}</StyledDate>
-      </Header>
+      <Header title={title} date={date}></Header>
       <EntryContent>
         <SubHeading>Beschreibung</SubHeading>
         <p>{description}</p>

@@ -4,7 +4,7 @@ export const StyledH2 = styled.h2`
   text-align: center;
   font-size: 0.8em;
   position: absolute;
-  top: -10px;
+  top: 5px;
   left: 50%;
   transform: translate(-50%, 0);
   margin: 0;
@@ -14,4 +14,5 @@ export const StyledH2 = styled.h2`
 
 export const StyledDiv = styled.div`
   position: relative;
+  padding-top: 10px;
 `;
