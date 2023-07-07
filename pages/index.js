@@ -8,7 +8,7 @@ export default function HomePage() {
       <ul>
         {placeholderEntries.map((placeholderEntry) => {
           return (
-            <li key={placeholderEntry.key}>
+            <li key={placeholderEntry.id}>
               <Link href={`/entries/${placeholderEntry.id}`}>
                 {placeholderEntry.date}
                 <h2>{placeholderEntry.title}</h2>

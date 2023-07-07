@@ -2,6 +2,7 @@ import BackButton from "@/components/BackButton";
 import Entry from "@/components/Entry";
 import placeholderEntries from "@/lib/placeholderEntries";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function EntryPage() {
   const router = useRouter();
@@ -13,7 +14,7 @@ export default function EntryPage() {
   return (
     <>
       <BackButton />
-      <Entry entry={entry}></Entry>
+      <Entry data={entry}></Entry>
     </>
   );
 }

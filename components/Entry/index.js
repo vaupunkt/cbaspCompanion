@@ -1,7 +1,8 @@
+import placeholderEntries from "@/lib/placeholderEntries";
 import { EntryContent, ContentHeadline } from "./Entry.style";
 import EntryHeader from "@/components/EntryHeader";
 
-export default function Entry({ entry }) {
+export default function Entry({ data }) {
   const {
     title,
     date,
@@ -12,11 +13,11 @@ export default function Entry({ entry }) {
     rolePlay,
     implementation,
     transfer,
-  } = entry;
-
+  } = data;
   return (
     <>
-      <EntryHeader title={title} date={date}></EntryHeader>
+      <p>Entry {data.id}</p>
+      {/* <EntryHeader title={title} date={date}></EntryHeader>
       <EntryContent>
         <ContentHeadline>Beschreibung</ContentHeadline>
         <p>{description}</p>
@@ -48,7 +49,7 @@ export default function Entry({ entry }) {
       <EntryContent>
         <ContentHeadline>Transfer</ContentHeadline>
         <p>{transfer}</p>
-      </EntryContent>
+      </EntryContent> */}
     </>
   );
 }
