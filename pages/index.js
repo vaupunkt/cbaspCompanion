@@ -1,22 +1,11 @@
-import placeholderEntries from "@/lib/placeholderEntries";
-import Link from "next/link";
+import EntryHeader from "@/components/EntryHeader";
+import EntryList from "@/components/EntryList";
 
 export default function HomePage() {
   return (
     <>
-      <h1>All Entries</h1>
-      <ul>
-        {placeholderEntries.map((placeholderEntry) => {
-          return (
-            <li key={placeholderEntry.id}>
-              <Link href={`/entries/${placeholderEntry.id}`}>
-                {placeholderEntry.date}
-                <h2>{placeholderEntry.title}</h2>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <EntryHeader title="All Entries" />
+      <EntryList />
     </>
   );
 }

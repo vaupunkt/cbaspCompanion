@@ -7,7 +7,11 @@ export const Header = styled.div`
   top: 0;
   padding: 10px;
   width: 100%;
+  height: 60px;
   z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const HeaderTitle = styled.h1`

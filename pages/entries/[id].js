@@ -1,4 +1,3 @@
-import BackButton from "@/components/BackButton";
 import Entry from "@/components/Entry";
 import placeholderEntries from "@/lib/placeholderEntries";
 import { useRouter } from "next/router";
@@ -16,10 +15,5 @@ export default function EntryPage() {
     );
   });
 
-  return (
-    <>
-      <BackButton />
-      {entry && <Entry data={entry} />}
-    </>
-  );
+  return <>{entry && <Entry data={entry} />}</>;
 }

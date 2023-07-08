@@ -1,12 +1,14 @@
 import { styled } from "styled-components";
 
 export const BackButtonStyled = styled.button`
-  position: fixed;
-  z-index: 2;
   background-color: var(--mainDarkColor);
   color: var(--mainLightColor);
-  font-size: 2.5em;
-  padding: 5px;
-  margin: 0;
   border: none;
+  font-size: 1.5em;
+  &:hover {
+    color: color-mix(in srgb, var(--mainLightColor) 50%, var(--mainDarkColor));
+  }
+  &:active {
+    color: var(--mainLightColor);
+  }
 `;
