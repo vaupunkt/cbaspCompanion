@@ -1,5 +1,5 @@
 import placeholderEntries from "@/lib/placeholderEntries";
-import Link from "next/link";
+
 import {
   EntryListContainer,
   EntryListDate,
