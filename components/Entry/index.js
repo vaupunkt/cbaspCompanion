@@ -16,8 +16,7 @@ export default function Entry({ data }) {
   } = data;
   return (
     <>
-      <p>Entry {data.id}</p>
-      {/* <EntryHeader title={title} date={date}></EntryHeader>
+      <EntryHeader title={title} date={date}></EntryHeader>
       <EntryContent>
         <ContentHeadline>Beschreibung</ContentHeadline>
         <p>{description}</p>
@@ -49,7 +48,7 @@ export default function Entry({ data }) {
       <EntryContent>
         <ContentHeadline>Transfer</ContentHeadline>
         <p>{transfer}</p>
-      </EntryContent> */}
+      </EntryContent>
     </>
   );
 }
