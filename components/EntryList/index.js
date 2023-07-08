@@ -11,16 +11,20 @@ import {
 export default function EntryList() {
   return (
     <EntryListContainer>
-      {placeholderEntries.map((placeholderEntry) => {
-        return (
-          <EntryListItemLink href={`/entries/${placeholderEntry.id}`}>
-            <EntryListItem key={placeholderEntry.id}>
-              <EntryListDate>{placeholderEntry.date}</EntryListDate>
-              <EntryListTitle>{placeholderEntry.title}</EntryListTitle>
-            </EntryListItem>
-          </EntryListItemLink>
-        );
-      })}
+      {placeholderEntries === "" ? (
+        <p>Es gibt noch keine Einträge.</p>
+      ) : (
+        placeholderEntries.map((placeholderEntry) => {
+          return (
+            <EntryListItemLink href={`/entries/${placeholderEntry.id}`}>
+              <EntryListItem key={placeholderEntry.id}>
+                <EntryListDate>{placeholderEntry.date}</EntryListDate>
+                <EntryListTitle>{placeholderEntry.title}</EntryListTitle>
+              </EntryListItem>
+            </EntryListItemLink>
+          );
+        })
+      )}
     </EntryListContainer>
   );
 }
