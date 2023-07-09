@@ -1,7 +1,7 @@
 import { EntryContent, ContentHeadline } from "./Entry.style";
-import EntryHeader from "@/components/EntryHeader";
+import Header from "@/components/Header";
 
-export default function Entry({ entry }) {
+export default function Entry({ data }) {
   const {
     title,
     date,
@@ -12,11 +12,10 @@ export default function Entry({ entry }) {
     rolePlay,
     implementation,
     transfer,
-  } = entry;
-
+  } = data;
   return (
     <>
-      <EntryHeader title={title} date={date}></EntryHeader>
+      <Header backButton title={title} date={date}></Header>
       <EntryContent>
         <ContentHeadline>Beschreibung</ContentHeadline>
         <p>{description}</p>

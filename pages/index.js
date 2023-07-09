@@ -1,6 +1,11 @@
-import placeholderEntry from "@/lib/placeholderEntry";
-import Entry from "@/components/Entry";
+import Header from "@/components/Header";
+import EntryList from "@/components/EntryList";
 
 export default function HomePage() {
-  return <Entry entry={placeholderEntry} />;
+  return (
+    <>
+      <Header title="All Entries"></Header>
+      <EntryList />
+    </>
+  );
 }
