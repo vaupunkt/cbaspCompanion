@@ -5,6 +5,8 @@ export const BackButtonStyled = styled.button`
   color: var(--mainLightColor);
   border: none;
   font-size: 1.5em;
+  position: absolute;
+  left: 10px;
   &:hover {
     color: color-mix(in srgb, var(--mainLightColor) 50%, var(--mainDarkColor));
   }

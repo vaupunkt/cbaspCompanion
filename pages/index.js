@@ -1,10 +1,10 @@
-import EntryHeader from "@/components/EntryHeader";
+import Header from "@/components/Header";
 import EntryList from "@/components/EntryList";
 
 export default function HomePage() {
   return (
     <>
-      <EntryHeader title="All Entries" />
+      <Header title="All Entries"></Header>
       <EntryList />
     </>
   );

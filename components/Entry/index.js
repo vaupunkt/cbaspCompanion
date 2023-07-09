@@ -1,6 +1,5 @@
-import placeholderEntries from "@/lib/placeholderEntries";
 import { EntryContent, ContentHeadline } from "./Entry.style";
-import EntryHeader from "@/components/EntryHeader";
+import Header from "@/components/Header";
 
 export default function Entry({ data }) {
   const {
@@ -16,7 +15,7 @@ export default function Entry({ data }) {
   } = data;
   return (
     <>
-      <EntryHeader title={title} date={date}></EntryHeader>
+      <Header backButton title={title} date={date}></Header>
       <EntryContent>
         <ContentHeadline>Beschreibung</ContentHeadline>
         <p>{description}</p>
