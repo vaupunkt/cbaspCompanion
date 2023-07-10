@@ -6,6 +6,9 @@ export default function App({ Component, pageProps }) {
   const allZukunftsanalyseEntries = placeholderEntries.filter(
     (placeholderEntry) => placeholderEntry.type === "FutureAnalysis"
   );
+  const allVergangenheitsanalyseEntries = placeholderEntries.filter(
+    (placeholderEntry) => placeholderEntry.type === "PastAnalysis"
+  );
 
   return (
     <>
@@ -14,6 +17,7 @@ export default function App({ Component, pageProps }) {
         {...pageProps}
         allEntries={allEntries}
         allZukunftsanalyseEntries={allZukunftsanalyseEntries}
+        allVergangenheitsanalyseEntries={allVergangenheitsanalyseEntries}
       />
     </>
   );
