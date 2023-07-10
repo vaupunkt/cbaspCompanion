@@ -7,7 +7,6 @@ import {
 } from "./EntryList.style";
 
 export default function EntryList({ entries }) {
-  console.log(entries);
   return (
     <EntryListContainer>
       {!entries ? (
