@@ -1,10 +1,13 @@
 import GlobalStyle from "../styles";
-import placeholderEntries from "@/lib/placeholderEntries";
+import initialEntries from "@/lib/initialEntries";
 
 export default function App({ Component, pageProps }) {
-  const allEntries = placeholderEntries;
-  const allZukunftsanalyseEntries = placeholderEntries.filter(
-    (placeholderEntry) => placeholderEntry.type === "FutureAnalysis"
+  const allEntries = initialEntries;
+  const allFutureAnalysisEntries = initialEntries.filter(
+    (initialEntry) => initialEntry.type === "FutureAnalysis"
+  );
+  const allPastAnalysisEntries = initialEntries.filter(
+    (initialEntry) => initialEntry.type === "PastAnalysis"
   );
 
   return (
@@ -13,7 +16,8 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
         allEntries={allEntries}
-        allZukunftsanalyseEntries={allZukunftsanalyseEntries}
+        allFutureAnalysisEntries={allFutureAnalysisEntries}
+        allPastAnalysisEntries={allPastAnalysisEntries}
       />
     </>
   );
