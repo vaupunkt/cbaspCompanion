@@ -9,8 +9,8 @@ export default function App({ Component, pageProps }) {
   const allPastAnalysisEntries = initialEntries.filter(
     (initialEntry) => initialEntry.type === "PastAnalysis"
   );
-  const allInnerAnalysisEntries = placeholderEntries.filter(
-    (placeholderEntry) => placeholderEntry.type === "InnerSituationAnalysis"
+  const allInnerAnalysisEntries = initialEntries.filter(
+    (initialEntry) => initialEntry.type === "InnerSituationAnalysis"
   );
 
   return (
