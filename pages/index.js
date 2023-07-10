@@ -1,11 +1,11 @@
 import Header from "@/components/Header";
 import EntryList from "@/components/EntryList";
 
-export default function PastAnalysesPage({ allPastAnalysesEntries }) {
+export default function PastAnalysesPage({ allInnerAnalysesEntries }) {
   return (
     <>
-      <Header title="Vergangenheitsanalysen" />
-      <EntryList entries={allPastAnalysesEntries} />
+      <Header title="Innere Situationsanalysen" />
+      <EntryList entries={allInnerAnalysesEntries} />
     </>
   );
 }

@@ -3,11 +3,14 @@ import placeholderEntries from "@/lib/placeholderEntries";
 
 export default function App({ Component, pageProps }) {
   const allEntries = placeholderEntries;
-  const allZukunftsanalyseEntries = placeholderEntries.filter(
+  const allFutureAnalysesEntries = placeholderEntries.filter(
     (placeholderEntry) => placeholderEntry.type === "FutureAnalysis"
   );
-  const allVergangenheitsanalyseEntries = placeholderEntries.filter(
+  const allPastAnalysesEntries = placeholderEntries.filter(
     (placeholderEntry) => placeholderEntry.type === "PastAnalysis"
+  );
+  const allInnerAnalysesEntries = placeholderEntries.filter(
+    (placeholderEntry) => placeholderEntry.type === "InnerSituationAnalysis"
   );
 
   return (
@@ -16,8 +19,9 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
         allEntries={allEntries}
-        allZukunftsanalyseEntries={allZukunftsanalyseEntries}
-        allVergangenheitsanalyseEntries={allVergangenheitsanalyseEntries}
+        allFutureAnalysesEntries={allFutureAnalysesEntries}
+        allPastAnalysesEntries={allPastAnalysesEntries}
+        allInnerAnalysesEntries={allInnerAnalysesEntries}
       />
     </>
   );
