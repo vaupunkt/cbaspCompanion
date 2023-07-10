@@ -1,11 +1,11 @@
 import Header from "@/components/Header";
 import EntryList from "@/components/EntryList";
 
-export default function HomePage() {
+export default function ZukunftsanalysenPage({ allZukunftsanalyseEntries }) {
   return (
     <>
-      <Header title="All Entries"></Header>
-      <EntryList />
+      <Header title="Zukunftsanalysen" />
+      <EntryList entries={allZukunftsanalyseEntries} />
     </>
   );
 }
