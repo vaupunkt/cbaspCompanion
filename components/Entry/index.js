@@ -1,5 +1,5 @@
-import { EntryContent, ContentHeadline } from "./Entry.style";
 import Header from "@/components/Header";
+import EntryContentBlock from "../EntryContentBlock";
 
 export default function Entry({ data }) {
   const {
@@ -16,38 +16,19 @@ export default function Entry({ data }) {
   return (
     <>
       <Header backButton title={title} date={date}></Header>
-      <EntryContent>
-        <ContentHeadline>Beschreibung</ContentHeadline>
-        <p>{description}</p>
-      </EntryContent>
-      <EntryContent>
-        <ContentHeadline>Gewünschtes Ergebnis</ContentHeadline>
-        <p>{desiredResult}</p>
-      </EntryContent>
-      <EntryContent>
-        <ContentHeadline>Verhalten</ContentHeadline>
-        <p>{behavior}</p>
-      </EntryContent>
-      <EntryContent>
-        <ContentHeadline>Interpretation</ContentHeadline>
-        <ol>
-          {interpretations.map(({ id, interpretation }) => {
-            return <li key={id}>{interpretation}</li>;
-          })}
-        </ol>
-      </EntryContent>
-      <EntryContent>
-        <ContentHeadline>Rollenspiel</ContentHeadline>
-        <p>{rolePlay}</p>
-      </EntryContent>
-      <EntryContent>
-        <ContentHeadline>Implementierung</ContentHeadline>
-        <p>{implementation}</p>
-      </EntryContent>
-      <EntryContent>
-        <ContentHeadline>Transfer</ContentHeadline>
-        <p>{transfer}</p>
-      </EntryContent>
+      <EntryContentBlock content={description}>Beschreibung</EntryContentBlock>
+      <EntryContentBlock content={desiredResult}>
+        Gewünschtes Ergebnis
+      </EntryContentBlock>
+      <EntryContentBlock content={behavior}>Verhalten</EntryContentBlock>
+      <EntryContentBlock content={interpretations}>
+        Interpretation
+      </EntryContentBlock>
+      <EntryContentBlock content={rolePlay}>Rollenspiel</EntryContentBlock>
+      <EntryContentBlock content={implementation}>
+        Implementierung
+      </EntryContentBlock>
+      <EntryContentBlock content={transfer}>Transfer</EntryContentBlock>
     </>
   );
 }
