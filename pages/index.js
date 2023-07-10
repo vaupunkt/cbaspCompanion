@@ -1,13 +1,11 @@
 import Header from "@/components/Header";
 import EntryList from "@/components/EntryList";
 
-export default function VergangenheitsanalysenPage({
-  allVergangenheitsanalyseEntries,
-}) {
+export default function PastAnalysesPage({ allPastAnalysesEntries }) {
   return (
     <>
       <Header title="Vergangenheitsanalysen" />
-      <EntryList entries={allVergangenheitsanalyseEntries} />
+      <EntryList entries={allPastAnalysesEntries} />
     </>
   );
 }
