@@ -1,5 +1,3 @@
-import placeholderEntries from "@/lib/placeholderEntries";
-
 import {
   EntryListContainer,
   EntryListDate,
@@ -8,18 +6,18 @@ import {
   EntryListItemLink,
 } from "./EntryList.style";
 
-export default function EntryList() {
+export default function EntryList({ entries }) {
   return (
     <EntryListContainer>
-      {placeholderEntries === "" ? (
+      {!entries ? (
         <p>Es gibt noch keine Einträge.</p>
       ) : (
-        placeholderEntries.map((placeholderEntry) => {
+        entries.map((entry) => {
           return (
-            <EntryListItemLink href={`/entries/${placeholderEntry.id}`}>
-              <EntryListItem key={placeholderEntry.id}>
-                <EntryListDate>{placeholderEntry.date}</EntryListDate>
-                <EntryListTitle>{placeholderEntry.title}</EntryListTitle>
+            <EntryListItemLink href={`/entries/${entry.id}`}>
+              <EntryListItem key={entry.id}>
+                <EntryListDate>{entry.date}</EntryListDate>
+                <EntryListTitle>{entry.title}</EntryListTitle>
               </EntryListItem>
             </EntryListItemLink>
           );
