@@ -1,11 +1,11 @@
 import Entry from "@/components/Entry";
 import { useRouter } from "next/router";
-import placeholderEntries from "@/lib/placeholderEntries";
+import initialEntries from "@/lib/initialEntries";
 
 export default function EntryPage() {
   const router = useRouter();
-  const entry = placeholderEntries.find(
-    (placeholderEntry) => placeholderEntry.id === router.query.id
+  const entry = initialEntries.find(
+    (initialEntry) => initialEntry.id === router.query.id
   );
 
   return <>{entry && <Entry data={entry} />}</>;
