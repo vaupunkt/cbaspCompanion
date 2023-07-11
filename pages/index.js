@@ -6,29 +6,14 @@ import {
 } from "@/components/EntryList/EntryList.style";
 import Header from "@/components/Header";
 
-export default function MyAnalysesPage() {
+export default function Home() {
   return (
     <>
-      <Header title="Meine Situationsanalysen" />
+      <Header title="CBASP Companion" />
       <EntryListContainer>
-        <EntryListItemLink href="./pastanalyses">
+        <EntryListItemLink href="./myanalyses">
           <EntryListItem>
-            <EntryListTitle>Vergangenheitsanalysen</EntryListTitle>
-          </EntryListItem>
-        </EntryListItemLink>
-        <EntryListItemLink href="./innersituationanalyses">
-          <EntryListItem>
-            <EntryListTitle>Innere Situationsanalysen</EntryListTitle>
-          </EntryListItem>
-        </EntryListItemLink>
-        <EntryListItemLink href="./futureanalyses">
-          <EntryListItem>
-            <EntryListTitle>Zukunftsanalysen</EntryListTitle>
-          </EntryListItem>
-        </EntryListItemLink>
-        <EntryListItemLink href="./allentries">
-          <EntryListItem>
-            <EntryListTitle>Alle Analysen</EntryListTitle>
+            <EntryListTitle>Meine Analysen</EntryListTitle>
           </EntryListItem>
         </EntryListItemLink>
       </EntryListContainer>
