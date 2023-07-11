@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
   const allInnerAnalysisEntries = allEntries.filter(
     (initialEntry) => initialEntry.type === "InnerSituationAnalysis"
   );
-  const [editMode, setEditMode] = useState(true);
+  const [editMode, setEditMode] = useState(false);
   function toggleEditMode() {
     setEditMode(!editMode);
   }
