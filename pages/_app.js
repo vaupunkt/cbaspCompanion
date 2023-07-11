@@ -4,15 +4,22 @@ import initialEntries from "@/lib/initialEntries";
 
 export default function App({ Component, pageProps }) {
   const [allEntries, setAllEntries] = useState(initialEntries);
-  const allFutureAnalysisEntries = initialEntries.filter(
+  const allFutureAnalysisEntries = allEntries.filter(
     (initialEntry) => initialEntry.type === "FutureAnalysis"
   );
-  const allPastAnalysisEntries = initialEntries.filter(
+  const allPastAnalysisEntries = allEntries.filter(
     (initialEntry) => initialEntry.type === "PastAnalysis"
   );
-  const allInnerAnalysisEntries = initialEntries.filter(
+  const allInnerAnalysisEntries = allEntries.filter(
     (initialEntry) => initialEntry.type === "InnerSituationAnalysis"
   );
+  const [editMode, setEditMode] = useState(true);
+  function toggleEditMode() {
+    setEditMode(!editMode);
+  }
+  function handleDelete(id) {
+    setAllEntries(allEntries.filter((entry) => entry.id !== id));
+  }
 
   return (
     <>
@@ -23,6 +30,9 @@ export default function App({ Component, pageProps }) {
         allFutureAnalysisEntries={allFutureAnalysisEntries}
         allPastAnalysisEntries={allPastAnalysisEntries}
         allInnerAnalysisEntries={allInnerAnalysisEntries}
+        onDelete={handleDelete}
+        editMode={editMode}
+        toggleEditMode={toggleEditMode}
       />
     </>
   );
