@@ -12,8 +12,18 @@ export default function EntryPage({ onDelete }) {
 
   return (
     <>
-      <Header backButton title={entry.title} date={entry.date}></Header>
-      <BigButton name="delete" onClick={() => onDelete(entry.id)} icon="🗑️">
+      <Header
+        backButton
+        title={entry && entry.title}
+        date={entry && entry.date}
+      ></Header>
+      <BigButton
+        name="delete"
+        onClick={() => {
+          onDelete(entry.id, "entry");
+        }}
+        icon="🗑️"
+      >
         Delete
       </BigButton>
       {entry && <Entry data={entry} />}
