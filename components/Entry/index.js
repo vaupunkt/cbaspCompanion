@@ -21,7 +21,6 @@ export default function Entry({ data }) {
     } = data;
     return (
       <>
-        <Header backButton title={title} date={date}></Header>
         <EntryContentBlock content={description}>
           Beschreibung
         </EntryContentBlock>

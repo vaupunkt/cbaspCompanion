@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const ButtonStyled = styled.button`
+export const SmallButtonStyled = styled.button`
   ${(props) =>
     props.name === "back" &&
     `
