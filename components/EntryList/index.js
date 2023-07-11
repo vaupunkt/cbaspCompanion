@@ -1,5 +1,4 @@
-import DeleteButton from "../DeleteButton";
-import EditButton from "../EditButton";
+import Button from "../Button";
 import {
   EntryListContainer,
   EntryListDate,
@@ -22,22 +21,24 @@ export default function EntryList({
         <>
           {entries.map((entry) => {
             return (
-              <>
-                <EntryListItem key={entry.id}>
-                  {editMode ? (
-                    <DeleteButton onDelete={onDelete} id={entry.id} />
-                  ) : (
-                    ""
-                  )}
-                  <EntryListItemLink href={`/entries/${entry.id}`}>
-                    <EntryListDate>{entry.date}</EntryListDate>
-                    <EntryListTitle>{entry.title}</EntryListTitle>
-                  </EntryListItemLink>
-                </EntryListItem>
-              </>
+              <EntryListItem key={entry.id}>
+                {editMode ? (
+                  <Button
+                    buttonType="deleteButton"
+                    onDelete={onDelete}
+                    id={entry.id}
+                  />
+                ) : (
+                  ""
+                )}
+                <EntryListItemLink href={`/entries/${entry.id}`}>
+                  <EntryListDate>{entry.date}</EntryListDate>
+                  <EntryListTitle>{entry.title}</EntryListTitle>
+                </EntryListItemLink>
+              </EntryListItem>
             );
           })}
-          <EditButton toggleEditMode={toggleEditMode} />
+          <Button buttonType="editButton" toggleEditMode={toggleEditMode} />
         </>
       )}
     </EntryListContainer>
