@@ -15,10 +15,7 @@ export default function App({ Component, pageProps }) {
   const allInnerAnalysisEntries = allEntries.filter(
     (initialEntry) => initialEntry.type === "InnerSituationAnalysis"
   );
-  const [editMode, setEditMode] = useState(false);
-  function toggleEditMode() {
-    setEditMode(!editMode);
-  }
+
   function handleDelete(id) {
     confirmAlert({
       message: "Sicher, dass du diesen Eintrag löschen willst?",
@@ -43,8 +40,6 @@ export default function App({ Component, pageProps }) {
         allPastAnalysisEntries={allPastAnalysisEntries}
         allInnerAnalysisEntries={allInnerAnalysisEntries}
         onDelete={handleDelete}
-        editMode={editMode}
-        toggleEditMode={toggleEditMode}
       />
     </>
   );

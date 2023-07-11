@@ -1,21 +1,11 @@
 import Header from "@/components/Header";
 import EntryList from "@/components/EntryList";
 
-export default function AllEntriesPage({
-  allEntries,
-  onDelete,
-  editMode,
-  toggleEditMode,
-}) {
+export default function AllEntriesPage({ allEntries, onDelete }) {
   return (
     <>
       <Header backButton title="All Entries" />
-      <EntryList
-        entries={allEntries}
-        onDelete={onDelete}
-        editMode={editMode}
-        toggleEditMode={toggleEditMode}
-      />
+      <EntryList entries={allEntries} onDelete={onDelete} />
     </>
   );
 }

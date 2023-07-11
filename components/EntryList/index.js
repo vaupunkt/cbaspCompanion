@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "../Button";
 import {
   EntryListContainer,
@@ -7,12 +8,11 @@ import {
   EntryListItemLink,
 } from "./EntryList.style";
 
-export default function EntryList({
-  entries,
-  onDelete,
-  editMode,
-  toggleEditMode,
-}) {
+export default function EntryList({ entries, onDelete }) {
+  const [editMode, setEditMode] = useState(false);
+  function toggleEditMode() {
+    setEditMode(!editMode);
+  }
   return (
     <EntryListContainer>
       {!entries ? (
