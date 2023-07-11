@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Button from "../Button";
 import {
   EntryListContainer,
   EntryListDate,
@@ -6,22 +8,42 @@ import {
   EntryListItemLink,
 } from "./EntryList.style";
 
-export default function EntryList({ entries }) {
+export default function EntryList({ entries, onDelete }) {
+  const [editMode, setEditMode] = useState(false);
+  function toggleEditMode() {
+    setEditMode(!editMode);
+  }
   return (
     <EntryListContainer>
       {!entries ? (
         <h2>Es gibt noch keine Einträge.</h2>
       ) : (
-        entries.map((entry) => {
-          return (
-            <EntryListItemLink href={`/entries/${entry.id}`}>
+        <>
+          {entries.map((entry) => {
+            return (
               <EntryListItem key={entry.id}>
-                <EntryListDate>{entry.date}</EntryListDate>
-                <EntryListTitle>{entry.title}</EntryListTitle>
+                {editMode ? (
+                  <Button
+                    name="delete"
+                    onClick={() => onDelete(entry.id)}
+                    id={entry.id}
+                  >
+                    🗑️
+                  </Button>
+                ) : (
+                  ""
+                )}
+                <EntryListItemLink href={`/entries/${entry.id}`}>
+                  <EntryListDate>{entry.date}</EntryListDate>
+                  <EntryListTitle>{entry.title}</EntryListTitle>
+                </EntryListItemLink>
               </EntryListItem>
-            </EntryListItemLink>
-          );
-        })
+            );
+          })}
+          <Button name="edit" onClick={() => toggleEditMode()}>
+            ✍️
+          </Button>
+        </>
       )}
     </EntryListContainer>
   );
