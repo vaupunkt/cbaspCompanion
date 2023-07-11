@@ -1,8 +1,9 @@
+import { useState } from "react";
 import GlobalStyle from "../styles";
 import initialEntries from "@/lib/initialEntries";
 
 export default function App({ Component, pageProps }) {
-  const allEntries = initialEntries;
+  const [allEntries, setAllEntries] = useState(initialEntries);
   const allFutureAnalysisEntries = initialEntries.filter(
     (initialEntry) => initialEntry.type === "FutureAnalysis"
   );
