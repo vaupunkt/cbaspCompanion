@@ -5,7 +5,11 @@ export default function Header({ title, date, backButton }) {
   return (
     <>
       <HeaderContainer>
-        {backButton && <Button buttonType="backButton" />}
+        {backButton && (
+          <Button name="back" onClick={() => history.back()}>
+            ❮
+          </Button>
+        )}
         {title && <HeaderTitle>{title}</HeaderTitle>}
         {date && <HeaderDate>{date}</HeaderDate>}
       </HeaderContainer>
