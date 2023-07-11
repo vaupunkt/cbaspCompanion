@@ -4,7 +4,7 @@ import EntryList from "@/components/EntryList";
 export default function AllEntriesPage({ allEntries }) {
   return (
     <>
-      <Header title="All Entries" />
+      <Header backButton title="All Entries" />
       <EntryList entries={allEntries} />
     </>
   );

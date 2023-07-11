@@ -4,7 +4,7 @@ import EntryList from "@/components/EntryList";
 export default function FutureAnalysesPage({ allFutureAnalysisEntries }) {
   return (
     <>
-      <Header title="Zukunftsanalysen" />
+      <Header backButton title="Zukunftsanalysen" />
       <EntryList entries={allFutureAnalysisEntries} />
     </>
   );
