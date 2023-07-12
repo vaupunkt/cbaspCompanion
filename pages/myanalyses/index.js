@@ -12,7 +12,7 @@ export default function MyAnalysesPage() {
   return (
     <>
       <Header backButton title="Meine Situationsanalysen" />
-      <NavigationContainer top left>
+      <NavigationContainer top="true" left="true">
         <NavigationLink href="./pastanalyses">
           Vergangenheitsanalysen
         </NavigationLink>

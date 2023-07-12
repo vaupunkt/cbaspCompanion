@@ -25,15 +25,16 @@ export default function EditEntry({
 
   return (
     <EditEntryContent>
-      <EditEntryLabel htmlFor={updatedData[analysisKey]}>
+      <EditEntryLabel htmlFor={analysisKey}>
         {analysisHeadings[analysisKey]}
       </EditEntryLabel>
       {Array.isArray(updatedData[analysisKey]) ? (
         updatedData[analysisKey].map((item, index) => (
           <EditEntryInput
-            short
+            short="true"
             key={item.id}
-            name={item.interpretation}
+            name={"interpretation " + item.id}
+            id={index}
             type="text"
             value={item.interpretation}
             onChange={(e) =>
@@ -43,10 +44,10 @@ export default function EditEntry({
         ))
       ) : (
         <EditEntryInput
-          long
+          long="true"
           type="text"
-          name={updatedData[analysisKey]}
-          id={updatedData[analysisKey]}
+          name={analysisKey}
+          id={analysisKey}
           value={updatedData[analysisKey]}
           onChange={(e) => handleChange(analysisKey, e.target.value)}
         />

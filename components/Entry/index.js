@@ -1,6 +1,7 @@
 import EntryContentBlock from "../EntryContentBlock";
 import EditEntry from "../EditEntry";
 import { useState } from "react";
+import Button from "../Button";
 
 const analysisHeadings = {
   description: "Beschreibung",
@@ -16,8 +17,22 @@ const analysisHeadings = {
   rolePlay: "Rollenspiel",
 };
 
-export default function Entry({ data, editMode, handleSubmit }) {
+export default function Entry({
+  data,
+  editMode,
+  setEditedData,
+  handleDataUpdate,
+}) {
   const { type } = data;
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    let dataset = Object.fromEntries(formData);
+    dataset = { ...dataset, id: data.id };
+    console.log("Dataset", dataset);
+    setEditedData(dataset);
+    handleDataUpdate();
+  }
 
   const analysisKeys = {
     PastAnalysis: [
@@ -60,9 +75,13 @@ export default function Entry({ data, editMode, handleSubmit }) {
     <>
       {editMode ? (
         <form id="editEntryForm" onSubmit={handleSubmit}>
+          <Button name="save" variant="big" form="editEntryForm" type="submit">
+            💾 Speichern
+          </Button>
           {analysisKeys.map((analysisKey) => {
             return (
               <EditEntry
+                key={analysisKey}
                 analysisHeadings={analysisHeadings}
                 analysisKey={analysisKey}
                 editMode={editMode}
@@ -75,7 +94,7 @@ export default function Entry({ data, editMode, handleSubmit }) {
       ) : (
         analysisKeys.map((analysisKey) => {
           return (
-            <EntryContentBlock content={data[analysisKey]}>
+            <EntryContentBlock key={analysisKey} content={data[analysisKey]}>
               {analysisHeadings[analysisKey]}
             </EntryContentBlock>
           );

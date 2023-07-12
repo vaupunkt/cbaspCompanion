@@ -1,38 +1,41 @@
 import Entry from "@/components/Entry";
 import { useRouter } from "next/router";
+import { uid } from "uid";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import { useState } from "react";
 
 export default function EntryPage({
   onDelete,
-  setAllEntries,
   toggleEditMode,
   allEntries,
+  setAllEntries,
 }) {
   const router = useRouter();
-  const entry = allEntries.find(
+  let entry = allEntries.find(
     (singleEntry) => singleEntry.id === router.query.id
   );
+  const [editedData, setEditedData] = useState(entry);
   const [editMode, setEditMode] = useState(false);
   function toggleEditMode() {
     setEditMode(!editMode);
   }
-
-  function handleSave() {
-    setAllEntries((oldEntries) =>
-      oldEntries.map((oldEntry) =>
-        oldEntry.id === updatedData.id ? updatedData : item
-      )
-    );
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-
-    console.log(data);
+  function handleDataUpdate() {
+    editedData.interpretations = Object.entries(editedData)
+      .filter(([key, value]) => key.startsWith("interpretation "))
+      .map(([key, value]) => {
+        const id = uid();
+        delete editedData[key];
+        return { interpretation: value, id };
+      });
+    setAllEntries([
+      ...allEntries.filter((singleEntry) => singleEntry.id !== editedData.id),
+      editedData,
+    ]);
+    console.log("allEntriesNew", allEntries);
+    setEditedData(editedData);
+    console.log("editedData:", editedData);
+    toggleEditMode();
   }
 
   return (
@@ -43,15 +46,42 @@ export default function EntryPage({
         date={entry && entry.date}
       ></Header>
       <Button
-        variant="big"
         name="delete"
+        type="button"
+        variant="big"
         onClick={() => {
           onDelete(entry.id, "entry");
         }}
       >
-        🗑️ Delete
+        🗑️ Löschen
       </Button>
-      {entry && <Entry data={entry} />}
+      {editMode ? (
+        <Button
+          variant="big"
+          type="button"
+          name="cancel"
+          onClick={() => toggleEditMode()}
+        >
+          🙅 Abbrechen
+        </Button>
+      ) : (
+        <Button
+          variant="big"
+          type="button"
+          name="edit"
+          onClick={() => toggleEditMode()}
+        >
+          ✍️ Bearbeiten
+        </Button>
+      )}
+      {entry && (
+        <Entry
+          data={entry}
+          editMode={editMode}
+          setEditedData={setEditedData}
+          handleDataUpdate={handleDataUpdate}
+        />
+      )}
     </>
   );
 }
