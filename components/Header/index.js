@@ -1,4 +1,4 @@
-import Button from "../SmallButton";
+import Button from "../Button";
 import { HeaderTitle, HeaderDate, HeaderContainer } from "./Header.style";
 
 export default function Header({ title, date, backButton }) {
