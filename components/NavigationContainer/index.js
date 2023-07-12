@@ -8,12 +8,7 @@ export default function NavigationContainer({
   children,
 }) {
   return (
-    <StyledNavigationContainer
-      top={top}
-      left={left}
-      right={right}
-      bottom={bottom}
-    >
+    <StyledNavigationContainer top={top} bottom={bottom}>
       {children}
     </StyledNavigationContainer>
   );

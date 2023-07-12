@@ -2,16 +2,15 @@ import { styled } from "styled-components";
 import Link from "next/link";
 
 export const StyledNavigationLink = styled(Link)`
-  border: solid;
   border-color: var(--mainDarkColor);
-  padding: 10px;
-  margin: 10px;
-  border-radius: 25px;
+  padding: 15px 15px 15px 15px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
   color: var(--mainLightColor);
   background-color: var(--mainDarkColor);
   text-decoration: none;
   font-size: 1.3em;
-  align-self: flex-end;
+  align-self: flex-start;
 
   &:hover {
     background-color: color-mix(
