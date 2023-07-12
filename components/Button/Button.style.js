@@ -38,7 +38,7 @@ export const ButtonBody = styled.button`
     ${(prop) =>
       prop.name === "delete"
         ? "background-color: color-mix(in srgb, var(--mainLightColor) 50%, red)"
-        : "background-color: color-mix(in srgb, var(--mainLightColor) 90%, blue)"};
+        : ""};
   }
   &:active {
     box-shadow: inset 0px 0px 5px var(--mainDarkColor);
