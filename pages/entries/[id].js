@@ -1,6 +1,5 @@
 import Entry from "@/components/Entry";
 import { useRouter } from "next/router";
-import initialEntries from "@/lib/initialEntries";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import { useState } from "react";
@@ -46,13 +45,12 @@ export default function EntryPage({
       <Button
         variant="big"
         name="delete"
-        variant="big"
         onClick={() => {
           onDelete(entry.id, "entry");
         }}
       >
-        Delete
-      </BigButton>
+        🗑️ Delete
+      </Button>
       {entry && <Entry data={entry} />}
     </>
   );
