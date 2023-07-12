@@ -1,8 +1,8 @@
 import { useState } from "react";
 import GlobalStyle from "../styles";
 import initialEntries from "@/lib/initialEntries";
-import { confirmAlert } from "react-confirm-alert"; // Import
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function App({ Component, pageProps }) {
   const [allEntries, setAllEntries] = useState(initialEntries);

@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Header title="CBASP Companion" />
-      <NavigationContainer bottom right>
+      <NavigationContainer bottom>
         <NavigationLink href="./myanalyses">Meine Analysen</NavigationLink>
       </NavigationContainer>
     </>
