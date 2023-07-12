@@ -44,6 +44,7 @@ export default function App({ Component, pageProps }) {
         allPastAnalysisEntries={allPastAnalysisEntries}
         allInnerAnalysisEntries={allInnerAnalysisEntries}
         onDelete={handleDelete}
+        setAllEntries={setAllEntries}
       />
     </>
   );

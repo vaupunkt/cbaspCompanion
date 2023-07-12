@@ -6,7 +6,6 @@ export const BigButtonBody = styled.button`
   position: relative;
   height: 3em;
   margin: 20px auto;
-  width: 100px;
   border: solid;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -14,7 +13,10 @@ export const BigButtonBody = styled.button`
   align-items: center;
   justify-content: flex-end;
   &:hover {
-    background-color: color-mix(in srgb, var(--mainLightColor) 50%, red);
+    ${(prop) =>
+      prop.name === "delete"
+        ? "background-color: color-mix(in srgb, var(--mainLightColor) 50%, red)"
+        : "background-color: color-mix(in srgb, var(--mainLightColor) 90%, blue)"};
   }
   &:active {
     box-shadow: inset 0px 0px 5px var(--mainDarkColor);
@@ -40,4 +42,5 @@ export const BigButtonDescription = styled.p`
   text-align: right;
   padding-right: 15px;
   width: 100%;
+  padding-left: 20px;
 `;
