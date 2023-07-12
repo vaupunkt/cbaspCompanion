@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SmallButton from "../SmallButton";
+import Button from "../Button";
 import {
   EntryListContainer,
   EntryListDate,
@@ -23,9 +23,13 @@ export default function EntryList({ entries, onDelete }) {
             return (
               <EntryListItem key={entry.id}>
                 {editMode ? (
-                  <SmallButton name="delete" onClick={() => onDelete(entry.id)}>
+                  <Button
+                    variant="small"
+                    name="delete"
+                    onClick={() => onDelete(entry.id)}
+                  >
                     🗑️
-                  </SmallButton>
+                  </Button>
                 ) : (
                   ""
                 )}
@@ -36,9 +40,9 @@ export default function EntryList({ entries, onDelete }) {
               </EntryListItem>
             );
           })}
-          <SmallButton name="edit" onClick={() => toggleEditMode()}>
+          <Button variant="small" name="edit" onClick={() => toggleEditMode()}>
             ✍️
-          </SmallButton>
+          </Button>
         </>
       )}
     </EntryListContainer>

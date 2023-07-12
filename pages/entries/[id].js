@@ -1,7 +1,7 @@
 import Entry from "@/components/Entry";
 import { useRouter } from "next/router";
 import initialEntries from "@/lib/initialEntries";
-import BigButton from "@/components/BigButton";
+import Button from "@/components/Button";
 import Header from "@/components/Header";
 import { useState } from "react";
 
@@ -43,29 +43,34 @@ export default function EntryPage({
         title={entry && entry.title}
         date={entry && entry.date}
       ></Header>
-      <BigButton
+      <Button
         name="delete"
+        variant="big"
         onClick={() => {
           onDelete(entry.id, "entry");
         }}
-        icon="🗑️"
       >
-        Löschen
-      </BigButton>
+        🗑️ Löschen
+      </Button>
       {editMode ? (
-        <BigButton
+        <Button
           name="save"
-          icon="💾"
+          variant="big"
           form="editEntryForm"
           type="submit"
           onClick={() => handleSubmit(event)}
         >
-          Speichern
-        </BigButton>
+          💾 Speichern
+        </Button>
       ) : (
-        <BigButton name="edit" onClick={() => toggleEditMode()} icon="✍️">
-          Bearbeiten
-        </BigButton>
+        <Button
+          variant="big"
+          name="edit"
+          onClick={() => toggleEditMode()}
+          icon="✍️"
+        >
+          ✍️ Bearbeiten
+        </Button>
       )}
       {entry && (
         <Entry data={entry} editMode={editMode} handleSubmit={handleSubmit} />
