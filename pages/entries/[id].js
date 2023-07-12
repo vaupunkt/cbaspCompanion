@@ -44,37 +44,16 @@ export default function EntryPage({
         date={entry && entry.date}
       ></Header>
       <Button
+        variant="big"
         name="delete"
         variant="big"
         onClick={() => {
           onDelete(entry.id, "entry");
         }}
       >
-        🗑️ Löschen
-      </Button>
-      {editMode ? (
-        <Button
-          name="save"
-          variant="big"
-          form="editEntryForm"
-          type="submit"
-          onClick={() => handleSubmit(event)}
-        >
-          💾 Speichern
-        </Button>
-      ) : (
-        <Button
-          variant="big"
-          name="edit"
-          onClick={() => toggleEditMode()}
-          icon="✍️"
-        >
-          ✍️ Bearbeiten
-        </Button>
-      )}
-      {entry && (
-        <Entry data={entry} editMode={editMode} handleSubmit={handleSubmit} />
-      )}
+        Delete
+      </BigButton>
+      {entry && <Entry data={entry} />}
     </>
   );
 }
