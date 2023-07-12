@@ -1,7 +1,7 @@
 import Entry from "@/components/Entry";
 import { useRouter } from "next/router";
 import initialEntries from "@/lib/initialEntries";
-import BigButton from "@/components/BigButton";
+import Button from "@/components/Button";
 import Header from "@/components/Header";
 
 export default function EntryPage({ onDelete }) {
@@ -17,15 +17,15 @@ export default function EntryPage({ onDelete }) {
         title={entry && entry.title}
         date={entry && entry.date}
       ></Header>
-      <BigButton
+      <Button
+        variant="big"
         name="delete"
         onClick={() => {
           onDelete(entry.id, "entry");
         }}
-        icon="🗑️"
       >
-        Delete
-      </BigButton>
+        🗑️ Delete
+      </Button>
       {entry && <Entry data={entry} />}
     </>
   );
