@@ -46,17 +46,17 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <StyleSheetManager shouldForwardProp={isPropValid}>
-        <Component
-          {...pageProps}
-          allEntries={allEntries}
-          allFutureAnalysisEntries={allFutureAnalysisEntries}
-          allPastAnalysisEntries={allPastAnalysisEntries}
-          allInnerAnalysisEntries={allInnerAnalysisEntries}
-          onDelete={handleDelete}
-          handleAllEntriesChange={handleAllEntriesChange}
-        />
-      </StyleSheetManager>
+      {/* <StyleSheetManager shouldForwardProp={isPropValid}> */}
+      <Component
+        {...pageProps}
+        allEntries={allEntries}
+        allFutureAnalysisEntries={allFutureAnalysisEntries}
+        allPastAnalysisEntries={allPastAnalysisEntries}
+        allInnerAnalysisEntries={allInnerAnalysisEntries}
+        onDelete={handleDelete}
+        handleAllEntriesChange={handleAllEntriesChange}
+      />
+      {/* </StyleSheetManager> */}
     </>
   );
 }
