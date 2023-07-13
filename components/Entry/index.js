@@ -1,5 +1,4 @@
 import EntryContentBlock from "../EntryContentBlock";
-import EditEntry from "../EditEntry";
 import { useState } from "react";
 import { uid } from "uid";
 import Button from "../Button";
@@ -99,14 +98,16 @@ export default function Entry({
           </Button>
           {analysisKeys.map((analysisKey) => {
             return (
-              <EditEntry
+              <EntryContentBlock
                 key={analysisKey}
                 analysisHeadings={analysisHeadings}
                 analysisKey={analysisKey}
                 editMode={editMode}
                 updatedData={updatedData}
                 setUpdatedData={setUpdatedData}
-              />
+              >
+                {analysisHeadings[analysisKey]}
+              </EntryContentBlock>
             );
           })}
         </form>

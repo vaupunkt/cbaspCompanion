@@ -3,16 +3,6 @@ import { useRouter } from "next/router";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import { useState } from "react";
-import { styled } from "styled-components";
-
-const ButtonSection = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  margin: 0;
-
-  align-items: center;
-`;
 
 export default function EntryPage({
   onDelete,
