@@ -1,131 +1,125 @@
-import Header from "@/components/Header";
 import EntryContentBlock from "../EntryContentBlock";
+import { useState } from "react";
+import { uid } from "uid";
+import Button from "../Button";
 
-export default function Entry({ data }) {
+const analysisHeadings = {
+  description: "Beschreibung",
+  interpretations: "Interpretation",
+  behavior: "Verhalten",
+  actualResult: "Tatsächliches Ergebnis",
+  desiredResult: "Gewünschtes Ergebnis",
+  comparison: "Vergleich des tatsächlichen mit dem erwünschten Ergebnis",
+  revision: "Revision ungeeigneter Interpretationen",
+  behaviorChange: "Veränderung des Verhaltens",
+  implementation: "Umsetzung und Zusammenfassung",
+  transfer: "Generalisierung und Übertragung des Gelernten auf den Alltag",
+  rolePlay: "Rollenspiel",
+};
+
+export default function Entry({
+  data,
+  editMode,
+  allEntries,
+  onAllEntriesChange,
+  toggleEditMode,
+}) {
   const { type } = data;
 
-  if (type === "PastAnalysis") {
-    const {
-      description,
-      interpretations,
-      behavior,
-      actualResult,
-      desiredResult,
-      comparison,
-      revision,
-      behaviorChange,
-      implementation,
-      transfer,
-    } = data;
-    return (
-      <>
-        <EntryContentBlock content={description}>
-          Beschreibung
-        </EntryContentBlock>
-        <EntryContentBlock content={interpretations}>
-          Interpretation
-        </EntryContentBlock>
-        <EntryContentBlock content={behavior}>Verhalten</EntryContentBlock>
-        <EntryContentBlock content={actualResult}>
-          Tatsächliches Ergebnis
-        </EntryContentBlock>
-        <EntryContentBlock content={desiredResult}>
-          Gewünschtes Ergebnis
-        </EntryContentBlock>
-        <EntryContentBlock content={comparison}>
-          Vergleich des tatsächlichen mit dem erwünschten Ergebnis
-        </EntryContentBlock>
-        <EntryContentBlock content={revision}>
-          Revision ungeeigneter Interpretationen
-        </EntryContentBlock>
-        <EntryContentBlock content={behaviorChange}>
-          Veränderung des Verhaltens
-        </EntryContentBlock>
-        <EntryContentBlock content={implementation}>
-          Umsetzung und Zusammenfassung
-        </EntryContentBlock>
-        <EntryContentBlock content={transfer}>
-          Generalisierung und Übertragung des Gelernten auf den Alltag
-        </EntryContentBlock>
-      </>
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    let dataset = Object.fromEntries(formData);
+    dataset = {
+      ...dataset,
+      id: data.id,
+      type: data.type,
+      title: data.title,
+      date: data.date,
+    };
+    dataset.interpretations = Object.entries(dataset)
+      .filter(([key, value]) => key.startsWith("interpretation "))
+      .map(([key, value]) => {
+        const id = uid();
+        delete dataset[key];
+        return { interpretation: value, id };
+      });
+
+    const filteredAllEntries = allEntries.filter(
+      (singleEntry) => singleEntry.id !== dataset.id
     );
+    onAllEntriesChange([...filteredAllEntries, dataset]);
+    toggleEditMode();
   }
 
-  if (type === "InnerSituationAnalysis") {
-    const {
-      description,
-      interpretations,
-      behavior,
-      actualResult,
-      desiredResult,
-      comparison,
-      revision,
-      behaviorChange,
-      implementation,
-      transfer,
-    } = data;
-    return (
-      <>
-        <EntryContentBlock content={description}>
-          Beschreibung
-        </EntryContentBlock>
-        <EntryContentBlock content={interpretations}>
-          Interpretation
-        </EntryContentBlock>
-        <EntryContentBlock content={behavior}>Verhalten</EntryContentBlock>
-        <EntryContentBlock content={actualResult}>
-          Tatsächliches Ergebnis
-        </EntryContentBlock>
-        <EntryContentBlock content={desiredResult}>
-          Gewünschtes Ergebnis
-        </EntryContentBlock>
-        <EntryContentBlock content={comparison}>
-          Vergleich des tatsächlichen mit dem erwünschten Ergebnis
-        </EntryContentBlock>
-        <EntryContentBlock content={revision}>
-          Revision ungeeigneter Interpretationen
-        </EntryContentBlock>
-        <EntryContentBlock content={behaviorChange}>
-          Veränderung des Verhaltens
-        </EntryContentBlock>
-        <EntryContentBlock content={implementation}>
-          Umsetzung und Zusammenfassung
-        </EntryContentBlock>
-        <EntryContentBlock content={transfer}>
-          Generalisierung und Übertragung des Gelernten auf den Alltag
-        </EntryContentBlock>
-      </>
-    );
-  }
+  const analysisKeys = {
+    PastAnalysis: [
+      "description",
+      "interpretations",
+      "behavior",
+      "actualResult",
+      "desiredResult",
+      "comparison",
+      "revision",
+      "behaviorChange",
+      "implementation",
+      "transfer",
+    ],
+    InnerSituationAnalysis: [
+      "description",
+      "interpretations",
+      "behavior",
+      "actualResult",
+      "desiredResult",
+      "comparison",
+      "revision",
+      "behaviorChange",
+      "implementation",
+      "transfer",
+    ],
+    FutureAnalysis: [
+      "description",
+      "desiredResult",
+      "behavior",
+      "interpretations",
+      "rolePlay",
+      "implementation",
+      "transfer",
+    ],
+  }[type];
+  const [updatedData, setUpdatedData] = useState(data);
 
-  if (type === "FutureAnalysis") {
-    const {
-      description,
-      desiredResult,
-      behavior,
-      interpretations,
-      rolePlay,
-      implementation,
-      transfer,
-    } = data;
-    return (
-      <>
-        <EntryContentBlock content={description}>
-          Beschreibung
-        </EntryContentBlock>
-        <EntryContentBlock content={desiredResult}>
-          Gewünschtes Ergebnis
-        </EntryContentBlock>
-        <EntryContentBlock content={behavior}>Verhalten</EntryContentBlock>
-        <EntryContentBlock content={interpretations}>
-          Interpretation
-        </EntryContentBlock>
-        <EntryContentBlock content={rolePlay}>Rollenspiel</EntryContentBlock>
-        <EntryContentBlock content={implementation}>
-          Implementierung
-        </EntryContentBlock>
-        <EntryContentBlock content={transfer}>Transfer</EntryContentBlock>
-      </>
-    );
-  }
+  return (
+    <>
+      {editMode ? (
+        <form id="editEntryForm" onSubmit={handleSubmit}>
+          <Button name="save" variant="big" form="editEntryForm" type="submit">
+            💾 Speichern
+          </Button>
+          {analysisKeys.map((analysisKey) => {
+            return (
+              <EntryContentBlock
+                key={analysisKey}
+                analysisHeadings={analysisHeadings}
+                analysisKey={analysisKey}
+                editMode={editMode}
+                updatedData={updatedData}
+                setUpdatedData={setUpdatedData}
+              >
+                {analysisHeadings[analysisKey]}
+              </EntryContentBlock>
+            );
+          })}
+        </form>
+      ) : (
+        analysisKeys.map((analysisKey) => {
+          return (
+            <EntryContentBlock key={analysisKey} content={data[analysisKey]}>
+              {analysisHeadings[analysisKey]}
+            </EntryContentBlock>
+          );
+        })
+      )}
+    </>
+  );
 }
