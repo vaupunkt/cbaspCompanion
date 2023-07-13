@@ -1,9 +1,8 @@
-import { useState } from "react";
 import GlobalStyle from "../styles";
 import initialEntries from "@/lib/initialEntries";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import { uid } from "uid";
+
 import useLocalStorageState from "use-local-storage-state";
 import isPropValid from "@emotion/is-prop-valid";
 import { StyleSheetManager } from "styled-components";
