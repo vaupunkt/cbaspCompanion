@@ -1,9 +1,18 @@
 import Entry from "@/components/Entry";
 import { useRouter } from "next/router";
-
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import { useState } from "react";
+import { styled } from "styled-components";
+
+const ButtonSection = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin: 0;
+
+  align-items: center;
+`;
 
 export default function EntryPage({
   onDelete,
@@ -26,25 +35,28 @@ export default function EntryPage({
         title={entry && entry.title}
         date={entry && entry.date}
       ></Header>
-      <Button
-        name="delete"
-        type="button"
-        variant="big"
-        onClick={() => {
-          onDelete(entry.id, "entry");
-        }}
-      >
-        🗑️ Löschen
-      </Button>
+
       {editMode ? (
-        <Button
-          variant="big"
-          type="button"
-          name="cancel"
-          onClick={() => toggleEditMode()}
-        >
-          🙅 Abbrechen
-        </Button>
+        <>
+          <Button
+            variant="big"
+            type="button"
+            name="cancel"
+            onClick={() => toggleEditMode()}
+          >
+            🙅 Abbrechen
+          </Button>
+          <Button
+            name="delete"
+            type="button"
+            variant="big"
+            onClick={() => {
+              onDelete(entry.id, "entry");
+            }}
+          >
+            🗑️ Löschen
+          </Button>
+        </>
       ) : (
         <Button
           variant="big"
@@ -55,6 +67,7 @@ export default function EntryPage({
           ✍️ Bearbeiten
         </Button>
       )}
+
       {entry && (
         <Entry
           data={entry}

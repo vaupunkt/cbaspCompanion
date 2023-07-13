@@ -44,8 +44,6 @@ export default function App({ Component, pageProps }) {
     });
   }
 
-  console.log("allEntries in App.js", allEntries);
-
   return (
     <>
       <GlobalStyle />

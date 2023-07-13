@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const EditEntryContent = styled.div`
-  margin-top: 40px;
+  margin: 20px 0 20px 0;
   padding: 10px;
   border-top: solid;
   position: relative;
@@ -13,11 +13,11 @@ export const EditEntryLabel = styled.label`
   font-size: 0.8em;
   font-weight: bold;
   margin: 0;
-  padding: 5px 20px;
+  padding: 5px 10px;
   position: absolute;
-  top: -15px;
+  top: 0px;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -50%);
 `;
 
 export const EditEntryInput = styled.textarea`

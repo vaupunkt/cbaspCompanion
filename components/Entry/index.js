@@ -45,11 +45,10 @@ export default function Entry({
         delete dataset[key];
         return { interpretation: value, id };
       });
-    console.log("Dataset: ", dataset);
+
     const filteredAllEntries = allEntries.filter(
       (singleEntry) => singleEntry.id !== dataset.id
     );
-    console.log("filtered: ", filteredAllEntries);
     onAllEntriesChange([...filteredAllEntries, dataset]);
     toggleEditMode();
   }

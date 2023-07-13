@@ -10,10 +10,50 @@ export const ButtonBody = styled.button`
       color: var(--mainDarkColor);
       position: relative;
       height: 3em;
-      margin: 20px auto;
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      margin: 20px auto;
+    `}
+  ${(props) =>
+    props.variant === "big" &&
+    props.name === "save" &&
+    css`
+      border: solid;
+      padding-right: 100px;
+      border-radius: 25px;
+      background-color: color-mix(in srgb, var(--mainLightColor) 50%, green);
+      color: var(--mainDarkColor);
+      position: fixed;
+      bottom: 25px;
+      right: -185px;
+      z-index: 1;
+      height: 3em;
+      align-items: center;
+      justify-content: flex-end;
+      &:hover {
+        transform: translatex(-110px);
+      }
+    `}
+      ${(props) =>
+    props.variant === "big" &&
+    props.name === "delete" &&
+    css`
+      border: solid;
+      padding-right: 100px;
+      border-radius: 25px;
+      background-color: color-mix(in srgb, var(--mainLightColor) 50%, red);
+      color: var(--mainDarkColor);
+      position: fixed;
+      bottom: 70px;
+      right: -175px;
+      z-index: 1;
+      height: 3em;
+      align-items: center;
+      justify-content: flex-end;
+      &:hover {
+        transform: translatex(-110px);
+      }
     `}
   ${(props) =>
     props.variant === "small" &&
@@ -68,7 +108,7 @@ export const ButtonBody = styled.button`
 export const ButtonDescription = styled.p`
   font-size: 1.2em;
   text-align: right;
-  padding-right: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
   width: 100%;
-  padding-left: 20px;
 `;
