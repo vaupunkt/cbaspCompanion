@@ -41,7 +41,11 @@ export default function NewAnalysis() {
         >
           ❮
         </Button>
-        <TitleInput name="title" defaultValue="Title der Analyse"></TitleInput>
+        <TitleInput
+          name="title"
+          required
+          placeholder="Title der Analyse"
+        ></TitleInput>
         <HeaderDate>{dateString}</HeaderDate>
       </HeaderContainer>
       <ChooseTypeOfAnalysisFormfield>
