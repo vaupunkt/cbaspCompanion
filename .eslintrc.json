@@ -1,19 +1,19 @@
-// {
-//   "env": {
-//     "jest": true
-//   },
-//   "extends": ["next/babel", "next/core-web-vitals"],
-//   "rules": {
-//     "import/no-anonymous-default-export": [
-//       "error",
-//       {
-//         "allowObject": true
-//       }
-//     ]
-//   },
-//   "plugins": ["jest"]
-// }
-
 {
-  "extends": ["next/core-web-vitals"]
+  "env": {
+    "jest": true
+  },
+  "extends": ["next/babel", "next/core-web-vitals"],
+  "rules": {
+    "import/no-anonymous-default-export": [
+      "error",
+      {
+        "allowObject": true
+      }
+    ]
+  },
+  "plugins": ["jest"]
 }
+
+// {
+//   "extends": ["next/core-web-vitals"]
+// }
