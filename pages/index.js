@@ -38,6 +38,7 @@ export default function Home() {
     <>
       <Header title="CBASP Companion" />
       <NavigationContainer>
+        <NavigationLink href="./newanalysis">Neue Analyse</NavigationLink>
         <NavigationLink href="./myanalyses">Meine Analysen</NavigationLink>
       </NavigationContainer>
     </>
