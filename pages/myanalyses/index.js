@@ -7,7 +7,7 @@ const NavigationContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  bottom: 80px;
+  top: 80px;
 `;
 
 const NavigationLink = styled(Link)`
@@ -33,12 +33,21 @@ const NavigationLink = styled(Link)`
   }
 `;
 
-export default function Home() {
+export default function MyAnalysesPage() {
   return (
     <>
-      <Header title="CBASP Companion" />
+      <Header backButton title="Meine Situationsanalysen" />
       <NavigationContainer>
-        <NavigationLink href="./myanalyses">Meine Analysen</NavigationLink>
+        <NavigationLink href="./pastanalyses">
+          Vergangenheitsanalysen
+        </NavigationLink>
+        <NavigationLink href="./innersituationanalyses">
+          Innere Situationsanalysen
+        </NavigationLink>
+        <NavigationLink href="./futureanalyses">
+          Zukunftsanalysen
+        </NavigationLink>
+        <NavigationLink href="./allentries">Alle Analysen</NavigationLink>
       </NavigationContainer>
     </>
   );

@@ -24,9 +24,9 @@ export default function EntryList({ entries, onDelete }) {
               <EntryListItem key={entry.id}>
                 {editMode ? (
                   <Button
+                    variant="small"
                     name="delete"
                     onClick={() => onDelete(entry.id)}
-                    id={entry.id}
                   >
                     🗑️
                   </Button>
@@ -40,7 +40,7 @@ export default function EntryList({ entries, onDelete }) {
               </EntryListItem>
             );
           })}
-          <Button name="edit" onClick={() => toggleEditMode()}>
+          <Button variant="small" name="edit" onClick={() => toggleEditMode()}>
             ✍️
           </Button>
         </>

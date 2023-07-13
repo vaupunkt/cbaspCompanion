@@ -1,8 +1,8 @@
 import { useState } from "react";
 import GlobalStyle from "../styles";
 import initialEntries from "@/lib/initialEntries";
-import { confirmAlert } from "react-confirm-alert"; // Import
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 export default function App({ Component, pageProps }) {
   const [allEntries, setAllEntries] = useState(initialEntries);
@@ -16,15 +16,19 @@ export default function App({ Component, pageProps }) {
     (initialEntry) => initialEntry.type === "InnerSituationAnalysis"
   );
 
-  function handleDelete(id) {
+  function handleDelete(id, currentPage) {
     confirmAlert({
       message: "Sicher, dass du diesen Eintrag löschen willst?",
       buttons: [
         { label: "Abbrechen" },
         {
           label: "Löschen",
-          onClick: () =>
-            setAllEntries(allEntries.filter((entry) => entry.id !== id)),
+          onClick: () => {
+            setAllEntries(allEntries.filter((entry) => entry.id !== id));
+            if (currentPage === "entry") {
+              history.back();
+            }
+          },
         },
       ],
     });
