@@ -1,9 +1,3 @@
-import {
-  EntryListContainer,
-  EntryListItem,
-  EntryListItemLink,
-  EntryListTitle,
-} from "@/components/EntryList/EntryList.style";
 import Header from "@/components/Header";
 import NavigationContainer from "@/components/NavigationContainer";
 import NavigationLink from "@/components/NavigationLink";
@@ -12,7 +6,7 @@ export default function MyAnalysesPage() {
   return (
     <>
       <Header backButton title="Meine Situationsanalysen" />
-      <NavigationContainer top="true" left="true">
+      <NavigationContainer top left>
         <NavigationLink href="./pastanalyses">
           Vergangenheitsanalysen
         </NavigationLink>

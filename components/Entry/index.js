@@ -1,6 +1,7 @@
 import EntryContentBlock from "../EntryContentBlock";
 import EditEntry from "../EditEntry";
 import { useState } from "react";
+import { uid } from "uid";
 import Button from "../Button";
 
 const analysisHeadings = {
@@ -20,18 +21,37 @@ const analysisHeadings = {
 export default function Entry({
   data,
   editMode,
-  setEditedData,
-  handleDataUpdate,
+  allEntries,
+  onAllEntriesChange,
+  toggleEditMode,
 }) {
   const { type } = data;
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     let dataset = Object.fromEntries(formData);
-    dataset = { ...dataset, id: data.id };
-    console.log("Dataset", dataset);
-    setEditedData(dataset);
-    handleDataUpdate();
+    dataset = {
+      ...dataset,
+      id: data.id,
+      type: data.type,
+      title: data.title,
+      date: data.date,
+    };
+    dataset.interpretations = Object.entries(dataset)
+      .filter(([key, value]) => key.startsWith("interpretation "))
+      .map(([key, value]) => {
+        const id = uid();
+        delete dataset[key];
+        return { interpretation: value, id };
+      });
+    console.log("Dataset: ", dataset);
+    const filteredAllEntries = allEntries.filter(
+      (singleEntry) => singleEntry.id !== dataset.id
+    );
+    console.log("filtered: ", filteredAllEntries);
+    onAllEntriesChange([...filteredAllEntries, dataset]);
+    toggleEditMode();
   }
 
   const analysisKeys = {
