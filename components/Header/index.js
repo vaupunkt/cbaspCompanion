@@ -6,7 +6,7 @@ export default function Header({ title, date, backButton }) {
     <>
       <HeaderContainer>
         {backButton && (
-          <Button variant="small" name="back" onClick={() => history.back()}>
+          <Button name="back" onClick={() => history.back()}>
             ❮
           </Button>
         )}

@@ -1,13 +1,9 @@
-import { ButtonDescription, ButtonBody } from "./Button.style";
+import { ButtonStyled } from "./Button.style";
 
-export default function Button({ name, children, variant, onClick }) {
+export default function Button({ name, children, onClick }) {
   return (
-    <ButtonBody variant={variant} name={name} type="button" onClick={onClick}>
-      {variant === "small" ? (
-        children
-      ) : (
-        <ButtonDescription>{children}</ButtonDescription>
-      )}
-    </ButtonBody>
+    <ButtonStyled type="button" name={name} aria-label={name} onClick={onClick}>
+      {children}
+    </ButtonStyled>
   );
 }

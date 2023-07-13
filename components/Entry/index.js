@@ -6,6 +6,8 @@ export default function Entry({ data }) {
 
   if (type === "PastAnalysis") {
     const {
+      title,
+      date,
       description,
       interpretations,
       behavior,
@@ -19,6 +21,7 @@ export default function Entry({ data }) {
     } = data;
     return (
       <>
+        <Header backButton title={title} date={date}></Header>
         <EntryContentBlock content={description}>
           Beschreibung
         </EntryContentBlock>
@@ -53,6 +56,8 @@ export default function Entry({ data }) {
 
   if (type === "InnerSituationAnalysis") {
     const {
+      title,
+      date,
       description,
       interpretations,
       behavior,
@@ -66,6 +71,7 @@ export default function Entry({ data }) {
     } = data;
     return (
       <>
+        <Header backButton title={title} date={date}></Header>
         <EntryContentBlock content={description}>
           Beschreibung
         </EntryContentBlock>
@@ -100,6 +106,8 @@ export default function Entry({ data }) {
 
   if (type === "FutureAnalysis") {
     const {
+      title,
+      date,
       description,
       desiredResult,
       behavior,
@@ -110,6 +118,7 @@ export default function Entry({ data }) {
     } = data;
     return (
       <>
+        <Header backButton title={title} date={date}></Header>
         <EntryContentBlock content={description}>
           Beschreibung
         </EntryContentBlock>
