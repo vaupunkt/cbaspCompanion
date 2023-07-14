@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import { HeaderContainer, HeaderDate } from "@/components/Header/Header.style";
+import { useState } from "react";
 import { styled } from "styled-components";
 
 const TitleInput = styled.input`
@@ -26,10 +27,28 @@ const ChooseTypeOfAnalysisInput = styled.section`
 `;
 
 export default function NewAnalysis() {
+  const pastAnalysisHeadlines = {
+    description: "Beschreibe die Situation",
+    interpretations: "Interpretation",
+    behavior: "Verhalten",
+    actualResult: "Tatsächliches Ergebnis",
+    desiredResult: "Erwünschtes Ergebnis",
+    comparison: "Vergleich des tatsächlichen mit dem erwünschten Ergebnis",
+    revision: "Revision ungeeigneter Interpretationen",
+    behaviorChange: "Veränderung des Verhaltens",
+    implementation: "Umsetzung und Zusammenfassung",
+    transfer: "Generalisierung und Übertragung des Gelernten auf den Alltag",
+  };
   const date = new Date();
   const dateString = `${date.getDate()}.${
     date.getMonth() + 1
   }.${date.getFullYear()}`;
+
+  const [typeOfAnalysis, setTypeOfAnalysis] = useState("");
+  function onOptionChange(event) {
+    setTypeOfAnalysis(event.target.value);
+    console.log(typeOfAnalysis);
+  }
   return (
     <>
       <HeaderContainer>
@@ -55,6 +74,8 @@ export default function NewAnalysis() {
             type="radio"
             id="pastAnalysis"
             name="type"
+            onChange={onOptionChange}
+            checked={typeOfAnalysis === "PastAnalysis"}
             value="PastAnalysis"
           />
           <label htmlFor="pastAnalysis">Vergangenheitsanalyse</label>
@@ -64,6 +85,8 @@ export default function NewAnalysis() {
             type="radio"
             id="InnerSituationAnalysis"
             name="type"
+            onChange={onOptionChange}
+            checked={typeOfAnalysis === "InnerSituationAnalysis"}
             value="InnerSituationAnalysis"
           />
           <label htmlFor="InnerSituationAnalysis">
@@ -75,11 +98,20 @@ export default function NewAnalysis() {
             type="radio"
             id="FutureAnalysis"
             name="type"
+            onChange={onOptionChange}
+            checked={typeOfAnalysis === "FutureAnalysis"}
             value="FutureAnalysis"
           />
           <label htmlFor="FutureAnalysis">Zukunftsanalyse</label>
         </ChooseTypeOfAnalysisInput>
       </ChooseTypeOfAnalysisFormfield>
+      {typeOfAnalysis === "PastAnalysis" ? (
+        pastAnalysisHeadlines.map((pastAnalysisHeadline) => {
+          return <p>{pastAnalysisHeadline}</p>;
+        })
+      ) : (
+        <p>nothing</p>
+      )}
     </>
   );
 }
