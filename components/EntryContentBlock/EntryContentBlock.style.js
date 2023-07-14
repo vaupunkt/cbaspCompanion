@@ -19,12 +19,3 @@ export const ContentHeadline = styled.label`
   font-weight: bold;
   transform: translate(-50%, -50%);
 `;
-
-export const EntryInput = styled.textarea`
-  width: 100%;
-  font-size: 1em;
-  margin-top: 15px;
-  font-family: sans-serif;
-  ${(prop) => (prop.long ? "height: 7em" : "")}
-  ${(prop) => (prop.short ? "height: 1.5em" : "")}
-`;
