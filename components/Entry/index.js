@@ -2,8 +2,9 @@ import EntryContentBlock from "../EntryContentBlock";
 import { useState } from "react";
 import { uid } from "uid";
 import Button from "../Button";
+import { allAnalysisKeys } from "@/lib/allAnalysisKeys";
 
-const analysisHeadings = {
+const analysisEntryHeadings = {
   description: "Beschreibung",
   interpretations: "Interpretation",
   behavior: "Verhalten",
@@ -25,6 +26,7 @@ export default function Entry({
   toggleEditMode,
 }) {
   const { type } = data;
+  const analysisKeys = allAnalysisKeys[type];
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -52,41 +54,6 @@ export default function Entry({
     toggleEditMode();
   }
 
-  const analysisKeys = {
-    PastAnalysis: [
-      "description",
-      "interpretations",
-      "behavior",
-      "actualResult",
-      "desiredResult",
-      "comparison",
-      "revision",
-      "behaviorChange",
-      "implementation",
-      "transfer",
-    ],
-    InnerSituationAnalysis: [
-      "description",
-      "interpretations",
-      "behavior",
-      "actualResult",
-      "desiredResult",
-      "comparison",
-      "revision",
-      "behaviorChange",
-      "implementation",
-      "transfer",
-    ],
-    FutureAnalysis: [
-      "description",
-      "desiredResult",
-      "behavior",
-      "interpretations",
-      "rolePlay",
-      "implementation",
-      "transfer",
-    ],
-  }[type];
   const [updatedData, setUpdatedData] = useState(data);
 
   return (
@@ -100,13 +67,13 @@ export default function Entry({
             return (
               <EntryContentBlock
                 key={analysisKey}
-                analysisHeadings={analysisHeadings}
+                analysisHeadings={analysisEntryHeadings}
                 analysisKey={analysisKey}
                 editMode={editMode}
                 updatedData={updatedData}
                 setUpdatedData={setUpdatedData}
               >
-                {analysisHeadings[analysisKey]}
+                {analysisEntryHeadings[analysisKey]}
               </EntryContentBlock>
             );
           })}
@@ -115,7 +82,7 @@ export default function Entry({
         analysisKeys.map((analysisKey) => {
           return (
             <EntryContentBlock key={analysisKey} content={data[analysisKey]}>
-              {analysisHeadings[analysisKey]}
+              {analysisEntryHeadings[analysisKey]}
             </EntryContentBlock>
           );
         })
