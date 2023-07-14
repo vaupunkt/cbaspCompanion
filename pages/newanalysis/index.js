@@ -4,6 +4,7 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import PastAnalysisForm from "@/components/PastAnalysisForm";
 import { uid } from "uid";
+import Entry from "@/components/Entry";
 
 const TitleInput = styled.input`
   width: 50%;
@@ -46,6 +47,7 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
   }
 
   const date = new Date();
+  const [dataset, setDataset] = useState();
   function handleSubmit(event) {
     event.preventDefault;
     event.preventDefault();
@@ -67,6 +69,7 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
         return { revision: value, id };
       });
     handleAllEntriesChange([...allEntries, dataset]);
+    setDataset(dataset);
   }
 
   return (
@@ -145,6 +148,11 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
           <p>Nothing yet</p>
         )}
       </form>
+      {dataset ? (
+        <Entry data={dataset} editMode={false} allEntries={allEntries} />
+      ) : (
+        ""
+      )}
     </>
   );
 }
