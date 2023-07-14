@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const EntryContent = styled.div`
-  margin: 20px 0 20px 0;
+  margin: 20px 0;
   padding: 10px;
   border-top: solid;
   position: relative;
