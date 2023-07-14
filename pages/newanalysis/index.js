@@ -10,6 +10,16 @@ const TitleInput = styled.input`
   background-color: var(--mainDarkColor);
   color: var(--mainLightColor);
   border: solid;
+  border-width: 2px;
+`;
+
+const DateInput = styled.input`
+  background-color: var(--mainDarkColor);
+  color: var(--mainLightColor);
+  border: solid;
+  text-align: right;
+  border-width: 2px;
+  margin-top: 2px;
 `;
 
 const ChooseTypeOfAnalysisFormfield = styled.section`
@@ -47,12 +57,12 @@ export default function NewAnalysis() {
           placeholder="Title der Analyse"
         ></TitleInput>
         <HeaderDate>
-          <input
+          <DateInput
             type="date"
             pattern="\d{4}-\d{2}-\d{2}"
             defaultValue={date.toISOString().slice(0, 10)}
             name="date"
-          ></input>
+          />
         </HeaderDate>
       </HeaderContainer>
       <ChooseTypeOfAnalysisFormfield>
