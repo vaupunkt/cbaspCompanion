@@ -14,6 +14,7 @@ const RemainingLength = styled.p`
   text-align: right;
   font-size: 0.8em;
   margin: 0;
+  color: color-mix(in srgb, var(--mainDarkColor) 50%, white);
 `;
 
 export default function EntryInput({

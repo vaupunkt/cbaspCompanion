@@ -1,32 +1,11 @@
 import { allAnalysisKeys } from "@/lib/allAnalysisKeys";
-import EntryContentBlock from "../EntryContentBlock";
-import { styled } from "styled-components";
 import {
   ContentHeadline,
   EntryContent,
 } from "../EntryContentBlock/EntryContentBlock.style";
 import { useState } from "react";
 import EntryInput from "../EntryInput";
-
-const InterpretationsContentBlock = styled.div`
-  margin: 20px 0;
-  padding: 10px;
-  border-top: solid;
-  position: relative;
-`;
-
-const InterpretationsContentBlockHeadline = styled.label`
-  background-color: var(--mainLightColor);
-  text-align: center;
-  font-size: 0.8em;
-  margin: 0;
-  padding: 5px 10px;
-  position: absolute;
-  top: 0px;
-  left: 50%;
-  font-weight: bold;
-  transform: translate(-50%, -50%);
-`;
+import { uid } from "uid";
 
 export default function PastAnalysisForm({ typeOfAnalysis }) {
   const analysisKeys = allAnalysisKeys[typeOfAnalysis];
@@ -79,8 +58,20 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
 
   const numberOfInterpretations = 3;
   const [interpretations, setInterpretations] = useState(
-    Array(numberOfInterpretations).fill({ interpretation: "" })
+    Array(numberOfInterpretations)
+      .fill()
+      .map((interpretation) => ({ id: uid(), interpretation: "" }))
   );
+
+  const [revisionValues, setRevisionValues] = useState(
+    Array(numberOfInterpretations).fill("")
+  );
+
+  function handleRevisionChange(index, value) {
+    setRevisionValues((prevValues) =>
+      prevValues.map((prevValue, i) => (i === index ? value : prevValue))
+    );
+  }
 
   function handleInterpretationChange(index, value) {
     setInterpretations((prevInterpretations) =>
@@ -95,73 +86,84 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
   return (
     <>
       {analysisKeys.map((analysisKey) => {
-        analysisKey === "interpretations" ? (
-          <EntryContent>
-            <ContentHeadline htmlFor={analysisKey}>
-              {pastAnalysisHeadlines[analysisKey].title}
-            </ContentHeadline>
-            <p>{pastAnalysisHeadlines[analysisKey].description}</p>
-            <ol>
-              {interpretations.map((_, index) => (
-                <li key={index}>
-                  <label htmlFor={index + 1}>Interpretation:</label>
-                  <EntryInput
-                    required
-                    type="text"
-                    name={analysisKey + " " + (index + 1)}
-                    id={index + 1}
-                    short
-                    maxLength="200"
-                  />
-                </li>
-              ))}
-            </ol>
-          </EntryContent>
-        ) : (
-          ""
-        );
-      })}
-      ;
-      {analysisKeys.map((analysisKey) => {
-        analysisKey === "revision" ? (
-          <EntryContent>
-            <ContentHeadline htmlFor={analysisKey}>
-              {pastAnalysisHeadlines[analysisKey].title}
-            </ContentHeadline>
-            <p>{pastAnalysisHeadlines[analysisKey].description}</p>
-            <ol>
-              {interpretations.map(({ interpretation }, index) => (
-                <>
-                  <li key={index}>
-                    <label htmlFor={index + 1}>Revision:</label>
-                    <p>Die Interpretation lautete: {interpretation}</p>
+        if (analysisKey === "interpretations") {
+          return (
+            <EntryContent>
+              <ContentHeadline htmlFor={analysisKey}>
+                {pastAnalysisHeadlines[analysisKey].title}
+              </ContentHeadline>
+              <p>{pastAnalysisHeadlines[analysisKey].description}</p>
+              <ol>
+                {interpretations.map(({ id }, index) => (
+                  <li key={id}>
+                    <label htmlFor={id}>Interpretation:</label>
                     <EntryInput
                       required
                       type="text"
-                      name={"revision " + (index + 1)}
-                      id={index + 1}
+                      name={analysisKey + " " + id}
+                      id={id}
                       short
                       maxLength="200"
+                      onChange={(event) =>
+                        handleInterpretationChange(index, event.target.value)
+                      }
                     />
                   </li>
-                </>
-              ))}
-            </ol>
-          </EntryContent>
-        ) : (
-          ""
-        );
-      })}
-      {analysisKeys.map((analysisKey) => {
-        analysisKey !== "revision" || analysisKey !== "interpretations" ? (
+                ))}
+              </ol>
+            </EntryContent>
+          );
+        }
+        if (analysisKey === "revision") {
+          return (
+            <EntryContent>
+              <ContentHeadline htmlFor={analysisKey}>
+                {pastAnalysisHeadlines[analysisKey].title}
+              </ContentHeadline>
+              <p>{pastAnalysisHeadlines[analysisKey].description}</p>
+              <ol>
+                {interpretations.map(({ interpretation }, index) => (
+                  <>
+                    <li key={uid()}>
+                      <label htmlFor={index + 1}>Revision:</label>
+                      <p>
+                        Die Interpretation lautete:{" "}
+                        <span
+                          style={{
+                            textDecoration: revisionValues[index]
+                              ? "line-through"
+                              : "",
+                          }}
+                        >
+                          {interpretation}
+                        </span>
+                      </p>
+                      <EntryInput
+                        required
+                        type="text"
+                        name={"revision " + (index + 1)}
+                        id={index + 1}
+                        short
+                        maxLength="200"
+                        onChange={(event) =>
+                          handleRevisionChange(index, event.target.value)
+                        }
+                      />
+                    </li>
+                  </>
+                ))}
+              </ol>
+            </EntryContent>
+          );
+        }
+        return (
           <EntryContent>
             <ContentHeadline htmlFor={analysisKey}>
               {pastAnalysisHeadlines[analysisKey].title}
             </ContentHeadline>
+            <p>{pastAnalysisHeadlines[analysisKey].description}</p>
             <EntryInput long type="text" name={analysisKey} id={analysisKey} />
           </EntryContent>
-        ) : (
-          ""
         );
       })}
     </>

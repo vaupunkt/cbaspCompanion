@@ -69,6 +69,64 @@ export default function EntryContentBlock({
         )}
       </EntryContent>
     );
+  } else if (newEntry) {
+    return (
+      <EntryContent>
+        <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+        <p>{description}</p>
+        {analysisKey === "interpretations" ? (
+          <ol>
+            {interpretations.map((_, index) => (
+              <li key={index}>
+                <label htmlFor={index + 1}>Interpretation:</label>
+                <EntryInput
+                  required
+                  type="text"
+                  name={analysisKey + " " + (index + 1)}
+                  id={index + 1}
+                  short
+                  maxLength="200"
+                  onChange={(event) =>
+                    handleInterpretationChange(index, event.target.value)
+                  }
+                />
+              </li>
+            ))}
+          </ol>
+        ) : (
+          ""
+        )}
+        {analysisKey === "revision" ? (
+          <ol>
+            {interpretations.map(({ interpretation }, index) => (
+              <>
+                <li key={index}>
+                  <label htmlFor={index + 1}>Revision:</label>
+                  <p>Die Interpretation lautete: {interpretation}</p>
+                  <EntryInput
+                    required
+                    type="text"
+                    name={"revision " + (index + 1)}
+                    id={index + 1}
+                    short
+                    maxLength="200"
+                  />
+                </li>
+              </>
+            ))}
+          </ol>
+        ) : (
+          <EntryInput
+            required
+            type="text"
+            name={analysisKey}
+            id={analysisKey}
+            long
+            maxLength="500"
+          />
+        )}
+      </EntryContent>
+    );
   } else {
     return (
       <>

@@ -22,6 +22,7 @@ const DateInput = styled.input`
   text-align: right;
   border-width: 2px;
   margin-top: 2px;
+  font-family: sans-serif;
 `;
 
 const ChooseTypeOfAnalysisFormfield = styled.section`
