@@ -3,6 +3,7 @@ import { HeaderContainer, HeaderDate } from "@/components/Header/Header.style";
 import { useState } from "react";
 import { styled } from "styled-components";
 import PastAnalysisForm from "@/components/PastAnalysisForm";
+import { uid } from "uid";
 
 const TitleInput = styled.input`
   width: 50%;
@@ -38,17 +39,39 @@ const ChooseTypeOfAnalysisInput = styled.section`
   font-size: 1.2em;
 `;
 
-export default function NewAnalysis() {
+export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
   const [typeOfAnalysis, setTypeOfAnalysis] = useState("");
   function onOptionChange(event) {
     setTypeOfAnalysis(event.target.value);
   }
 
   const date = new Date();
+  function handleSubmit(event) {
+    event.preventDefault;
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    let dataset = Object.fromEntries(formData);
+    dataset = { ...dataset, id: uid() };
+    dataset.interpretations = Object.entries(dataset)
+      .filter(([key, value]) => key.startsWith("interpretations "))
+      .map(([key, value]) => {
+        const id = uid();
+        delete dataset[key];
+        return { interpretation: value, id };
+      });
+    dataset.revision = Object.entries(dataset)
+      .filter(([key, value]) => key.startsWith("revision "))
+      .map(([key, value]) => {
+        const id = uid();
+        delete dataset[key];
+        return { revision: value, id };
+      });
+    handleAllEntriesChange([...allEntries, dataset]);
+  }
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <HeaderContainer>
           <Button
             type="button"

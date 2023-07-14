@@ -116,44 +116,58 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
         }
         if (analysisKey === "revision") {
           return (
-            <EntryContent>
-              <ContentHeadline htmlFor={analysisKey}>
-                {pastAnalysisHeadlines[analysisKey].title}
-              </ContentHeadline>
-              <p>{pastAnalysisHeadlines[analysisKey].description}</p>
-              <ol>
-                {interpretations.map(({ interpretation }, index) => (
-                  <>
-                    <li key={uid()}>
-                      <label htmlFor={index + 1}>Revision:</label>
-                      <p>
-                        Die Interpretation lautete:{" "}
-                        <span
-                          style={{
-                            textDecoration: revisionValues[index]
-                              ? "line-through"
-                              : "",
-                          }}
-                        >
-                          {interpretation}
-                        </span>
-                      </p>
-                      <EntryInput
-                        required
-                        type="text"
-                        name={"revision " + (index + 1)}
-                        id={index + 1}
-                        short
-                        maxLength="200"
-                        onChange={(event) =>
-                          handleRevisionChange(index, event.target.value)
-                        }
-                      />
-                    </li>
-                  </>
-                ))}
-              </ol>
-            </EntryContent>
+            <>
+              <EntryContent>
+                <ContentHeadline htmlFor={analysisKey}>
+                  {pastAnalysisHeadlines[analysisKey].title}
+                </ContentHeadline>
+                <p>{pastAnalysisHeadlines[analysisKey].description}</p>
+                <ol>
+                  {interpretations.map(({ interpretation }, index) => (
+                    <>
+                      <li key={index}>
+                        <label htmlFor={index + 1}>Revision:</label>
+                        <p>
+                          Die Interpretation lautete:{" "}
+                          <span
+                            style={{
+                              textDecoration: revisionValues[index]
+                                ? "line-through"
+                                : "",
+                            }}
+                          >
+                            {interpretation}
+                          </span>
+                        </p>
+                        <EntryInput
+                          required
+                          type="text"
+                          name={"revision " + (index + 1)}
+                          id={index + 1}
+                          short
+                          maxLength="200"
+                          onChange={(event) =>
+                            handleRevisionChange(index, event.target.value)
+                          }
+                        />
+                      </li>
+                    </>
+                  ))}
+                </ol>
+              </EntryContent>
+              <EntryContent>
+                <ContentHeadline htmlFor="actionInterpretation">
+                  Handlungsinterpretationen bzw. Meine "Schlachtrufe"
+                </ContentHeadline>
+                <EntryInput
+                  required
+                  type="text"
+                  name="actionInterpretation"
+                  short
+                  maxLength="200"
+                />
+              </EntryContent>
+            </>
           );
         }
         return (
