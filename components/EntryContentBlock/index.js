@@ -38,7 +38,7 @@ export default function EntryContentBlock({
       )
     );
   }
-  console.log(interpretations);
+
   if (editMode === true) {
     return (
       <EntryContent>
