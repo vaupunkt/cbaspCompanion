@@ -46,6 +46,13 @@ export default function Entry({
         delete dataset[key];
         return { interpretation: value, id };
       });
+    dataset.revision = Object.entries(dataset)
+      .filter(([key, value]) => key.startsWith("revision "))
+      .map(([key, value]) => {
+        const id = uid();
+        delete dataset[key];
+        return { revision: value, id };
+      });
 
     const filteredAllEntries = allEntries.filter(
       (singleEntry) => singleEntry.id !== dataset.id
