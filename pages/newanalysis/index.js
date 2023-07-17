@@ -146,9 +146,7 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
         </ChooseTypeOfAnalysisFormfield>
         {typeOfAnalysis === "PastAnalysis" ? (
           <PastAnalysisForm typeOfAnalysis={typeOfAnalysis} />
-        ) : (
-          ""
-        )}
+        ) : null}
         {typeOfAnalysis === "InnerSituationAnalysis" ? (
           <InnerSituationAnalysisForm typeOfAnalysis={typeOfAnalysis} />
         ) : (
@@ -159,15 +157,11 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
           <Button variant="big" type="submit">
             💾 Speichern
           </Button>
-        ) : (
-          ""
-        )}
+        ) : null}
       </form>
       {dataset ? (
         <Entry data={dataset} editMode={false} allEntries={allEntries} />
-      ) : (
-        ""
-      )}
+      ) : null}
     </>
   );
 }

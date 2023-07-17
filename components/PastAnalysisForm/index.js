@@ -115,7 +115,7 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
                   <li key={id}>
                     <label htmlFor={id}>Interpretation:</label>
                     <EntryInput
-                      required={index === 0 ? true : false}
+                      required={index === 0}
                       type="text"
                       name={analysisKey + " " + id}
                       id={id}
@@ -139,17 +139,17 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
                 </ContentHeadline>
                 <p>{pastAnalysisHeadlines[analysisKey].description}</p>
                 <StyledList>
-                  {interpretations.map(({ interpretation }, index) => (
+                  {interpretations.map(({ id, interpretation }, index) => (
                     <>
-                      <li key={index}>
-                        <label htmlFor={index + 1}>Revision:</label>
+                      <li key={id}>
+                        <label htmlFor={id}>Revision:</label>
                         <InterpretationToRevise>
                           Die Interpretation lautete:{" "}
                           <span
                             style={{
                               textDecoration: revisionValues[index]
                                 ? "line-through"
-                                : "",
+                                : null,
                             }}
                           >
                             {interpretation}
@@ -158,7 +158,7 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
                         <EntryInput
                           type="text"
                           name={"revision " + (index + 1)}
-                          id={index + 1}
+                          id={id}
                           short
                           placeholder="(wenn nötig)"
                           onChange={(event) =>
