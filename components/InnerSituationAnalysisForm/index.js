@@ -6,6 +6,19 @@ import {
 import { useState } from "react";
 import EntryInput from "../EntryInput";
 import { uid } from "uid";
+import { styled } from "styled-components";
+
+const StyledList = styled.ol`
+  padding: 20px;
+  margin: 0px;
+`;
+
+const InterpretationToRevise = styled.p`
+  margin: 0;
+  padding: 0;
+  font-size: 0.9em;
+  word-wrap: normal;
+`;
 
 export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
   const analysisKeys = allAnalysisKeys[typeOfAnalysis];
@@ -68,8 +81,12 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
   );
 
   function handleRevisionChange(index, value) {
-    setRevisionValues((prevValues) =>
-      prevValues.map((prevValue, i) => (i === index ? value : prevValue))
+    setRevisionValues((prevRevisionValues) =>
+      prevRevisionValues.map((prevRevisionValue, i) =>
+        i === index
+          ? { ...prevRevisionValue, revision: value }
+          : prevRevisionValue
+      )
     );
   }
 
@@ -93,24 +110,23 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
                 {innerSituationAnalysisHeadlines[analysisKey].title}
               </ContentHeadline>
               <p>{innerSituationAnalysisHeadlines[analysisKey].description}</p>
-              <ol>
+              <StyledList>
                 {interpretations.map(({ id }, index) => (
                   <li key={id}>
                     <label htmlFor={id}>Interpretation:</label>
                     <EntryInput
-                      required
+                      required={index === 0 ? true : false}
                       type="text"
                       name={analysisKey + " " + id}
                       id={id}
                       short
-                      maxLength="200"
                       onChange={(event) =>
                         handleInterpretationChange(index, event.target.value)
                       }
                     />
                   </li>
                 ))}
-              </ol>
+              </StyledList>
             </EntryContent>
           );
         }
@@ -124,12 +140,12 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
                 <p>
                   {innerSituationAnalysisHeadlines[analysisKey].description}
                 </p>
-                <ol>
+                <StyledList>
                   {interpretations.map(({ interpretation }, index) => (
                     <>
                       <li key={index}>
                         <label htmlFor={index + 1}>Revision:</label>
-                        <p>
+                        <InterpretationToRevise>
                           Die Interpretation lautete:{" "}
                           <span
                             style={{
@@ -140,14 +156,13 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
                           >
                             {interpretation}
                           </span>
-                        </p>
+                        </InterpretationToRevise>
                         <EntryInput
-                          required
                           type="text"
                           name={"revision " + (index + 1)}
                           id={index + 1}
                           short
-                          maxLength="200"
+                          placeholder="(wenn nötig)"
                           onChange={(event) =>
                             handleRevisionChange(index, event.target.value)
                           }
@@ -155,7 +170,7 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
                       </li>
                     </>
                   ))}
-                </ol>
+                </StyledList>
               </EntryContent>
               <EntryContent>
                 <ContentHeadline htmlFor="actionInterpretation">
@@ -166,7 +181,6 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
                   type="text"
                   name="actionInterpretation"
                   short
-                  maxLength="200"
                 />
               </EntryContent>
             </>
@@ -178,7 +192,13 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
               {innerSituationAnalysisHeadlines[analysisKey].title}
             </ContentHeadline>
             <p>{innerSituationAnalysisHeadlines[analysisKey].description}</p>
-            <EntryInput long type="text" name={analysisKey} id={analysisKey} />
+            <EntryInput
+              long
+              required
+              type="text"
+              name={analysisKey}
+              id={analysisKey}
+            />
           </EntryContent>
         );
       })}
