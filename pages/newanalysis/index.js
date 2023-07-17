@@ -50,27 +50,33 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
   const date = new Date();
   const [dataset, setDataset] = useState();
   function handleSubmit(event) {
-    event.preventDefault;
     event.preventDefault();
     const formData = new FormData(event.target);
     let dataset = Object.fromEntries(formData);
     dataset = { ...dataset, id: uid() };
     dataset.interpretations = Object.entries(dataset)
       .filter(([key, value]) => key.startsWith("interpretations "))
-      .map(([key, value]) => {
-        const id = uid();
+      .reduce((array, [key, value]) => {
         delete dataset[key];
-        return { interpretation: value, id };
-      });
+        if (value) {
+          const id = uid();
+          return [...array, { interpretation: value, id }];
+        }
+        return array;
+      }, []);
     dataset.revision = Object.entries(dataset)
       .filter(([key, value]) => key.startsWith("revision "))
-      .map(([key, value]) => {
-        const id = uid();
+      .reduce((array, [key, value]) => {
         delete dataset[key];
-        return { revision: value, id };
-      });
+        if (value) {
+          const id = uid();
+          return [...array, { revision: value, id }];
+        }
+        return array;
+      }, []);
     handleAllEntriesChange([...allEntries, dataset]);
     setDataset(dataset);
+    event.target.reset();
   }
 
   return (
@@ -96,6 +102,7 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
               pattern="\d{4}-\d{2}-\d{2}"
               defaultValue={date.toISOString().slice(0, 10)}
               name="date"
+              max={date.toISOString().slice(0, 10)}
             />
           </HeaderDate>
         </HeaderContainer>
