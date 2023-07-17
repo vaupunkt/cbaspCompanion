@@ -5,6 +5,7 @@ import { styled } from "styled-components";
 import PastAnalysisForm from "@/components/PastAnalysisForm";
 import { uid } from "uid";
 import Entry from "@/components/Entry";
+import InnerSituationAnalysisForm from "@/components/InnerSituationAnalysisForm";
 
 const TitleInput = styled.input`
   width: 50%;
@@ -144,22 +145,23 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
           </ChooseTypeOfAnalysisInput>
         </ChooseTypeOfAnalysisFormfield>
         {typeOfAnalysis === "PastAnalysis" ? (
-          <>
-            <PastAnalysisForm typeOfAnalysis={typeOfAnalysis} />
-
-            <Button variant="big" type="submit">
-              💾 Speichern
-            </Button>
-          </>
+          <PastAnalysisForm typeOfAnalysis={typeOfAnalysis} />
+        ) : null}
+        {typeOfAnalysis === "InnerSituationAnalysis" ? (
+          <InnerSituationAnalysisForm typeOfAnalysis={typeOfAnalysis} />
         ) : (
-          <p>Nothing yet</p>
+          ""
         )}
+
+        {typeOfAnalysis !== "" ? (
+          <Button variant="big" type="submit">
+            💾 Speichern
+          </Button>
+        ) : null}
       </form>
       {dataset ? (
         <Entry data={dataset} editMode={false} allEntries={allEntries} />
-      ) : (
-        ""
-      )}
+      ) : null}
     </>
   );
 }

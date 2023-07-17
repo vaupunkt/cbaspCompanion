@@ -20,9 +20,9 @@ const InterpretationToRevise = styled.p`
   word-wrap: normal;
 `;
 
-export default function PastAnalysisForm({ typeOfAnalysis }) {
+export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
   const analysisKeys = allAnalysisKeys[typeOfAnalysis];
-  const pastAnalysisHeadlines = {
+  const innerSituationAnalysisHeadlines = {
     description: {
       title: "Beschreibe die Situation",
       description: "Was ist in dieser Situation passiert?",
@@ -107,9 +107,9 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
           return (
             <EntryContent>
               <ContentHeadline htmlFor={analysisKey}>
-                {pastAnalysisHeadlines[analysisKey].title}
+                {innerSituationAnalysisHeadlines[analysisKey].title}
               </ContentHeadline>
-              <p>{pastAnalysisHeadlines[analysisKey].description}</p>
+              <p>{innerSituationAnalysisHeadlines[analysisKey].description}</p>
               <StyledList>
                 {interpretations.map(({ id }, index) => (
                   <li key={id}>
@@ -135,9 +135,11 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
             <>
               <EntryContent>
                 <ContentHeadline htmlFor={analysisKey}>
-                  {pastAnalysisHeadlines[analysisKey].title}
+                  {innerSituationAnalysisHeadlines[analysisKey].title}
                 </ContentHeadline>
-                <p>{pastAnalysisHeadlines[analysisKey].description}</p>
+                <p>
+                  {innerSituationAnalysisHeadlines[analysisKey].description}
+                </p>
                 <StyledList>
                   {interpretations.map(({ id, interpretation }, index) => (
                     <>
@@ -172,7 +174,7 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
               </EntryContent>
               <EntryContent>
                 <ContentHeadline htmlFor="actionInterpretation">
-                  Handlungsinterpretation bzw. "Schlachtrufe"
+                  Handlungsinterpretationen bzw. Meine "Schlachtrufe"
                 </ContentHeadline>
                 <EntryInput
                   required
@@ -187,9 +189,9 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
         return (
           <EntryContent>
             <ContentHeadline htmlFor={analysisKey}>
-              {pastAnalysisHeadlines[analysisKey].title}
+              {innerSituationAnalysisHeadlines[analysisKey].title}
             </ContentHeadline>
-            <p>{pastAnalysisHeadlines[analysisKey].description}</p>
+            <p>{innerSituationAnalysisHeadlines[analysisKey].description}</p>
             <EntryInput
               long
               required
