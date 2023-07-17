@@ -73,7 +73,7 @@ export const ButtonBody = styled.button`
       background-color: var(--mainLightColor);
       color: var(--mainDarkColor);
       border-radius: 100%;
-      position: absolute;
+      position: fixed;
       right: 20px;
       bottom: 20px;
       font-size: 3em;

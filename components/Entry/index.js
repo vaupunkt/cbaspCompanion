@@ -81,7 +81,14 @@ export default function Entry({
       ) : (
         analysisKeys.map((analysisKey) => {
           return (
-            <EntryContentBlock key={analysisKey} content={data[analysisKey]}>
+            <EntryContentBlock
+              key={analysisKey}
+              analysisHeadings={analysisEntryHeadings}
+              analysisKey={analysisKey}
+              editMode={editMode}
+              updatedData={updatedData}
+              setUpdatedData={setUpdatedData}
+            >
               {analysisEntryHeadings[analysisKey]}
             </EntryContentBlock>
           );

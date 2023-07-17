@@ -25,6 +25,7 @@ export default function EntryInput({
   id,
   value,
   onChange,
+  required,
 }) {
   let maxLength;
   if (short) {
@@ -45,6 +46,8 @@ export default function EntryInput({
   return (
     <>
       <StyledEntryInput
+        required={required}
+        maxLength={short ? "200" : "500"}
         long={long}
         short={short}
         type={type}
