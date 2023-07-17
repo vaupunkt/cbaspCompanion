@@ -7,7 +7,7 @@ export const EntryContent = styled.div`
   position: relative;
 `;
 
-export const ContentHeadline = styled.h2`
+export const ContentHeadline = styled.label`
   background-color: var(--mainLightColor);
   text-align: center;
   font-size: 0.8em;
@@ -16,14 +16,6 @@ export const ContentHeadline = styled.h2`
   position: absolute;
   top: 0px;
   left: 50%;
+  font-weight: bold;
   transform: translate(-50%, -50%);
-`;
-
-export const EntryInput = styled.textarea`
-  width: 100%;
-  font-size: 1em;
-  margin-top: 15px;
-  font-family: sans-serif;
-  ${(prop) => (prop.long ? "height: 7em" : "")}
-  ${(prop) => (prop.short ? "height: 1.5em" : "")}
 `;
