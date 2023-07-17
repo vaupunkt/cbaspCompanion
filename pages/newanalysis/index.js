@@ -6,6 +6,8 @@ import PastAnalysisForm from "@/components/PastAnalysisForm";
 import { uid } from "uid";
 import Entry from "@/components/Entry";
 import InnerSituationAnalysisForm from "@/components/InnerSituationAnalysisForm";
+import FutureAnalysisForm from "@/components/FutureAnalysisForm";
+import { useRouter } from "next/router";
 
 const TitleInput = styled.input`
   width: 50%;
@@ -42,6 +44,7 @@ const ChooseTypeOfAnalysisInput = styled.section`
 `;
 
 export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
+  const router = useRouter();
   const [typeOfAnalysis, setTypeOfAnalysis] = useState("");
   function onOptionChange(event) {
     setTypeOfAnalysis(event.target.value);
@@ -77,8 +80,9 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
     handleAllEntriesChange([...allEntries, dataset]);
     setDataset(dataset);
     event.target.reset();
+    router.push(`/entries/${dataset.id}`);
   }
-
+  console.log(typeOfAnalysis);
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -149,9 +153,10 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
         ) : null}
         {typeOfAnalysis === "InnerSituationAnalysis" ? (
           <InnerSituationAnalysisForm typeOfAnalysis={typeOfAnalysis} />
-        ) : (
-          ""
-        )}
+        ) : null}
+        {typeOfAnalysis === "FutureAnalysis" ? (
+          <FutureAnalysisForm typeOfAnalysis={typeOfAnalysis} />
+        ) : null}
 
         {typeOfAnalysis !== "" ? (
           <Button variant="big" type="submit">
