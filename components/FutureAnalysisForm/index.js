@@ -7,7 +7,6 @@ import { useState } from "react";
 import EntryInput from "../EntryInput";
 import { uid } from "uid";
 import { styled } from "styled-components";
-import { useRouter } from "next/router";
 
 const StyledList = styled.ol`
   padding: 20px;
