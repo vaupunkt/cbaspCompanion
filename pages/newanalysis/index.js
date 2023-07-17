@@ -6,6 +6,7 @@ import PastAnalysisForm from "@/components/PastAnalysisForm";
 import { uid } from "uid";
 import Entry from "@/components/Entry";
 import InnerSituationAnalysisForm from "@/components/InnerSituationAnalysisForm";
+import FutureAnalysisForm from "@/components/FutureAnalysisForm";
 
 const TitleInput = styled.input`
   width: 50%;
@@ -78,7 +79,7 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
     setDataset(dataset);
     event.target.reset();
   }
-
+  console.log(typeOfAnalysis);
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -149,9 +150,10 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
         ) : null}
         {typeOfAnalysis === "InnerSituationAnalysis" ? (
           <InnerSituationAnalysisForm typeOfAnalysis={typeOfAnalysis} />
-        ) : (
-          ""
-        )}
+        ) : null}
+        {typeOfAnalysis === "FutureAnalysis" ? (
+          <FutureAnalysisForm typeOfAnalysis={typeOfAnalysis} />
+        ) : null}
 
         {typeOfAnalysis !== "" ? (
           <Button variant="big" type="submit">
