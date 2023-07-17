@@ -80,7 +80,6 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
     event.target.reset();
     router.push(`/entries/${dataset.id}`);
   }
-  console.log(typeOfAnalysis);
   return (
     <>
       <form onSubmit={handleSubmit}>
