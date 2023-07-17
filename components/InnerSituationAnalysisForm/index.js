@@ -149,7 +149,7 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
                           Die Interpretation lautete:{" "}
                           <span
                             style={{
-                              textDecoration: revisions[index]
+                              textDecoration: revisions[index].revision
                                 ? "line-through"
                                 : null,
                             }}

@@ -76,16 +76,16 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
       .map((interpretation) => ({ id: uid(), interpretation: "" }))
   );
 
-  const [revisionValues, setRevisionValues] = useState(
-    Array(numberOfInterpretations).fill("")
+  const [revisions, setRevisions] = useState(
+    Array(numberOfInterpretations)
+      .fill()
+      .map((revision) => ({ id: uid(), revision: "" }))
   );
 
   function handleRevisionChange(index, value) {
-    setRevisionValues((prevRevisionValues) =>
-      prevRevisionValues.map((prevRevisionValue, i) =>
-        i === index
-          ? { ...prevRevisionValue, revision: value }
-          : prevRevisionValue
+    setRevisions((prevRevisions) =>
+      prevRevisions.map((prevRevision, i) =>
+        i === index ? { ...prevRevision, revision: value } : prevRevision
       )
     );
   }
@@ -147,7 +147,7 @@ export default function PastAnalysisForm({ typeOfAnalysis }) {
                           Die Interpretation lautete:{" "}
                           <span
                             style={{
-                              textDecoration: revisionValues[index]
+                              textDecoration: revisions[index].revision
                                 ? "line-through"
                                 : null,
                             }}
