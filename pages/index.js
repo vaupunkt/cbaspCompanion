@@ -40,6 +40,7 @@ export default function Home() {
       <NavigationContainer>
         <NavigationLink href="./newanalysis">Neue Analyse ➕ </NavigationLink>
         <NavigationLink href="./myanalyses">Meine Analysen</NavigationLink>
+        <NavigationLink href="./chatbot">Chatbot-Test</NavigationLink>
       </NavigationContainer>
     </>
   );
