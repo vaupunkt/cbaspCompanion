@@ -16,6 +16,12 @@ const StyledList = styled.ol`
   margin: 0px;
 `;
 
+const OutcomeReachedSection = styled.section`
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+`;
+
 const InterpretationToRevise = styled.p`
   margin: 0;
   padding: 0;
@@ -88,6 +94,11 @@ export default function AnalysisForm({ typeOfAnalysis }) {
           : prevInterpretation
       )
     );
+  }
+
+  const [outcomeReached, setOutcomeReached] = useState("");
+  function onOptionChange(event) {
+    setOutcomeReached(event.target.value === "true");
   }
   return (
     <>
@@ -189,6 +200,51 @@ export default function AnalysisForm({ typeOfAnalysis }) {
                 />
               </EntryContent>
             </>
+          );
+        }
+        if (analysisKey === "comparison") {
+          return (
+            <EntryContent>
+              <ContentHeadline htmlFor={analysisKey}>
+                {analysisHeadlines[analysisKey].title}
+              </ContentHeadline>
+              <p>{analysisHeadlines[analysisKey].description}</p>
+              <OutcomeReachedSection>
+                <input
+                  type="radio"
+                  id="comparisonYes"
+                  name="comparison"
+                  value={true}
+                  checked={outcomeReached === true}
+                  onChange={onOptionChange}
+                />
+                <label htmlFor="comparisonYes">Ja</label>
+              </OutcomeReachedSection>
+              <OutcomeReachedSection>
+                {" "}
+                <input
+                  type="radio"
+                  id="comparisonNo"
+                  name="comparison"
+                  value={false}
+                  checked={outcomeReached === false}
+                  onChange={onOptionChange}
+                />
+                <label htmlFor="comparisonNo">Nein</label>
+              </OutcomeReachedSection>
+              {outcomeReached === false ? (
+                <>
+                  <p>Warum nicht?</p>
+                  <EntryInput
+                    long
+                    required
+                    type="text"
+                    name={analysisKey}
+                    id={analysisKey}
+                  />
+                </>
+              ) : null}
+            </EntryContent>
           );
         }
         return (
