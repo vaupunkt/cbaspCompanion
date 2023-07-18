@@ -6,6 +6,7 @@ import { uid } from "uid";
 import Entry from "@/components/Entry";
 import { useRouter } from "next/router";
 import AnalysisForm from "@/components/AnalysisForm";
+import { ConversationalForm } from "conversational-form";
 
 const TitleInput = styled.input`
   width: 50%;
@@ -97,7 +98,7 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
   }
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form cf-form onSubmit={handleSubmit}>
         <HeaderContainer>
           <Button
             type="button"
