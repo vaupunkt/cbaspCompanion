@@ -94,9 +94,23 @@ export const ButtonBody = styled.button`
       width: 2.5em;
       height: 2.5em;
     `}  
+    ${(props) =>
+    props.variant === "small" &&
+    props.name === "deleteInterpretation" &&
+    css`
+      background-color: var(--mainLightColor);
+      color: var(--mainDarkColor);
+      border-radius: 100%;
+      position: absolute;
+      top: 15px;
+      right: -15px;
+      font-weight: bolder;
+      width: 2.5em;
+      height: 2.5em;
+    `}  
   &:hover {
     ${(prop) =>
-      prop.name === "delete"
+      prop.name === "delete" || prop.name === "deleteInterpretation"
         ? "background-color: color-mix(in srgb, var(--mainLightColor) 50%, red)"
         : ""};
   }

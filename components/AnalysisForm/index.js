@@ -1,13 +1,14 @@
+import { confirmAlert } from "react-confirm-alert";
+import { useState } from "react";
+import { uid } from "uid";
+import { styled } from "styled-components";
 import { allAnalysisHeadlines } from "@/lib/ allAnalysisHeadlines";
 import { allAnalysisKeys } from "@/lib/allAnalysisKeys";
 import {
   ContentHeadline,
   EntryContent,
 } from "../EntryContentBlock/EntryContentBlock.style";
-import { useState } from "react";
 import EntryInput from "../EntryInput";
-import { uid } from "uid";
-import { styled } from "styled-components";
 import Button from "../Button";
 
 const StyledList = styled.ol`
@@ -20,6 +21,10 @@ const InterpretationToRevise = styled.p`
   padding: 0;
   font-size: 0.9em;
   word-wrap: normal;
+`;
+
+const InterpretationListItem = styled.li`
+  position: relative;
 `;
 
 export default function AnalysisForm({ typeOfAnalysis }) {
@@ -48,6 +53,23 @@ export default function AnalysisForm({ typeOfAnalysis }) {
       ...prevRevisions,
       { id: uid(), revision: "" },
     ]);
+  }
+
+  function removeInterpretation(index) {
+    confirmAlert({
+      message: "Sicher, dass du diese Interpretation löschen willst?",
+      buttons: [
+        { label: "Abbrechen" },
+        {
+          label: "Löschen",
+          onClick: () => {
+            setInterpretations((prevInterpretations) =>
+              prevInterpretations.filter((interpretation, i) => i !== index)
+            );
+          },
+        },
+      ],
+    });
   }
 
   function handleRevisionChange(index, value) {
@@ -79,7 +101,7 @@ export default function AnalysisForm({ typeOfAnalysis }) {
               <p>{analysisHeadlines[analysisKey].description}</p>
               <StyledList>
                 {interpretations.map(({ id }, index) => (
-                  <li key={id}>
+                  <InterpretationListItem key={id}>
                     <label htmlFor={id}>Interpretation:</label>
                     <EntryInput
                       required={index === 0}
@@ -91,10 +113,25 @@ export default function AnalysisForm({ typeOfAnalysis }) {
                         handleInterpretationChange(index, event.target.value)
                       }
                     />
-                  </li>
+                    {index >= numberOfInterpretations ? (
+                      <Button
+                        onClick={() => removeInterpretation(index)}
+                        variant="small"
+                        type="button"
+                        name="deleteInterpretation"
+                      >
+                        🗑️
+                      </Button>
+                    ) : null}
+                  </InterpretationListItem>
                 ))}
-                <Button variant="big" onClick={() => addInterpretation()}>
-                  ➕ Interpretation hinzufügen
+                <Button
+                  variant="big"
+                  type="button"
+                  name="addInterpretation"
+                  onClick={() => addInterpretation()}
+                >
+                  ➕ mehr Interpretationen hinzufügen
                 </Button>
               </StyledList>
             </EntryContent>
