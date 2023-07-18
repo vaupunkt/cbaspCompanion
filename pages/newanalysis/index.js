@@ -2,12 +2,10 @@ import Button from "@/components/Button";
 import { HeaderContainer, HeaderDate } from "@/components/Header/Header.style";
 import { useState } from "react";
 import { styled } from "styled-components";
-import PastAnalysisForm from "@/components/PastAnalysisForm";
 import { uid } from "uid";
 import Entry from "@/components/Entry";
-import InnerSituationAnalysisForm from "@/components/InnerSituationAnalysisForm";
-import FutureAnalysisForm from "@/components/FutureAnalysisForm";
 import { useRouter } from "next/router";
+import AnalysisForm from "@/components/AnalysisForm";
 
 const TitleInput = styled.input`
   width: 50%;
@@ -148,14 +146,8 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
             <label htmlFor="FutureAnalysis">Zukunftsanalyse</label>
           </ChooseTypeOfAnalysisInput>
         </ChooseTypeOfAnalysisFormfield>
-        {typeOfAnalysis === "PastAnalysis" ? (
-          <PastAnalysisForm typeOfAnalysis={typeOfAnalysis} />
-        ) : null}
-        {typeOfAnalysis === "InnerSituationAnalysis" ? (
-          <InnerSituationAnalysisForm typeOfAnalysis={typeOfAnalysis} />
-        ) : null}
-        {typeOfAnalysis === "FutureAnalysis" ? (
-          <FutureAnalysisForm typeOfAnalysis={typeOfAnalysis} />
+        {typeOfAnalysis ? (
+          <AnalysisForm typeOfAnalysis={typeOfAnalysis} />
         ) : null}
 
         {typeOfAnalysis !== "" ? (

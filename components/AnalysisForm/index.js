@@ -1,3 +1,4 @@
+import { allAnalysisHeadlines } from "@/lib/ allAnalysisHeadlines";
 import { allAnalysisKeys } from "@/lib/allAnalysisKeys";
 import {
   ContentHeadline,
@@ -7,6 +8,7 @@ import { useState } from "react";
 import EntryInput from "../EntryInput";
 import { uid } from "uid";
 import { styled } from "styled-components";
+import Button from "../Button";
 
 const StyledList = styled.ol`
   padding: 20px;
@@ -20,54 +22,9 @@ const InterpretationToRevise = styled.p`
   word-wrap: normal;
 `;
 
-export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
+export default function AnalysisForm({ typeOfAnalysis }) {
   const analysisKeys = allAnalysisKeys[typeOfAnalysis];
-  const innerSituationAnalysisHeadlines = {
-    description: {
-      title: "Beschreibe die Situation",
-      description: "Was ist in dieser Situation passiert?",
-    },
-    interpretations: {
-      title: "Interpretation",
-      description:
-        "Wie habe ich die Situation aufgefasst/gelesen/interpretiert?",
-    },
-    behavior: {
-      title: "Verhalten",
-      description: "Was habe ich in dieser Situation genau getan?",
-    },
-    actualResult: {
-      title: "Tatsächliches Ergebnis",
-      description: "Wie ging die Situation für mich aus?",
-    },
-    desiredResult: {
-      title: "Erwünschtes Ergebnis",
-      description: "Welchen Ausgang hätte ich mir gewünscht?",
-    },
-    comparison: {
-      title: "Vergleich des tatsächlichen mit dem erwünschten Ergebnis",
-      description: "Habe ich erreicht, was ich wollte?",
-    },
-    revision: {
-      title: "Revision ungeeigneter Interpretationen",
-      description:
-        "Ist die Interpretation in der Situation verankert? War es wirklich so? Inwieweit trägt diese Interpretation dazu bei, dass ich mein Ziel erreiche? Sehe ich Zusammenhänge zwischen meinen Interpretationen und meinen Prägungen?",
-    },
-    behaviorChange: {
-      title: "Veränderung des Verhaltens",
-      description:
-        "Nachdem ich nun meine Interpretationen revidiert habe: Wie hätte ich mich verhalten um das zu bekommen, was ich will - also um mein neues Ziel auch tatsächlich zu erreichen?",
-    },
-    implementation: {
-      title: "Umsetzung und Zusammenfassung",
-      description: "Was habe ich heute (in der Übung) gelernt?",
-    },
-    transfer: {
-      title: "Generalisierung und Übertragung des Gelernten auf den Alltag",
-      description:
-        "Kenne ich eine ähnliche Sitation aus meinem Alltag/Leben? Was hätte ich gedacht und gemacht, wenn ich das, was ich heute gelernt habe, damals schon gewusst hätte?",
-    },
-  };
+  const analysisHeadlines = allAnalysisHeadlines[typeOfAnalysis];
 
   const numberOfInterpretations = 3;
   const [interpretations, setInterpretations] = useState(
@@ -81,6 +38,17 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
       .fill()
       .map((revision) => ({ id: uid(), revision: "" }))
   );
+
+  function addInterpretation() {
+    setInterpretations((prevInterpretations) => [
+      ...prevInterpretations,
+      { id: uid(), interpretation: "" },
+    ]);
+    setRevisions((prevRevisions) => [
+      ...prevRevisions,
+      { id: uid(), revision: "" },
+    ]);
+  }
 
   function handleRevisionChange(index, value) {
     setRevisions((prevRevisions) =>
@@ -99,7 +67,6 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
       )
     );
   }
-
   return (
     <>
       {analysisKeys.map((analysisKey) => {
@@ -107,9 +74,9 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
           return (
             <EntryContent>
               <ContentHeadline htmlFor={analysisKey}>
-                {innerSituationAnalysisHeadlines[analysisKey].title}
+                {analysisHeadlines[analysisKey].title}
               </ContentHeadline>
-              <p>{innerSituationAnalysisHeadlines[analysisKey].description}</p>
+              <p>{analysisHeadlines[analysisKey].description}</p>
               <StyledList>
                 {interpretations.map(({ id }, index) => (
                   <li key={id}>
@@ -126,6 +93,9 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
                     />
                   </li>
                 ))}
+                <Button variant="big" onClick={() => addInterpretation()}>
+                  ➕ Interpretation hinzufügen
+                </Button>
               </StyledList>
             </EntryContent>
           );
@@ -135,11 +105,9 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
             <>
               <EntryContent>
                 <ContentHeadline htmlFor={analysisKey}>
-                  {innerSituationAnalysisHeadlines[analysisKey].title}
+                  {analysisHeadlines[analysisKey].title}
                 </ContentHeadline>
-                <p>
-                  {innerSituationAnalysisHeadlines[analysisKey].description}
-                </p>
+                <p>{analysisHeadlines[analysisKey].description}</p>
                 <StyledList>
                   {interpretations.map(({ id, interpretation }, index) => (
                     <>
@@ -189,9 +157,9 @@ export default function InnerSituationAnalysisForm({ typeOfAnalysis }) {
         return (
           <EntryContent>
             <ContentHeadline htmlFor={analysisKey}>
-              {innerSituationAnalysisHeadlines[analysisKey].title}
+              {analysisHeadlines[analysisKey].title}
             </ContentHeadline>
-            <p>{innerSituationAnalysisHeadlines[analysisKey].description}</p>
+            <p>{analysisHeadlines[analysisKey].description}</p>
             <EntryInput
               long
               required
