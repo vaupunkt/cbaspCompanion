@@ -48,6 +48,20 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
     setTypeOfAnalysis(event.target.value);
   }
 
+  const [allActionInterpretations, setAllActionInterpretations] = useState([
+    "Ich darf eigene Bedürfnisse haben",
+    "Ich kann mutig sein",
+  ]);
+  function addActionInterpretation(newActionInterpretation) {
+    setAllActionInterpretations((previousActionInterpretation) => {
+      if (previousActionInterpretation.includes(newActionInterpretation)) {
+        return previousActionInterpretation;
+      } else {
+        return [...previousActionInterpretation, newActionInterpretation];
+      }
+    });
+  }
+
   const date = new Date();
   const [dataset, setDataset] = useState();
   function handleSubmit(event) {
@@ -76,6 +90,7 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
         return array;
       }, []);
     handleAllEntriesChange([...allEntries, dataset]);
+    addActionInterpretation(dataset.actionInterpretation);
     setDataset(dataset);
     event.target.reset();
     router.push(`/entries/${dataset.id}`);
@@ -146,7 +161,10 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
           </ChooseTypeOfAnalysisInput>
         </ChooseTypeOfAnalysisFormfield>
         {typeOfAnalysis ? (
-          <AnalysisForm typeOfAnalysis={typeOfAnalysis} />
+          <AnalysisForm
+            typeOfAnalysis={typeOfAnalysis}
+            allActionInterpretations={allActionInterpretations}
+          />
         ) : null}
 
         {typeOfAnalysis !== "" ? (

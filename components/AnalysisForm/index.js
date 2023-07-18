@@ -33,7 +33,10 @@ const InterpretationListItem = styled.li`
   position: relative;
 `;
 
-export default function AnalysisForm({ typeOfAnalysis }) {
+export default function AnalysisForm({
+  typeOfAnalysis,
+  allActionInterpretations,
+}) {
   const analysisKeys = allAnalysisKeys[typeOfAnalysis];
   const analysisHeadlines = allAnalysisHeadlines[typeOfAnalysis];
 
@@ -197,7 +200,16 @@ export default function AnalysisForm({ typeOfAnalysis }) {
                   type="text"
                   name="actionInterpretation"
                   short
+                  list="allActionInterpretations"
                 />
+                <datalist id="allActionInterpretations">
+                  {allActionInterpretations.map((actionInterpretation) => (
+                    <option
+                      key={actionInterpretation}
+                      value={actionInterpretation}
+                    />
+                  ))}
+                </datalist>
               </EntryContent>
             </>
           );
