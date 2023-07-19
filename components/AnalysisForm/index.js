@@ -2,7 +2,7 @@ import { confirmAlert } from "react-confirm-alert";
 import { useState } from "react";
 import { uid } from "uid";
 import { styled } from "styled-components";
-import { allAnalysisHeadlines } from "@/lib/ allAnalysisHeadlines";
+import { allAnalysisHeadlines } from "@/lib/allAnalysisHeadlines";
 import { allAnalysisKeys } from "@/lib/allAnalysisKeys";
 import {
   ContentHeadline,
@@ -191,27 +191,32 @@ export default function AnalysisForm({
                   ))}
                 </StyledList>
               </EntryContent>
-              <EntryContent>
-                <ContentHeadline htmlFor="actionInterpretation">
-                  Handlungsinterpretationen bzw. Meine "Schlachtrufe"
-                </ContentHeadline>
-                <EntryInput
-                  required
-                  type="text"
-                  name="actionInterpretation"
-                  short
-                  list="allActionInterpretations"
-                />
-                <datalist id="allActionInterpretations">
-                  {allActionInterpretations.map((actionInterpretation) => (
-                    <option
-                      key={actionInterpretation}
-                      value={actionInterpretation}
-                    />
-                  ))}
-                </datalist>
-              </EntryContent>
             </>
+          );
+        }
+        if (analysisKey === "actionInterpretation") {
+          return (
+            <EntryContent>
+              <ContentHeadline htmlFor={analysisKey}>
+                {analysisHeadlines[analysisKey].title}
+              </ContentHeadline>
+              <p>{analysisHeadlines[analysisKey].description}</p>
+              <EntryInput
+                required
+                type="text"
+                name="actionInterpretation"
+                short
+                list="allActionInterpretations"
+              />
+              <datalist id="allActionInterpretations">
+                {allActionInterpretations.map((actionInterpretation) => (
+                  <option
+                    key={actionInterpretation}
+                    value={actionInterpretation}
+                  />
+                ))}
+              </datalist>
+            </EntryContent>
           );
         }
         if (analysisKey === "comparison") {

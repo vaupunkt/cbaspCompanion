@@ -41,17 +41,18 @@ const ChooseTypeOfAnalysisInput = styled.section`
   font-size: 1.2em;
 `;
 
-export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
+export default function NewAnalysis({
+  allEntries,
+  handleAllEntriesChange,
+  setAllActionInterpretations,
+  allActionInterpretations,
+}) {
   const router = useRouter();
   const [typeOfAnalysis, setTypeOfAnalysis] = useState("");
   function onOptionChange(event) {
     setTypeOfAnalysis(event.target.value);
   }
 
-  const [allActionInterpretations, setAllActionInterpretations] = useState([
-    "Ich darf eigene Bedürfnisse haben",
-    "Ich kann mutig sein",
-  ]);
   function addActionInterpretation(newActionInterpretation) {
     setAllActionInterpretations((previousActionInterpretation) => {
       if (previousActionInterpretation.includes(newActionInterpretation)) {
