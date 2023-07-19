@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { styled } from "styled-components";
 
 const ConversationalFormSection = styled.div`
-  height: 90vh;
+  height: calc(100vh - 60px);
 `;
 
 const ChatBotComponent = dynamic(
