@@ -69,6 +69,9 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
     const formData = new FormData(event.target);
     let dataset = Object.fromEntries(formData);
     dataset = { ...dataset, id: uid() };
+    if (Object.entries(dataset).filter((data) => data.comparison === "true")) {
+      dataset.comparison = "Erwünschtes Ergebnis erreicht.";
+    }
     dataset.interpretations = Object.entries(dataset)
       .filter(([key, value]) => key.startsWith("interpretations "))
       .reduce((array, [key, value]) => {
@@ -97,86 +100,81 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <HeaderContainer>
-          <Button
-            type="button"
-            variant="small"
-            name="back"
-            onClick={() => history.back()}
-          >
-            ❮
-          </Button>
-          <TitleInput
-            name="title"
-            required
-            placeholder="Title der Analyse"
-          ></TitleInput>
-          <HeaderDate>
-            <DateInput
-              type="date"
-              pattern="\d{4}-\d{2}-\d{2}"
-              defaultValue={date.toISOString().slice(0, 10)}
-              name="date"
-              max={date.toISOString().slice(0, 10)}
-            />
-          </HeaderDate>
-        </HeaderContainer>
-        <ChooseTypeOfAnalysisFormfield>
-          <h2>Was für eine Analyse möchtest du erstellen?</h2>
-          <ChooseTypeOfAnalysisInput>
-            <input
-              type="radio"
-              id="pastAnalysis"
-              name="type"
-              onChange={onOptionChange}
-              checked={typeOfAnalysis === "PastAnalysis"}
-              value="PastAnalysis"
-            />
-            <label htmlFor="pastAnalysis">Vergangenheitsanalyse</label>
-          </ChooseTypeOfAnalysisInput>
-          <ChooseTypeOfAnalysisInput>
-            <input
-              type="radio"
-              id="InnerSituationAnalysis"
-              name="type"
-              onChange={onOptionChange}
-              checked={typeOfAnalysis === "InnerSituationAnalysis"}
-              value="InnerSituationAnalysis"
-            />
-            <label htmlFor="InnerSituationAnalysis">
-              Innere Situationsanalyse
-            </label>
-          </ChooseTypeOfAnalysisInput>
-          <ChooseTypeOfAnalysisInput>
-            <input
-              type="radio"
-              id="FutureAnalysis"
-              name="type"
-              onChange={onOptionChange}
-              checked={typeOfAnalysis === "FutureAnalysis"}
-              value="FutureAnalysis"
-            />
-            <label htmlFor="FutureAnalysis">Zukunftsanalyse</label>
-          </ChooseTypeOfAnalysisInput>
-        </ChooseTypeOfAnalysisFormfield>
-        {typeOfAnalysis ? (
-          <AnalysisForm
-            typeOfAnalysis={typeOfAnalysis}
-            allActionInterpretations={allActionInterpretations}
+    <form onSubmit={handleSubmit}>
+      <HeaderContainer>
+        <Button
+          type="button"
+          variant="small"
+          name="back"
+          onClick={() => history.back()}
+        >
+          ❮
+        </Button>
+        <TitleInput
+          name="title"
+          required
+          placeholder="Title der Analyse"
+        ></TitleInput>
+        <HeaderDate>
+          <DateInput
+            type="date"
+            pattern="\d{4}-\d{2}-\d{2}"
+            defaultValue={date.toISOString().slice(0, 10)}
+            name="date"
+            max={date.toISOString().slice(0, 10)}
           />
-        ) : null}
-
-        {typeOfAnalysis !== "" ? (
-          <Button variant="big" type="submit">
-            💾 Speichern
-          </Button>
-        ) : null}
-      </form>
-      {dataset ? (
-        <Entry data={dataset} editMode={false} allEntries={allEntries} />
+        </HeaderDate>
+      </HeaderContainer>
+      <ChooseTypeOfAnalysisFormfield>
+        <h2>Was für eine Analyse möchtest du erstellen?</h2>
+        <ChooseTypeOfAnalysisInput>
+          <input
+            type="radio"
+            id="pastAnalysis"
+            name="type"
+            onChange={onOptionChange}
+            checked={typeOfAnalysis === "PastAnalysis"}
+            value="PastAnalysis"
+          />
+          <label htmlFor="pastAnalysis">Vergangenheitsanalyse</label>
+        </ChooseTypeOfAnalysisInput>
+        <ChooseTypeOfAnalysisInput>
+          <input
+            type="radio"
+            id="InnerSituationAnalysis"
+            name="type"
+            onChange={onOptionChange}
+            checked={typeOfAnalysis === "InnerSituationAnalysis"}
+            value="InnerSituationAnalysis"
+          />
+          <label htmlFor="InnerSituationAnalysis">
+            Innere Situationsanalyse
+          </label>
+        </ChooseTypeOfAnalysisInput>
+        <ChooseTypeOfAnalysisInput>
+          <input
+            type="radio"
+            id="FutureAnalysis"
+            name="type"
+            onChange={onOptionChange}
+            checked={typeOfAnalysis === "FutureAnalysis"}
+            value="FutureAnalysis"
+          />
+          <label htmlFor="FutureAnalysis">Zukunftsanalyse</label>
+        </ChooseTypeOfAnalysisInput>
+      </ChooseTypeOfAnalysisFormfield>
+      {typeOfAnalysis ? (
+        <AnalysisForm
+          typeOfAnalysis={typeOfAnalysis}
+          allActionInterpretations={allActionInterpretations}
+        />
       ) : null}
-    </>
+
+      {typeOfAnalysis !== "" ? (
+        <Button variant="big" type="submit">
+          💾 Speichern
+        </Button>
+      ) : null}
+    </form>
   );
 }
