@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { ConversationalForm } from "conversational-form";
 
 export default function MyForm() {
@@ -22,10 +22,17 @@ export default function MyForm() {
   useEffect(function mount() {
     cf = ConversationalForm.startTheConversation({
       options: {
-        theme: "blue",
         submitCallback: submitCallback,
-        preventAutoFocus: true,
-        // loadExternalStyleSheet: false
+        preventAutoFocus: false,
+        loadExternalStyleSheet: true,
+        surpressLog: true,
+        userInterfaceOptions: {
+          robot: {
+            robotResponseTime: 200,
+            chainedResponseTime: 400,
+          },
+        },
+        showProgressBar: true,
       },
       tags: formFields,
     });

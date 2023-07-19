@@ -17,4 +17,6 @@ export default createGlobalStyle`
     color: var(--mainDarkColor);
     font-family: system-ui;
   }
+
+
 `;
