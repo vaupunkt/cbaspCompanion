@@ -2,7 +2,7 @@ import { confirmAlert } from "react-confirm-alert";
 import { useState } from "react";
 import { uid } from "uid";
 import { styled } from "styled-components";
-import { allAnalysisHeadlines } from "@/lib/allAnalysisHeadlines";
+import { allAnalysisFormHeadlines } from "@/lib/allAnalysisFormHeadlines";
 import { allAnalysisKeys } from "@/lib/allAnalysisKeys";
 import {
   ContentHeadline,
@@ -38,7 +38,7 @@ export default function AnalysisForm({
   allActionInterpretations,
 }) {
   const analysisKeys = allAnalysisKeys[typeOfAnalysis];
-  const analysisHeadlines = allAnalysisHeadlines[typeOfAnalysis];
+  const analysisHeadlines = allAnalysisFormHeadlines[typeOfAnalysis];
 
   const numberOfInterpretations = 3;
   const [interpretations, setInterpretations] = useState(

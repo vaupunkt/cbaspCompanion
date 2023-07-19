@@ -4,13 +4,10 @@ import { EntryContent, ContentHeadline } from "./EntryContentBlock.style";
 
 export default function EntryContentBlock({
   children,
-  content,
   editMode,
   analysisKey,
   updatedData,
   setUpdatedData,
-  newEntry,
-  description,
 }) {
   function handleChange(analysisKey, value) {
     setUpdatedData((prevData) => ({ ...prevData, [analysisKey]: value }));
@@ -43,7 +40,8 @@ export default function EntryContentBlock({
     return (
       <EntryContent>
         <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
-        {Array.isArray(updatedData[analysisKey]) ? (
+        {Array.isArray(updatedData[analysisKey]) &&
+        analysisKey === "interpretations" ? (
           updatedData[analysisKey].map((item, index) => (
             <EntryInput
               short
@@ -52,6 +50,21 @@ export default function EntryContentBlock({
               id={index}
               type="text"
               value={item.interpretation}
+              onChange={(event) =>
+                handleArrayChange(analysisKey, index, event.target.value)
+              }
+            />
+          ))
+        ) : Array.isArray(updatedData[analysisKey]) &&
+          analysisKey === "revision" ? (
+          updatedData[analysisKey].map((item, index) => (
+            <EntryInput
+              short
+              key={item.id}
+              name={"revision " + item.id}
+              id={index}
+              type="text"
+              value={item.revision}
               onChange={(event) =>
                 handleArrayChange(analysisKey, index, event.target.value)
               }
@@ -70,7 +83,6 @@ export default function EntryContentBlock({
       </EntryContent>
     );
   } else {
-    console.log(updatedData);
     return (
       <>
         <EntryContent>
