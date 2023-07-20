@@ -1,16 +1,26 @@
 import { useState } from "react";
 import EntryInput from "../EntryInput";
 import { EntryContent, ContentHeadline } from "./EntryContentBlock.style";
+import { styled } from "styled-components";
+import Button from "../Button";
+import { uid } from "uid";
+import { confirmAlert } from "react-confirm-alert";
+
+const InterpretationListItem = styled.li`
+  position: relative;
+`;
+
+const StyledList = styled.ol`
+  padding: 20px;
+  margin: 0px;
+`;
 
 export default function EntryContentBlock({
   children,
-  content,
   editMode,
   analysisKey,
   updatedData,
   setUpdatedData,
-  newEntry,
-  description,
 }) {
   function handleChange(analysisKey, value) {
     setUpdatedData((prevData) => ({ ...prevData, [analysisKey]: value }));
@@ -26,38 +36,122 @@ export default function EntryContentBlock({
   }
   const numberOfInterpretations = 3;
   const [interpretations, setInterpretations] = useState(
-    Array(numberOfInterpretations).fill({ interpretation: "" })
+    updatedData[analysisKey]
   );
 
-  function handleInterpretationChange(index, value) {
-    setInterpretations((prevInterpretations) =>
-      prevInterpretations.map((prevInterpretation, i) =>
-        i === index
-          ? { ...prevInterpretation, interpretation: value }
-          : prevInterpretation
-      )
-    );
+  const [revisions, setRevisions] = useState(
+    Array(numberOfInterpretations)
+      .fill()
+      .map((revision) => ({ id: uid(), revision: "" }))
+  );
+
+  function removeInterpretation(index) {
+    confirmAlert({
+      message: "Sicher, dass du diese Interpretation löschen willst?",
+      buttons: [
+        { label: "Abbrechen" },
+        {
+          label: "Löschen",
+          onClick: () => {
+            setUpdatedData((prevData) => ({
+              ...prevData,
+              [analysisKey]: prevData[analysisKey].filter(
+                (interpretation, i) => i !== index
+              ),
+              revision: prevData.revision.filter((revision, i) => i !== index),
+            }));
+          },
+        },
+      ],
+    });
+  }
+
+  function addInterpretation() {
+    setUpdatedData((prevData) => {
+      const newInterpretations = [
+        ...prevData[analysisKey],
+        { id: uid(), interpretation: "" },
+      ];
+      const newRevisions = Array.isArray(prevData.revision)
+        ? [...prevData.revision, { id: uid(), revision: "" }]
+        : Array(newInterpretations.length)
+            .fill()
+            .map(() => ({ id: uid(), revision: "" }));
+      return {
+        ...prevData,
+        [analysisKey]: newInterpretations,
+        revision: newRevisions,
+      };
+    });
   }
 
   if (editMode === true) {
-    return (
-      <EntryContent>
-        <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
-        {Array.isArray(updatedData[analysisKey]) ? (
-          updatedData[analysisKey].map((item, index) => (
-            <EntryInput
-              short
-              key={item.id}
-              name={"interpretation " + item.id}
-              id={index}
-              type="text"
-              value={item.interpretation}
-              onChange={(event) =>
-                handleArrayChange(analysisKey, index, event.target.value)
-              }
-            />
-          ))
-        ) : (
+    if (
+      analysisKey === "interpretations" &&
+      Array.isArray(updatedData[analysisKey])
+    ) {
+      return (
+        <EntryContent>
+          <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+          <StyledList>
+            {updatedData[analysisKey].map(({ id, interpretation }, index) => (
+              <InterpretationListItem key={id}>
+                <label htmlFor={id}>Interpretation:</label>
+                <EntryInput
+                  type="text"
+                  name={analysisKey + " " + id}
+                  id={id}
+                  short
+                  value={interpretation}
+                  onChange={(event) =>
+                    handleArrayChange(analysisKey, index, event.target.value)
+                  }
+                />
+                <Button
+                  onClick={() => removeInterpretation(index)}
+                  variant="small"
+                  type="button"
+                  name="deleteInterpretation"
+                >
+                  🗑️
+                </Button>
+              </InterpretationListItem>
+            ))}
+            <Button
+              variant="big"
+              type="button"
+              name="addInterpretation"
+              onClick={() => addInterpretation()}
+            >
+              ➕ mehr Interpretationen hinzufügen
+            </Button>
+          </StyledList>
+        </EntryContent>
+      );
+    } else if (analysisKey === "revision") {
+      return (
+        <EntryContent>
+          <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+          {Array.isArray(updatedData.revision) &&
+            updatedData.revision.map((item, index) => (
+              <EntryInput
+                short
+                key={item.id}
+                name={"revision " + item.id}
+                id={index}
+                type="text"
+                value={item.revision}
+                onChange={(event) =>
+                  handleArrayChange("revision", index, event.target.value)
+                }
+              />
+            ))}
+        </EntryContent>
+      );
+    } else {
+      return (
+        <EntryContent>
+          <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
           <EntryInput
             long
             type="text"
@@ -66,28 +160,21 @@ export default function EntryContentBlock({
             value={updatedData[analysisKey]}
             onChange={(event) => handleChange(analysisKey, event.target.value)}
           />
-        )}
-      </EntryContent>
-    );
+        </EntryContent>
+      );
+    }
   } else {
-    console.log(updatedData);
     return (
       <>
         <EntryContent>
           <ContentHeadline>{children}</ContentHeadline>
-          {Array.isArray(updatedData[analysisKey]) &&
-          analysisKey === "interpretations" ? (
+          {Array.isArray(updatedData[analysisKey]) ? (
             <ol>
-              {updatedData[analysisKey].map(({ id, interpretation }) => (
-                <li key={id}>{interpretation}</li>
-              ))}
-            </ol>
-          ) : Array.isArray(updatedData[analysisKey]) &&
-            analysisKey === "revision" ? (
-            <ol>
-              {updatedData[analysisKey].map(({ id, revision }) => (
-                <li key={id}>{revision}</li>
-              ))}
+              {updatedData[analysisKey].map(
+                ({ id, interpretation, revision }) => (
+                  <li key={id}>{interpretation ? interpretation : revision}</li>
+                )
+              )}
             </ol>
           ) : (
             <p>{updatedData[analysisKey]}</p>

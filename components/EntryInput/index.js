@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { styled } from "styled-components";
 
-const StyledEntryInput = styled.textarea`
+const StyledEntryInputTextarea = styled.textarea`
+  width: 100%;
+  font-size: 1em;
+  margin-top: 15px;
+  font-family: sans-serif;
+  ${(prop) => (prop.long ? "height: 7em" : "")}
+  ${(prop) => (prop.short ? "height: 1.5em" : "")}
+`;
+
+const StyledEntryInput = styled.input`
   width: 100%;
   font-size: 1em;
   margin-top: 15px;
@@ -26,6 +35,7 @@ export default function EntryInput({
   value,
   onChange,
   required,
+  list,
 }) {
   let maxLength;
   if (short) {
@@ -45,18 +55,34 @@ export default function EntryInput({
 
   return (
     <>
-      <StyledEntryInput
-        required={required}
-        maxLength={short ? "200" : "500"}
-        long={long}
-        short={short}
-        type={type}
-        name={name}
-        id={id}
-        value={value}
-        onChange={onChange}
-        onInput={handleInput}
-      />
+      {list ? (
+        <StyledEntryInput
+          required={required}
+          maxLength={short ? "200" : "500"}
+          long={long}
+          short={short}
+          type={type}
+          name={name}
+          id={id}
+          value={value}
+          list={list}
+          onChange={onChange}
+          onInput={handleInput}
+        />
+      ) : (
+        <StyledEntryInputTextarea
+          required={required}
+          maxLength={short ? "200" : "500"}
+          long={long}
+          short={short}
+          type={type}
+          name={name}
+          id={id}
+          value={value}
+          onChange={onChange}
+          onInput={handleInput}
+        />
+      )}
       <RemainingLength>{remainingLength} Zeichen übrig</RemainingLength>
     </>
   );

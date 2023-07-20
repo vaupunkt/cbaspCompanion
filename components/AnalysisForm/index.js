@@ -2,7 +2,7 @@ import { confirmAlert } from "react-confirm-alert";
 import { useState } from "react";
 import { uid } from "uid";
 import { styled } from "styled-components";
-import { allAnalysisHeadlines } from "@/lib/ allAnalysisHeadlines";
+import { allAnalysisFormHeadlines } from "@/lib/allAnalysisFormHeadlines";
 import { allAnalysisKeys } from "@/lib/allAnalysisKeys";
 import {
   ContentHeadline,
@@ -33,9 +33,12 @@ const InterpretationListItem = styled.li`
   position: relative;
 `;
 
-export default function AnalysisForm({ typeOfAnalysis }) {
+export default function AnalysisForm({
+  typeOfAnalysis,
+  allActionInterpretations,
+}) {
   const analysisKeys = allAnalysisKeys[typeOfAnalysis];
-  const analysisHeadlines = allAnalysisHeadlines[typeOfAnalysis];
+  const analysisHeadlines = allAnalysisFormHeadlines[typeOfAnalysis];
 
   const numberOfInterpretations = 3;
   const [interpretations, setInterpretations] = useState(
@@ -188,18 +191,32 @@ export default function AnalysisForm({ typeOfAnalysis }) {
                   ))}
                 </StyledList>
               </EntryContent>
-              <EntryContent>
-                <ContentHeadline htmlFor="actionInterpretation">
-                  Handlungsinterpretationen bzw. Meine "Schlachtrufe"
-                </ContentHeadline>
-                <EntryInput
-                  required
-                  type="text"
-                  name="actionInterpretation"
-                  short
-                />
-              </EntryContent>
             </>
+          );
+        }
+        if (analysisKey === "actionInterpretation") {
+          return (
+            <EntryContent>
+              <ContentHeadline htmlFor={analysisKey}>
+                {analysisHeadlines[analysisKey].title}
+              </ContentHeadline>
+              <p>{analysisHeadlines[analysisKey].description}</p>
+              <EntryInput
+                required
+                type="text"
+                name="actionInterpretation"
+                short
+                list="allActionInterpretations"
+              />
+              <datalist id="allActionInterpretations">
+                {allActionInterpretations.map((actionInterpretation) => (
+                  <option
+                    key={actionInterpretation}
+                    value={actionInterpretation}
+                  />
+                ))}
+              </datalist>
+            </EntryContent>
           );
         }
         if (analysisKey === "comparison") {

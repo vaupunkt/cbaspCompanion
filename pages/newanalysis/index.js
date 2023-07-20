@@ -41,11 +41,26 @@ const ChooseTypeOfAnalysisInput = styled.section`
   font-size: 1.2em;
 `;
 
-export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
+export default function NewAnalysis({
+  allEntries,
+  handleAllEntriesChange,
+  setAllActionInterpretations,
+  allActionInterpretations,
+}) {
   const router = useRouter();
   const [typeOfAnalysis, setTypeOfAnalysis] = useState("");
   function onOptionChange(event) {
     setTypeOfAnalysis(event.target.value);
+  }
+
+  function addActionInterpretation(newActionInterpretation) {
+    setAllActionInterpretations((previousActionInterpretation) => {
+      if (previousActionInterpretation.includes(newActionInterpretation)) {
+        return previousActionInterpretation;
+      } else {
+        return [...previousActionInterpretation, newActionInterpretation];
+      }
+    });
   }
 
   const date = new Date();
@@ -76,6 +91,7 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
         return array;
       }, []);
     handleAllEntriesChange([...allEntries, dataset]);
+    addActionInterpretation(dataset.actionInterpretation);
     setDataset(dataset);
     event.target.reset();
     router.push(`/entries/${dataset.id}`);
@@ -146,7 +162,10 @@ export default function NewAnalysis({ allEntries, handleAllEntriesChange }) {
           </ChooseTypeOfAnalysisInput>
         </ChooseTypeOfAnalysisFormfield>
         {typeOfAnalysis ? (
-          <AnalysisForm typeOfAnalysis={typeOfAnalysis} />
+          <AnalysisForm
+            typeOfAnalysis={typeOfAnalysis}
+            allActionInterpretations={allActionInterpretations}
+          />
         ) : null}
 
         {typeOfAnalysis !== "" ? (
