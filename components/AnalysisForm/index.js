@@ -10,6 +10,7 @@ import {
 } from "../EntryContentBlock/EntryContentBlock.style";
 import EntryInput from "../EntryInput";
 import Button from "../Button";
+import KieslerKreis from "../KieslerKreis";
 
 const StyledList = styled.ol`
   padding: 20px;
@@ -216,6 +217,24 @@ export default function AnalysisForm({
                   />
                 ))}
               </datalist>
+            </EntryContent>
+          );
+        }
+        if (analysisKey === "behavior") {
+          return (
+            <EntryContent>
+              <ContentHeadline htmlFor={analysisKey}>
+                {analysisHeadlines[analysisKey].title}
+              </ContentHeadline>
+              <p>{analysisHeadlines[analysisKey].description}</p>
+              <EntryInput
+                long
+                required
+                type="text"
+                name={analysisKey}
+                id={analysisKey}
+              />
+              <KieslerKreis />
             </EntryContent>
           );
         }
