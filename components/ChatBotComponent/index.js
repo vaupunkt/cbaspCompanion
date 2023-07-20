@@ -46,7 +46,7 @@ export default function ChatBotComponent() {
       ],
     },
   ];
-  var flowCallback = function (dto, success, error) {
+  let flowCallback = function (dto, success, error) {
     console.log("Callback: ", dto, success, error);
 
     const interpretationsQuestionsArray = [];
