@@ -1,6 +1,13 @@
 import { Radar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
-import "chartjs-plugin-dragdata"; // Importieren des Plugins
+import styled from "styled-components";
+
+const DiagrammContainer = styled.div`
+  max-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default function KieslerKreis() {
   const data = {
@@ -14,15 +21,7 @@ export default function KieslerKreis() {
       ["Feindselig", "Distanziert"],
       "",
     ],
-    datasets: [
-      {
-        label: "Beispiel-Daten",
-        data: [, 2, , , , , ,],
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
-        borderWidth: 1,
-      },
-    ],
+    datasets: [],
   };
 
   const options = {
@@ -30,6 +29,7 @@ export default function KieslerKreis() {
       ticks: {
         beginAtZero: true,
         max: 3,
+        stepSize: 1,
       },
     },
     scales: {
@@ -39,31 +39,13 @@ export default function KieslerKreis() {
         stepSize: 1,
       },
     },
-    plugins: {
-      dragData: {
-        round: 1,
-        showTooltip: true,
-        onDragStart: function (e) {
-          // console.log(e)
-        },
-        onDrag: function (e, datasetIndex, index, value) {
-          e.target.style.cursor = "grabbing";
-          // console.log(e, datasetIndex, index, value)
-        },
-        onDragEnd: function (e, datasetIndex, index, value) {
-          e.target.style.cursor = "default";
-          // console.log(datasetIndex, index, value)
-        },
-      },
-    },
   };
 
   return (
     <>
-      <h2>Kieslerkreis</h2>
-      <div style={{ height: "90vh" }}>
+      <DiagrammContainer>
         <Radar data={data} options={options} />
-      </div>
+      </DiagrammContainer>
     </>
   );
 }
