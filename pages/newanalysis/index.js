@@ -3,7 +3,6 @@ import { HeaderContainer, HeaderDate } from "@/components/Header/Header.style";
 import { useState } from "react";
 import { styled } from "styled-components";
 import { uid } from "uid";
-import Entry from "@/components/Entry";
 import { useRouter } from "next/router";
 import AnalysisForm from "@/components/AnalysisForm";
 

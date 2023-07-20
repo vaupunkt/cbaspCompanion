@@ -18,5 +18,7 @@ export default createGlobalStyle`
     font-family: system-ui;
   }
 
-
+.conversational-form .cf-progressBar {
+  top: 60px;
+}
 `;

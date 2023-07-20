@@ -5,6 +5,7 @@ import { styled } from "styled-components";
 
 const ConversationalFormSection = styled.div`
   height: calc(100vh - 60px);
+  display: flex;
 `;
 
 const ChatBotComponent = dynamic(
