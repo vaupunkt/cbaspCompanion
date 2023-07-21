@@ -55,17 +55,16 @@ export default function KieslerKreis({
   kieslerkreisDataset,
   editMode,
   analysisKey,
+  overviewDataset,
 }) {
-  console.log(kieslerkreisDataset);
   const [kieslerkreisData, setKieslerkreisData] = useState(
-    JSON.parse(kieslerkreisDataset)
+    kieslerkreisDataset ? JSON.parse(kieslerkreisDataset) : null
   );
   const strengthDescriptions = [
     { number: 1, text: "schwach ausgeprägt" },
     { number: 2, text: "mittlere Ausprägung" },
     { number: 3, text: "stark ausgeprägt" },
   ];
-
   const chartData = {
     labels: [
       ["Dominant", "Offen"],
@@ -77,7 +76,33 @@ export default function KieslerKreis({
       ["Feindselig", "Distanziert"],
       "",
     ],
-    datasets: [
+  };
+
+  if (overviewDataset) {
+    chartData.datasets = [
+      {
+        type: "radar",
+        label: "Verhalten",
+        data: overviewDataset.averageBehaviorKieslerkreis,
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        borderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 4,
+      },
+      {
+        type: "radar",
+        label: "Gewünschtes Verhalten",
+        data: overviewDataset.averageBehaviorChangeKieslerkreis,
+        backgroundColor: "rgba(50, 168, 82, 0.2)",
+        borderColor: "rgba(50, 168, 82, 1)",
+        borderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 4,
+      },
+    ];
+  } else {
+    chartData.datasets = [
       {
         type: "radar",
         label: "Einschätzung",
@@ -87,8 +112,8 @@ export default function KieslerKreis({
         pointRadius: 30,
         pointHoverRadius: 30,
       },
-    ],
-  };
+    ];
+  }
   if (analysisKey === "behavior") {
     chartData.datasets[0].backgroundColor = "rgba(255, 99, 132, 0.2)";
     chartData.datasets[0].borderColor = "rgba(255, 99, 132, 1)";
@@ -111,6 +136,16 @@ export default function KieslerKreis({
       },
     },
   };
+  if (overviewDataset) {
+    options.plugins = {
+      legend: {
+        display: true,
+      },
+      tooltip: {
+        enabled: true,
+      },
+    };
+  }
   if (editMode) {
     options.plugins = {
       legend: {
@@ -172,46 +207,54 @@ export default function KieslerKreis({
       }
     };
   }
-  const strengthOfCategory = kieslerkreisData.findIndex(
-    (value) => value !== null
-  );
-  const strengthDescription = strengthDescriptions.find(
-    (strengthDescription) =>
-      strengthDescription.number === kieslerkreisData[strengthOfCategory]
-  );
-  const descriptionText = kieslerKreisDescription[strengthOfCategory];
-  if (analysisKey === "behavior") {
-    console.log("Behavior", kieslerkreisData);
-  } else if (analysisKey === "behaviorChange") {
-    console.log("behaviorChange", kieslerkreisData);
-  }
-  return (
-    <>
+  if (kieslerkreisData) {
+    const strengthOfCategory = kieslerkreisData.findIndex(
+      (value) => value !== null
+    );
+    const strengthDescription = strengthDescriptions.find(
+      (strengthDescription) =>
+        strengthDescription.number === kieslerkreisData[strengthOfCategory]
+    );
+    const descriptionText = kieslerKreisDescription[strengthOfCategory];
+    if (analysisKey === "behavior") {
+      console.log("Behavior", kieslerkreisData);
+    } else if (analysisKey === "behaviorChange") {
+      console.log("behaviorChange", kieslerkreisData);
+    }
+    return (
+      <>
+        <DiagrammContainer>
+          <Radar data={chartData} options={options} />
+        </DiagrammContainer>
+        {descriptionText &&
+          (analysisKey === "behavior" ? (
+            <p>Dein Verhalten war:</p>
+          ) : analysisKey === "behaviorChange" ? (
+            <p>So möchtest du handeln:</p>
+          ) : (
+            ""
+          ))}
+        <h2>{descriptionText?.title}</h2>
+        <p>{strengthDescription?.text}</p>
+        <p>{descriptionText?.description}</p>
+        <input
+          type="hidden"
+          name={
+            analysisKey === "behavior"
+              ? "behaviorKieslerkreis"
+              : analysisKey === "behaviorChange"
+              ? "behaviorChangeKieslerkreis"
+              : null
+          }
+          value={JSON.stringify(kieslerkreisData)}
+        />
+      </>
+    );
+  } else {
+    return (
       <DiagrammContainer>
         <Radar data={chartData} options={options} />
       </DiagrammContainer>
-      {descriptionText &&
-        (analysisKey === "behavior" ? (
-          <p>Dein Verhalten war:</p>
-        ) : analysisKey === "behaviorChange" ? (
-          <p>So möchtest du handeln:</p>
-        ) : (
-          ""
-        ))}
-      <h2>{descriptionText?.title}</h2>
-      <p>{strengthDescription?.text}</p>
-      <p>{descriptionText?.description}</p>
-      <input
-        type="hidden"
-        name={
-          analysisKey === "behavior"
-            ? "behaviorKieslerkreis"
-            : analysisKey === "behaviorChange"
-            ? "behaviorChangeKieslerkreis"
-            : null
-        }
-        value={JSON.stringify(kieslerkreisData)}
-      />
-    </>
-  );
+    );
+  }
 }
