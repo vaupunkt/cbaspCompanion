@@ -165,6 +165,7 @@ export default function KieslerKreis() {
       } else {
         setPointData([null, null, null, null, null, null, null, null]);
         setDescriptionText({});
+        setStrengthOfCategory();
       }
     },
   };
