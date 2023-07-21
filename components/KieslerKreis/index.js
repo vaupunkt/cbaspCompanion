@@ -55,6 +55,7 @@ export default function KieslerKreis({
   kieslerkreisData,
   setKieslerkreisData,
   editMode,
+  analysisKey,
 }) {
   const strengthDescriptions = [
     { number: 1, text: "schwach ausgeprägt" },
@@ -78,15 +79,21 @@ export default function KieslerKreis({
         type: "radar",
         label: "Einschätzung",
         data: kieslerkreisData,
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
+
         borderWidth: 2,
         pointRadius: 30,
         pointHoverRadius: 30,
       },
     ],
   };
-  let options = {
+  if (analysisKey === "behavior") {
+    chartData.datasets[0].backgroundColor = "rgba(255, 99, 132, 0.2)";
+    chartData.datasets[0].borderColor = "rgba(255, 99, 132, 1)";
+  } else if (analysisKey === "behaviorChange") {
+    chartData.datasets[0].backgroundColor = "rgba(50, 168, 82, 0.2)";
+    chartData.datasets[0].borderColor = "rgba(50, 168, 82, 1)";
+  }
+  const options = {
     scale: { min: 0, max: 3, stepSize: 1 },
     scales: {
       r: {
@@ -102,76 +109,65 @@ export default function KieslerKreis({
     },
   };
   if (editMode) {
-    options = {
-      scale: { min: 0, max: 3, stepSize: 1 },
-      scales: {
-        r: {
-          max: 3,
-          min: 0,
-          stepSize: 1,
-        },
+    options.plugins = {
+      legend: {
+        display: false,
       },
-      plugins: {
-        legend: {
-          display: false,
-        },
-        tooltip: {
-          enabled: false,
-        },
+      tooltip: {
+        enabled: false,
       },
+    };
+    options.onClick = (event, element, chart) => {
+      const x = event.x;
+      const y = event.y;
+      const center = { x: chart.scales.r.xCenter, y: chart.scales.r.yCenter };
+      const distance = Math.sqrt(
+        Math.pow(x - center.x, 2) + Math.pow(y - center.y, 2)
+      );
+      const angle = Math.atan2(y - center.y, x - center.x);
+      const rScale = chart.scales.r;
+      const distanceMax = rScale.getDistanceFromCenterForValue(rScale.max);
+      const distanceWidth = distanceMax / 6;
+      const distance0 = distanceWidth;
+      const distance1 = distanceWidth * 3;
+      const distance2 = distanceWidth * 5;
+      const distance3 = distanceWidth * 7;
 
-      onClick: (event, element, chart) => {
-        const x = event.x;
-        const y = event.y;
-        const center = { x: chart.scales.r.xCenter, y: chart.scales.r.yCenter };
-        const distance = Math.sqrt(
-          Math.pow(x - center.x, 2) + Math.pow(y - center.y, 2)
-        );
-        const angle = Math.atan2(y - center.y, x - center.x);
-        const rScale = chart.scales.r;
-        const distanceMax = rScale.getDistanceFromCenterForValue(rScale.max);
-        const distanceWidth = distanceMax / 6;
-        const distance0 = distanceWidth;
-        const distance1 = distanceWidth * 3;
-        const distance2 = distanceWidth * 5;
-        const distance3 = distanceWidth * 7;
+      const value =
+        distance < distance0
+          ? 0
+          : distance >= distance0 && distance < distance1
+          ? 1
+          : distance >= distance1 && distance < distance2
+          ? 2
+          : distance >= distance2 && distance < distance3
+          ? 3
+          : null;
 
-        const value =
-          distance < distance0
-            ? 0
-            : distance >= distance0 && distance < distance1
-            ? 1
-            : distance >= distance1 && distance < distance2
-            ? 2
-            : distance >= distance2 && distance < distance3
-            ? 3
-            : null;
+      const getAxisIndex = (angle) => {
+        if (angle >= -0.405 && angle < 0.405) return 2;
+        if (angle >= 0.405 && angle < 1.215) return 3;
+        if (angle >= 1.215 && angle < 2.025) return 4;
+        if (angle >= 2.025 && angle < 2.835) return 5;
+        if (
+          (angle >= 2.835 && angle <= 3.14) ||
+          (angle >= -3.14 && angle < -2.835)
+        )
+          return 6;
+        if (angle >= -2.835 && angle < -2.025) return 7;
+        if (angle >= -2.025 && angle < -1.215) return 0;
+        if (angle >= -1.215 && angle < -0.405) return 1;
+      };
 
-        const getAxisIndex = (angle) => {
-          if (angle >= -0.405 && angle < 0.405) return 2;
-          if (angle >= 0.405 && angle < 1.215) return 3;
-          if (angle >= 1.215 && angle < 2.025) return 4;
-          if (angle >= 2.025 && angle < 2.835) return 5;
-          if (
-            (angle >= 2.835 && angle <= 3.14) ||
-            (angle >= -3.14 && angle < -2.835)
-          )
-            return 6;
-          if (angle >= -2.835 && angle < -2.025) return 7;
-          if (angle >= -2.025 && angle < -1.215) return 0;
-          if (angle >= -1.215 && angle < -0.405) return 1;
-        };
+      const axisIndex = getAxisIndex(angle);
 
-        const axisIndex = getAxisIndex(angle);
-
-        let axisPoints = [null, null, null, null, null, null, null, null];
-        axisPoints[axisIndex] = value;
-        if (value > 0) {
-          setKieslerkreisData(axisPoints);
-        } else {
-          setKieslerkreisData([null, null, null, null, null, null, null, null]);
-        }
-      },
+      let axisPoints = [null, null, null, null, null, null, null, null];
+      axisPoints[axisIndex] = value;
+      if (value > 0) {
+        setKieslerkreisData(axisPoints);
+      } else {
+        setKieslerkreisData([null, null, null, null, null, null, null, null]);
+      }
     };
   }
   const strengthOfCategory = kieslerkreisData.findIndex(
@@ -187,13 +183,25 @@ export default function KieslerKreis({
       <DiagrammContainer>
         <Radar data={chartData} options={options} />
       </DiagrammContainer>
-      {descriptionText && <p>Dein Verhalten war:</p>}
+      {descriptionText && analysisKey === "behaviour" ? (
+        <p>Dein Verhalten war:</p>
+      ) : analysisKey === "behaviorChange" ? (
+        <p>So möchtest du handeln:</p>
+      ) : (
+        ""
+      )}
       <h2>{descriptionText?.title}</h2>
       <p>{strengthDescription?.text}</p>
       <p>{descriptionText?.description}</p>
       <input
         type="hidden"
-        name="kieslerkreis"
+        name={
+          analysisKey === "behavior"
+            ? "behaviorKieslerkreis"
+            : analysisKey === "behaviorChange"
+            ? "behaviorChangeKieslerkreis"
+            : null
+        }
         value={JSON.stringify(kieslerkreisData)}
       />
     </>

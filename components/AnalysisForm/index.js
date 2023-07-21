@@ -246,6 +246,30 @@ export default function AnalysisForm({
               />
               <KieslerKreis
                 editMode="true"
+                analysisKey={analysisKey}
+                kieslerkreisData={kieslerkreisData}
+                setKieslerkreisData={setKieslerkreisData}
+              />
+            </EntryContent>
+          );
+        }
+        if (analysisKey === "behaviorChange") {
+          return (
+            <EntryContent>
+              <ContentHeadline htmlFor={analysisKey}>
+                {analysisHeadlines[analysisKey].title}
+              </ContentHeadline>
+              <p>{analysisHeadlines[analysisKey].description}</p>
+              <EntryInput
+                long
+                required
+                type="text"
+                name={analysisKey}
+                id={analysisKey}
+              />
+              <KieslerKreis
+                editMode="true"
+                analysisKey={analysisKey}
                 kieslerkreisData={kieslerkreisData}
                 setKieslerkreisData={setKieslerkreisData}
               />

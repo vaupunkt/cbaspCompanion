@@ -164,6 +164,27 @@ export default function EntryContentBlock({
             onChange={(event) => handleChange(analysisKey, event.target.value)}
           />
           <KieslerKreis
+            analysisKey={analysisKey}
+            editMode={editMode}
+            kieslerkreisData={kieslerkreisData}
+            setKieslerkreisData={setKieslerkreisData}
+          />
+        </EntryContent>
+      );
+    } else if (analysisKey === "behaviorChange") {
+      return (
+        <EntryContent>
+          <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+          <EntryInput
+            long
+            type="text"
+            name={analysisKey}
+            id={analysisKey}
+            value={updatedData[analysisKey]}
+            onChange={(event) => handleChange(analysisKey, event.target.value)}
+          />
+          <KieslerKreis
+            analysisKey={analysisKey}
             editMode={editMode}
             kieslerkreisData={kieslerkreisData}
             setKieslerkreisData={setKieslerkreisData}
@@ -193,6 +214,21 @@ export default function EntryContentBlock({
             <ContentHeadline>{children}</ContentHeadline>
             <p>{updatedData[analysisKey]}</p>
             <KieslerKreis
+              analysisKey={analysisKey}
+              kieslerkreisData={kieslerkreisData}
+              setKieslerkreisData={setKieslerkreisData}
+            />
+          </EntryContent>
+        </>
+      );
+    } else if (analysisKey === "behaviorChange") {
+      return (
+        <>
+          <EntryContent>
+            <ContentHeadline>{children}</ContentHeadline>
+            <p>{updatedData[analysisKey]}</p>
+            <KieslerKreis
+              analysisKey={analysisKey}
               kieslerkreisData={kieslerkreisData}
               setKieslerkreisData={setKieslerkreisData}
             />
