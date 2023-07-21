@@ -14,7 +14,9 @@ export default function Entry({
 }) {
   const { type } = data;
   const analysisKeys = allAnalysisKeys[type];
-
+  const [kieslerkreisData, setKieslerkreisData] = useState(
+    JSON.parse(data.kieslerkreis)
+  );
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -66,6 +68,8 @@ export default function Entry({
                 editMode={editMode}
                 updatedData={updatedData}
                 setUpdatedData={setUpdatedData}
+                kieslerkreisData={kieslerkreisData}
+                setKieslerkreisData={setKieslerkreisData}
               >
                 {allAnalysisEntryHeadings[analysisKey]}
               </EntryContentBlock>
@@ -82,6 +86,8 @@ export default function Entry({
               editMode={editMode}
               updatedData={updatedData}
               setUpdatedData={setUpdatedData}
+              kieslerkreisData={kieslerkreisData}
+              setKieslerkreisData={setKieslerkreisData}
             >
               {allAnalysisEntryHeadings[analysisKey]}
             </EntryContentBlock>

@@ -5,6 +5,7 @@ import { styled } from "styled-components";
 import Button from "../Button";
 import { uid } from "uid";
 import { confirmAlert } from "react-confirm-alert";
+import KieslerKreis from "../KieslerKreis";
 
 const InterpretationListItem = styled.li`
   position: relative;
@@ -21,6 +22,8 @@ export default function EntryContentBlock({
   analysisKey,
   updatedData,
   setUpdatedData,
+  kieslerkreisData,
+  setKieslerkreisData,
 }) {
   function handleChange(analysisKey, value) {
     setUpdatedData((prevData) => ({ ...prevData, [analysisKey]: value }));
@@ -148,6 +151,25 @@ export default function EntryContentBlock({
             ))}
         </EntryContent>
       );
+    } else if (analysisKey === "behavior") {
+      return (
+        <EntryContent>
+          <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+          <EntryInput
+            long
+            type="text"
+            name={analysisKey}
+            id={analysisKey}
+            value={updatedData[analysisKey]}
+            onChange={(event) => handleChange(analysisKey, event.target.value)}
+          />
+          <KieslerKreis
+            editMode={editMode}
+            kieslerkreisData={kieslerkreisData}
+            setKieslerkreisData={setKieslerkreisData}
+          />
+        </EntryContent>
+      );
     } else {
       return (
         <EntryContent>
@@ -164,23 +186,40 @@ export default function EntryContentBlock({
       );
     }
   } else {
-    return (
-      <>
-        <EntryContent>
-          <ContentHeadline>{children}</ContentHeadline>
-          {Array.isArray(updatedData[analysisKey]) ? (
-            <ol>
-              {updatedData[analysisKey].map(
-                ({ id, interpretation, revision }) => (
-                  <li key={id}>{interpretation ? interpretation : revision}</li>
-                )
-              )}
-            </ol>
-          ) : (
+    if (analysisKey === "behavior") {
+      return (
+        <>
+          <EntryContent>
+            <ContentHeadline>{children}</ContentHeadline>
             <p>{updatedData[analysisKey]}</p>
-          )}
-        </EntryContent>
-      </>
-    );
+            <KieslerKreis
+              kieslerkreisData={kieslerkreisData}
+              setKieslerkreisData={setKieslerkreisData}
+            />
+          </EntryContent>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <EntryContent>
+            <ContentHeadline>{children}</ContentHeadline>
+            {Array.isArray(updatedData[analysisKey]) ? (
+              <ol>
+                {updatedData[analysisKey].map(
+                  ({ id, interpretation, revision }) => (
+                    <li key={id}>
+                      {interpretation ? interpretation : revision}
+                    </li>
+                  )
+                )}
+              </ol>
+            ) : (
+              <p>{updatedData[analysisKey]}</p>
+            )}
+          </EntryContent>
+        </>
+      );
+    }
   }
 }

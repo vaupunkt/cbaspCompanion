@@ -38,6 +38,16 @@ export default function AnalysisForm({
   typeOfAnalysis,
   allActionInterpretations,
 }) {
+  const [kieslerkreisData, setKieslerkreisData] = useState([
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ]);
   const analysisKeys = allAnalysisKeys[typeOfAnalysis];
   const analysisHeadlines = allAnalysisFormHeadlines[typeOfAnalysis];
 
@@ -234,7 +244,11 @@ export default function AnalysisForm({
                 name={analysisKey}
                 id={analysisKey}
               />
-              <KieslerKreis />
+              <KieslerKreis
+                editMode="true"
+                kieslerkreisData={kieslerkreisData}
+                setKieslerkreisData={setKieslerkreisData}
+              />
             </EntryContent>
           );
         }
