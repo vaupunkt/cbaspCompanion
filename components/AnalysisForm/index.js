@@ -38,16 +38,6 @@ export default function AnalysisForm({
   typeOfAnalysis,
   allActionInterpretations,
 }) {
-  const [kieslerkreisData, setKieslerkreisData] = useState([
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ]);
   const analysisKeys = allAnalysisKeys[typeOfAnalysis];
   const analysisHeadlines = allAnalysisFormHeadlines[typeOfAnalysis];
 
@@ -247,8 +237,7 @@ export default function AnalysisForm({
               <KieslerKreis
                 editMode="true"
                 analysisKey={analysisKey}
-                kieslerkreisData={kieslerkreisData}
-                setKieslerkreisData={setKieslerkreisData}
+                kieslerkreisDataset="[null,null,null,null,null,null,null,null]"
               />
             </EntryContent>
           );
@@ -270,8 +259,7 @@ export default function AnalysisForm({
               <KieslerKreis
                 editMode="true"
                 analysisKey={analysisKey}
-                kieslerkreisData={kieslerkreisData}
-                setKieslerkreisData={setKieslerkreisData}
+                kieslerkreisDataset="[null,null,null,null,null,null,null,null]"
               />
             </EntryContent>
           );

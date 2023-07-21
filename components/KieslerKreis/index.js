@@ -1,7 +1,7 @@
 import { Radar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import styled from "styled-components";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 const DiagrammContainer = styled.div`
   max-height: 80vh;
@@ -52,11 +52,14 @@ const kieslerKreisDescription = [
 ];
 
 export default function KieslerKreis({
-  kieslerkreisData,
-  setKieslerkreisData,
+  kieslerkreisDataset,
   editMode,
   analysisKey,
 }) {
+  console.log(kieslerkreisDataset);
+  const [kieslerkreisData, setKieslerkreisData] = useState(
+    JSON.parse(kieslerkreisDataset)
+  );
   const strengthDescriptions = [
     { number: 1, text: "schwach ausgeprägt" },
     { number: 2, text: "mittlere Ausprägung" },
@@ -160,7 +163,6 @@ export default function KieslerKreis({
       };
 
       const axisIndex = getAxisIndex(angle);
-
       let axisPoints = [null, null, null, null, null, null, null, null];
       axisPoints[axisIndex] = value;
       if (value > 0) {
@@ -178,18 +180,24 @@ export default function KieslerKreis({
       strengthDescription.number === kieslerkreisData[strengthOfCategory]
   );
   const descriptionText = kieslerKreisDescription[strengthOfCategory];
+  if (analysisKey === "behavior") {
+    console.log("Behavior", kieslerkreisData);
+  } else if (analysisKey === "behaviorChange") {
+    console.log("behaviorChange", kieslerkreisData);
+  }
   return (
     <>
       <DiagrammContainer>
         <Radar data={chartData} options={options} />
       </DiagrammContainer>
-      {descriptionText && analysisKey === "behaviour" ? (
-        <p>Dein Verhalten war:</p>
-      ) : analysisKey === "behaviorChange" ? (
-        <p>So möchtest du handeln:</p>
-      ) : (
-        ""
-      )}
+      {descriptionText &&
+        (analysisKey === "behavior" ? (
+          <p>Dein Verhalten war:</p>
+        ) : analysisKey === "behaviorChange" ? (
+          <p>So möchtest du handeln:</p>
+        ) : (
+          ""
+        ))}
       <h2>{descriptionText?.title}</h2>
       <p>{strengthDescription?.text}</p>
       <p>{descriptionText?.description}</p>
