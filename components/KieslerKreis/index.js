@@ -53,10 +53,12 @@ const kieslerKreisDescription = [
 
 export default function KieslerKreis({
   kieslerkreisData,
-  setKieslerkreisData,
   editMode,
   analysisKey,
 }) {
+  const [kieslerkreisDataset, setKieslerkreisDataset] = useState(
+    JSON.parse(kieslerkreisData)
+  );
   const strengthDescriptions = [
     { number: 1, text: "schwach ausgeprägt" },
     { number: 2, text: "mittlere Ausprägung" },
@@ -78,7 +80,7 @@ export default function KieslerKreis({
       {
         type: "radar",
         label: "Einschätzung",
-        data: kieslerkreisData,
+        data: kieslerkreisDataset,
 
         borderWidth: 2,
         pointRadius: 30,
@@ -164,18 +166,27 @@ export default function KieslerKreis({
       let axisPoints = [null, null, null, null, null, null, null, null];
       axisPoints[axisIndex] = value;
       if (value > 0) {
-        setKieslerkreisData(axisPoints);
+        setKieslerkreisDataset(axisPoints);
       } else {
-        setKieslerkreisData([null, null, null, null, null, null, null, null]);
+        setKieslerkreisDataset([
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+        ]);
       }
     };
   }
-  const strengthOfCategory = kieslerkreisData.findIndex(
+  const strengthOfCategory = kieslerkreisDataset.findIndex(
     (value) => value !== null
   );
   const strengthDescription = strengthDescriptions.find(
     (strengthDescription) =>
-      strengthDescription.number === kieslerkreisData[strengthOfCategory]
+      strengthDescription.number === kieslerkreisDataset[strengthOfCategory]
   );
   const descriptionText = kieslerKreisDescription[strengthOfCategory];
   return (
@@ -202,7 +213,7 @@ export default function KieslerKreis({
             ? "behaviorChangeKieslerkreis"
             : null
         }
-        value={JSON.stringify(kieslerkreisData)}
+        value={JSON.stringify(kieslerkreisDataset)}
       />
     </>
   );

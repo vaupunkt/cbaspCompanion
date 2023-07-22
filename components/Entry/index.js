@@ -26,7 +26,7 @@ export default function Entry({
       date: data.date,
     };
     dataset.interpretations = Object.entries(dataset)
-      .filter(([key, value]) => key.startsWith("interpretation "))
+      .filter(([key, value]) => key.startsWith("interpretations "))
       .map(([key, value]) => {
         const id = uid();
         delete dataset[key];
@@ -48,9 +48,6 @@ export default function Entry({
   }
 
   const [updatedData, setUpdatedData] = useState(data);
-  const [kieslerkreisData, setKieslerkreisData] = useState(
-    JSON.parse(updatedData.kieslerkreis)
-  );
 
   return (
     <>
@@ -68,8 +65,6 @@ export default function Entry({
                 editMode={editMode}
                 updatedData={updatedData}
                 setUpdatedData={setUpdatedData}
-                kieslerkreisData={kieslerkreisData}
-                setKieslerkreisData={setKieslerkreisData}
               >
                 {allAnalysisEntryHeadings[analysisKey]}
               </EntryContentBlock>
@@ -86,8 +81,6 @@ export default function Entry({
               editMode={editMode}
               updatedData={updatedData}
               setUpdatedData={setUpdatedData}
-              kieslerkreisData={kieslerkreisData}
-              setKieslerkreisData={setKieslerkreisData}
             >
               {allAnalysisEntryHeadings[analysisKey]}
             </EntryContentBlock>
