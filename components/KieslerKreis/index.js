@@ -8,6 +8,7 @@ const DiagrammContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 15px;
 `;
 const kieslerKreisDescription = [
   {
@@ -142,10 +143,11 @@ export default function KieslerKreis({
         display: true,
       },
       tooltip: {
-        enabled: true,
+        enabled: false,
       },
     };
   }
+  console.log(chartData);
   if (editMode) {
     options.plugins = {
       legend: {
