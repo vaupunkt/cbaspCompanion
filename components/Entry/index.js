@@ -3,20 +3,7 @@ import { useState } from "react";
 import { uid } from "uid";
 import Button from "../Button";
 import { allAnalysisKeys } from "@/lib/allAnalysisKeys";
-
-const analysisEntryHeadings = {
-  description: "Beschreibung",
-  interpretations: "Interpretation",
-  behavior: "Verhalten",
-  actualResult: "Tatsächliches Ergebnis",
-  desiredResult: "Gewünschtes Ergebnis",
-  comparison: "Vergleich des tatsächlichen mit dem erwünschten Ergebnis",
-  revision: "Revision ungeeigneter Interpretationen",
-  behaviorChange: "Veränderung des Verhaltens",
-  implementation: "Umsetzung und Zusammenfassung",
-  transfer: "Generalisierung und Übertragung des Gelernten auf den Alltag",
-  rolePlay: "Rollenspiel",
-};
+import { allAnalysisEntryHeadings } from "@/lib/allAnalysisEntryHeadings";
 
 export default function Entry({
   data,
@@ -74,13 +61,13 @@ export default function Entry({
             return (
               <EntryContentBlock
                 key={analysisKey}
-                analysisHeadings={analysisEntryHeadings}
+                analysisHeadings={allAnalysisEntryHeadings}
                 analysisKey={analysisKey}
                 editMode={editMode}
                 updatedData={updatedData}
                 setUpdatedData={setUpdatedData}
               >
-                {analysisEntryHeadings[analysisKey]}
+                {allAnalysisEntryHeadings[analysisKey]}
               </EntryContentBlock>
             );
           })}
@@ -90,13 +77,13 @@ export default function Entry({
           return (
             <EntryContentBlock
               key={analysisKey}
-              analysisHeadings={analysisEntryHeadings}
+              analysisHeadings={allAnalysisEntryHeadings}
               analysisKey={analysisKey}
               editMode={editMode}
               updatedData={updatedData}
               setUpdatedData={setUpdatedData}
             >
-              {analysisEntryHeadings[analysisKey]}
+              {allAnalysisEntryHeadings[analysisKey]}
             </EntryContentBlock>
           );
         })
