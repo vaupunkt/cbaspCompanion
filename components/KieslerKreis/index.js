@@ -51,24 +51,20 @@ const kieslerKreisDescription = [
   },
 ];
 
-export default function KieslerKreis() {
-  const [strengthOfCategory, setStrengthOfCategory] = useState("");
+export default function KieslerKreis({
+  kieslerkreisData,
+  editMode,
+  analysisKey,
+}) {
+  const [kieslerkreisDataset, setKieslerkreisDataset] = useState(
+    JSON.parse(kieslerkreisData)
+  );
   const strengthDescriptions = [
     { number: 1, text: "schwach ausgeprägt" },
     { number: 2, text: "mittlere Ausprägung" },
     { number: 3, text: "stark ausgeprägt" },
   ];
-  const [pointData, setPointData] = useState([
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ]);
-  const [descriptionText, setDescriptionText] = useState({});
+
   const chartData = {
     labels: [
       ["Dominant", "Offen"],
@@ -84,16 +80,21 @@ export default function KieslerKreis() {
       {
         type: "radar",
         label: "Einschätzung",
-        data: pointData,
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderColor: "rgba(255, 99, 132, 1)",
+        data: kieslerkreisDataset,
+
         borderWidth: 2,
         pointRadius: 30,
         pointHoverRadius: 30,
       },
     ],
   };
-
+  if (analysisKey === "behavior") {
+    chartData.datasets[0].backgroundColor = "rgba(255, 99, 132, 0.2)";
+    chartData.datasets[0].borderColor = "rgba(255, 99, 132, 1)";
+  } else if (analysisKey === "behaviorChange") {
+    chartData.datasets[0].backgroundColor = "rgba(50, 168, 82, 0.2)";
+    chartData.datasets[0].borderColor = "rgba(50, 168, 82, 1)";
+  }
   const options = {
     scale: { min: 0, max: 3, stepSize: 1 },
     scales: {
@@ -107,12 +108,18 @@ export default function KieslerKreis() {
       legend: {
         display: false,
       },
+    },
+  };
+  if (editMode) {
+    options.plugins = {
+      legend: {
+        display: false,
+      },
       tooltip: {
         enabled: false,
       },
-    },
-
-    onClick: (event, element, chart) => {
+    };
+    options.onClick = (event, element, chart) => {
       const x = event.x;
       const y = event.y;
       const center = { x: chart.scales.r.xCenter, y: chart.scales.r.yCenter };
@@ -159,32 +166,55 @@ export default function KieslerKreis() {
       let axisPoints = [null, null, null, null, null, null, null, null];
       axisPoints[axisIndex] = value;
       if (value > 0) {
-        setPointData(axisPoints);
-        setDescriptionText(kieslerKreisDescription[axisIndex]);
-        setStrengthOfCategory(value);
+        setKieslerkreisDataset(axisPoints);
       } else {
-        setPointData([null, null, null, null, null, null, null, null]);
-        setDescriptionText({});
-        setStrengthOfCategory();
+        setKieslerkreisDataset([
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+        ]);
       }
-    },
-  };
-
+    };
+  }
+  const strengthOfCategory = kieslerkreisDataset.findIndex(
+    (value) => value !== null
+  );
+  const strengthDescription = strengthDescriptions.find(
+    (strengthDescription) =>
+      strengthDescription.number === kieslerkreisDataset[strengthOfCategory]
+  );
+  const descriptionText = kieslerKreisDescription[strengthOfCategory];
   return (
     <>
       <DiagrammContainer>
         <Radar data={chartData} options={options} />
       </DiagrammContainer>
-      {descriptionText.title && <p>Dein Verhalten war:</p>}
-      <h2>{descriptionText.title}</h2>
-      <p>
-        {strengthOfCategory &&
-          strengthDescriptions.filter(
-            (strengthDescription) =>
-              strengthDescription.number == strengthOfCategory
-          )[0].text}
-      </p>
-      <p>{descriptionText.description}</p>
+      {descriptionText && analysisKey === "behaviour" ? (
+        <p>Dein Verhalten war:</p>
+      ) : analysisKey === "behaviorChange" ? (
+        <p>So möchtest du handeln:</p>
+      ) : (
+        ""
+      )}
+      <h2>{descriptionText?.title}</h2>
+      <p>{strengthDescription?.text}</p>
+      <p>{descriptionText?.description}</p>
+      <input
+        type="hidden"
+        name={
+          analysisKey === "behavior"
+            ? "behaviorKieslerkreis"
+            : analysisKey === "behaviorChange"
+            ? "behaviorChangeKieslerkreis"
+            : null
+        }
+        value={JSON.stringify(kieslerkreisDataset)}
+      />
     </>
   );
 }

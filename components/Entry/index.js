@@ -14,7 +14,6 @@ export default function Entry({
 }) {
   const { type } = data;
   const analysisKeys = allAnalysisKeys[type];
-
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -27,7 +26,7 @@ export default function Entry({
       date: data.date,
     };
     dataset.interpretations = Object.entries(dataset)
-      .filter(([key, value]) => key.startsWith("interpretation "))
+      .filter(([key, value]) => key.startsWith("interpretations "))
       .map(([key, value]) => {
         const id = uid();
         delete dataset[key];
