@@ -107,7 +107,7 @@ export default function KieslerKreis({
       {
         type: "radar",
         label: "Einschätzung",
-        data: kieslerkreisDataset,
+        data: kieslerkreisData,
 
         borderWidth: 2,
         pointRadius: 30,
@@ -147,7 +147,6 @@ export default function KieslerKreis({
       },
     };
   }
-  console.log(chartData);
   if (editMode) {
     options.plugins = {
       legend: {
@@ -203,18 +202,9 @@ export default function KieslerKreis({
       let axisPoints = [null, null, null, null, null, null, null, null];
       axisPoints[axisIndex] = value;
       if (value > 0) {
-        setKieslerkreisDataset(axisPoints);
+        setKieslerkreisData(axisPoints);
       } else {
-        setKieslerkreisDataset([
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ]);
+        setKieslerkreisData([null, null, null, null, null, null, null, null]);
       }
     };
   }
@@ -228,9 +218,7 @@ export default function KieslerKreis({
     );
     const descriptionText = kieslerKreisDescription[strengthOfCategory];
     if (analysisKey === "behavior") {
-      console.log("Behavior", kieslerkreisData);
     } else if (analysisKey === "behaviorChange") {
-      console.log("behaviorChange", kieslerkreisData);
     }
     return (
       <>
