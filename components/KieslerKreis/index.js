@@ -107,7 +107,7 @@ export default function KieslerKreis({
       {
         type: "radar",
         label: "Einschätzung",
-        data: kieslerkreisData,
+        data: kieslerkreisDataset,
 
         borderWidth: 2,
         pointRadius: 30,
@@ -203,9 +203,18 @@ export default function KieslerKreis({
       let axisPoints = [null, null, null, null, null, null, null, null];
       axisPoints[axisIndex] = value;
       if (value > 0) {
-        setKieslerkreisData(axisPoints);
+        setKieslerkreisDataset(axisPoints);
       } else {
-        setKieslerkreisData([null, null, null, null, null, null, null, null]);
+        setKieslerkreisDataset([
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+        ]);
       }
     };
   }
