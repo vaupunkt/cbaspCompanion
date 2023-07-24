@@ -14,6 +14,8 @@ export default function Entry({
 }) {
   const { type } = data;
   const analysisKeys = allAnalysisKeys[type];
+
+  const [updatedData, setUpdatedData] = useState(data);
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -44,10 +46,9 @@ export default function Entry({
       (singleEntry) => singleEntry.id !== dataset.id
     );
     onAllEntriesChange([...filteredAllEntries, dataset]);
+    setUpdatedData(dataset);
     toggleEditMode();
   }
-
-  const [updatedData, setUpdatedData] = useState(data);
 
   return (
     <>

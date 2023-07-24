@@ -22,8 +22,8 @@ export default function App({ Component, pageProps }) {
     (initialEntry) => initialEntry.type === "InnerSituationAnalysis"
   );
 
-  function handleAllEntriesChange(newEntries) {
-    setAllEntries(newEntries);
+  function handleAllEntriesChange(updatedEntries) {
+    setAllEntries(updatedEntries);
   }
 
   const [allActionInterpretations, setAllActionInterpretations] = useState(

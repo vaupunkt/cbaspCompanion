@@ -69,10 +69,23 @@ export default function EntryInput({
           onChange={onChange}
           onInput={handleInput}
         />
+      ) : short ? (
+        <StyledEntryInput
+          required={required}
+          maxLength="200"
+          long={long}
+          short={short}
+          type={type}
+          name={name}
+          id={id}
+          value={value}
+          onChange={onChange}
+          onInput={handleInput}
+        />
       ) : (
         <StyledEntryInputTextarea
           required={required}
-          maxLength={short ? "200" : "500"}
+          maxLength="500"
           long={long}
           short={short}
           type={type}

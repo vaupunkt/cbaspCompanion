@@ -1,13 +1,14 @@
 import { Radar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import styled from "styled-components";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 const DiagrammContainer = styled.div`
   max-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 15px;
 `;
 const kieslerKreisDescription = [
   {
@@ -52,19 +53,19 @@ const kieslerKreisDescription = [
 ];
 
 export default function KieslerKreis({
-  kieslerkreisData,
+  kieslerkreisDataset,
   editMode,
   analysisKey,
+  overviewDataset,
 }) {
-  const [kieslerkreisDataset, setKieslerkreisDataset] = useState(
-    JSON.parse(kieslerkreisData)
+  const [kieslerkreisData, setKieslerkreisData] = useState(
+    kieslerkreisDataset ? JSON.parse(kieslerkreisDataset) : null
   );
   const strengthDescriptions = [
     { number: 1, text: "schwach ausgeprägt" },
     { number: 2, text: "mittlere Ausprägung" },
     { number: 3, text: "stark ausgeprägt" },
   ];
-
   const chartData = {
     labels: [
       ["Dominant", "Offen"],
@@ -76,18 +77,44 @@ export default function KieslerKreis({
       ["Feindselig", "Distanziert"],
       "",
     ],
-    datasets: [
+  };
+
+  if (overviewDataset) {
+    chartData.datasets = [
+      {
+        type: "radar",
+        label: "Verhalten",
+        data: overviewDataset.averageBehaviorKieslerkreis,
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        borderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 4,
+      },
+      {
+        type: "radar",
+        label: "Gewünschtes Verhalten",
+        data: overviewDataset.averageBehaviorChangeKieslerkreis,
+        backgroundColor: "rgba(50, 168, 82, 0.2)",
+        borderColor: "rgba(50, 168, 82, 1)",
+        borderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 4,
+      },
+    ];
+  } else {
+    chartData.datasets = [
       {
         type: "radar",
         label: "Einschätzung",
-        data: kieslerkreisDataset,
+        data: kieslerkreisData,
 
         borderWidth: 2,
         pointRadius: 30,
         pointHoverRadius: 30,
       },
-    ],
-  };
+    ];
+  }
   if (analysisKey === "behavior") {
     chartData.datasets[0].backgroundColor = "rgba(255, 99, 132, 0.2)";
     chartData.datasets[0].borderColor = "rgba(255, 99, 132, 1)";
@@ -110,6 +137,16 @@ export default function KieslerKreis({
       },
     },
   };
+  if (overviewDataset) {
+    options.plugins = {
+      legend: {
+        display: true,
+      },
+      tooltip: {
+        enabled: false,
+      },
+    };
+  }
   if (editMode) {
     options.plugins = {
       legend: {
@@ -162,59 +199,61 @@ export default function KieslerKreis({
       };
 
       const axisIndex = getAxisIndex(angle);
-
       let axisPoints = [null, null, null, null, null, null, null, null];
       axisPoints[axisIndex] = value;
       if (value > 0) {
-        setKieslerkreisDataset(axisPoints);
+        setKieslerkreisData(axisPoints);
       } else {
-        setKieslerkreisDataset([
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ]);
+        setKieslerkreisData([null, null, null, null, null, null, null, null]);
       }
     };
   }
-  const strengthOfCategory = kieslerkreisDataset.findIndex(
-    (value) => value !== null
-  );
-  const strengthDescription = strengthDescriptions.find(
-    (strengthDescription) =>
-      strengthDescription.number === kieslerkreisDataset[strengthOfCategory]
-  );
-  const descriptionText = kieslerKreisDescription[strengthOfCategory];
-  return (
-    <>
+  if (kieslerkreisData) {
+    const strengthOfCategory = kieslerkreisData.findIndex(
+      (value) => value !== null
+    );
+    const strengthDescription = strengthDescriptions.find(
+      (strengthDescription) =>
+        strengthDescription.number === kieslerkreisData[strengthOfCategory]
+    );
+    const descriptionText = kieslerKreisDescription[strengthOfCategory];
+    if (analysisKey === "behavior") {
+    } else if (analysisKey === "behaviorChange") {
+    }
+    return (
+      <>
+        <DiagrammContainer>
+          <Radar data={chartData} options={options} />
+        </DiagrammContainer>
+        {descriptionText &&
+          (analysisKey === "behavior" ? (
+            <p>Dein Verhalten war:</p>
+          ) : analysisKey === "behaviorChange" ? (
+            <p>So möchtest du handeln:</p>
+          ) : (
+            ""
+          ))}
+        <h2>{descriptionText?.title}</h2>
+        <p>{strengthDescription?.text}</p>
+        <p>{descriptionText?.description}</p>
+        <input
+          type="hidden"
+          name={
+            analysisKey === "behavior"
+              ? "behaviorKieslerkreis"
+              : analysisKey === "behaviorChange"
+              ? "behaviorChangeKieslerkreis"
+              : null
+          }
+          value={JSON.stringify(kieslerkreisData)}
+        />
+      </>
+    );
+  } else {
+    return (
       <DiagrammContainer>
         <Radar data={chartData} options={options} />
       </DiagrammContainer>
-      {descriptionText && analysisKey === "behaviour" ? (
-        <p>Dein Verhalten war:</p>
-      ) : analysisKey === "behaviorChange" ? (
-        <p>So möchtest du handeln:</p>
-      ) : (
-        ""
-      )}
-      <h2>{descriptionText?.title}</h2>
-      <p>{strengthDescription?.text}</p>
-      <p>{descriptionText?.description}</p>
-      <input
-        type="hidden"
-        name={
-          analysisKey === "behavior"
-            ? "behaviorKieslerkreis"
-            : analysisKey === "behaviorChange"
-            ? "behaviorChangeKieslerkreis"
-            : null
-        }
-        value={JSON.stringify(kieslerkreisDataset)}
-      />
-    </>
-  );
+    );
+  }
 }

@@ -38,16 +38,6 @@ export default function AnalysisForm({
   typeOfAnalysis,
   allActionInterpretations,
 }) {
-  const [kieslerkreisData, setKieslerkreisData] = useState([
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-  ]);
   const analysisKeys = allAnalysisKeys[typeOfAnalysis];
   const analysisHeadlines = allAnalysisFormHeadlines[typeOfAnalysis];
 
@@ -171,7 +161,7 @@ export default function AnalysisForm({
                 </ContentHeadline>
                 <p>{analysisHeadlines[analysisKey].description}</p>
                 <StyledList>
-                  {interpretations.map(({ id, interpretation }, index) => (
+                  {revisions.map(({ id, revision }, index) => (
                     <>
                       <li key={id}>
                         <label htmlFor={id}>Revision:</label>
@@ -184,7 +174,7 @@ export default function AnalysisForm({
                                 : null,
                             }}
                           >
-                            {interpretation}
+                            {interpretations[index].interpretation}
                           </span>
                         </InterpretationToRevise>
                         <EntryInput
@@ -244,12 +234,7 @@ export default function AnalysisForm({
                 name={analysisKey}
                 id={analysisKey}
               />
-              <KieslerKreis
-                editMode="true"
-                analysisKey={analysisKey}
-                kieslerkreisData={kieslerkreisData}
-                setKieslerkreisData={setKieslerkreisData}
-              />
+              <KieslerKreis editMode="true" analysisKey={analysisKey} />
             </EntryContent>
           );
         }
@@ -267,12 +252,7 @@ export default function AnalysisForm({
                 name={analysisKey}
                 id={analysisKey}
               />
-              <KieslerKreis
-                editMode="true"
-                analysisKey={analysisKey}
-                kieslerkreisData={kieslerkreisData}
-                setKieslerkreisData={setKieslerkreisData}
-              />
+              <KieslerKreis editMode="true" analysisKey={analysisKey} />
             </EntryContent>
           );
         }
