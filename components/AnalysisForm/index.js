@@ -234,11 +234,7 @@ export default function AnalysisForm({
                 name={analysisKey}
                 id={analysisKey}
               />
-              <KieslerKreis
-                editMode="true"
-                analysisKey={analysisKey}
-                kieslerkreisDataset="[null,null,null,null,null,null,null,null]"
-              />
+              <KieslerKreis editMode="true" analysisKey={analysisKey} />
             </EntryContent>
           );
         }
@@ -256,11 +252,7 @@ export default function AnalysisForm({
                 name={analysisKey}
                 id={analysisKey}
               />
-              <KieslerKreis
-                editMode="true"
-                analysisKey={analysisKey}
-                kieslerkreisDataset="[null,null,null,null,null,null,null,null]"
-              />
+              <KieslerKreis editMode="true" analysisKey={analysisKey} />
             </EntryContent>
           );
         }

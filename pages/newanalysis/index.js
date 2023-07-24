@@ -93,7 +93,6 @@ export default function NewAnalysis({
     handleAllEntriesChange([...allEntries, dataset]);
     addActionInterpretation(dataset.actionInterpretation);
     setDataset(dataset);
-    console.log(dataset);
     event.target.reset();
     router.push(`/entries/${dataset.id}`);
   }
