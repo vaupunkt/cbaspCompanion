@@ -112,7 +112,7 @@ export default function NewAnalysis({
           <TitleInput
             name="title"
             required
-            placeholder="Title der Analyse"
+            placeholder="Titel der Analyse"
           ></TitleInput>
           <HeaderDate>
             <DateInput

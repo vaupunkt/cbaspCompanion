@@ -161,7 +161,7 @@ export default function AnalysisForm({
                 </ContentHeadline>
                 <p>{analysisHeadlines[analysisKey].description}</p>
                 <StyledList>
-                  {interpretations.map(({ id, interpretation }, index) => (
+                  {revisions.map(({ id, revision }, index) => (
                     <>
                       <li key={id}>
                         <label htmlFor={id}>Revision:</label>
@@ -174,7 +174,7 @@ export default function AnalysisForm({
                                 : null,
                             }}
                           >
-                            {interpretation}
+                            {interpretations[index].interpretation}
                           </span>
                         </InterpretationToRevise>
                         <EntryInput
