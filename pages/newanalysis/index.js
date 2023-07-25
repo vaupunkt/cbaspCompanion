@@ -93,7 +93,6 @@ export default function NewAnalysis({
     handleAllEntriesChange([...allEntries, dataset]);
     addActionInterpretation(dataset.actionInterpretation);
     setDataset(dataset);
-    console.log(dataset);
     event.target.reset();
     router.push(`/entries/${dataset.id}`);
   }
@@ -112,7 +111,7 @@ export default function NewAnalysis({
           <TitleInput
             name="title"
             required
-            placeholder="Title der Analyse"
+            placeholder="Titel der Analyse"
           ></TitleInput>
           <HeaderDate>
             <DateInput

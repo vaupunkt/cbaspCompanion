@@ -164,7 +164,7 @@ export default function EntryContentBlock({
           <KieslerKreis
             analysisKey={analysisKey}
             editMode={editMode}
-            kieslerkreisData={updatedData.behaviorKieslerkreis}
+            kieslerkreisDataset={updatedData.behaviorKieslerkreis}
           />
         </EntryContent>
       );
@@ -183,7 +183,7 @@ export default function EntryContentBlock({
           <KieslerKreis
             analysisKey={analysisKey}
             editMode={editMode}
-            kieslerkreisData={updatedData.behaviorChangeKieslerkreis}
+            kieslerkreisDataset={updatedData.behaviorChangeKieslerkreis}
           />
         </EntryContent>
       );
@@ -211,7 +211,7 @@ export default function EntryContentBlock({
             <p>{updatedData[analysisKey]}</p>
             <KieslerKreis
               analysisKey={analysisKey}
-              kieslerkreisData={updatedData.behaviorKieslerkreis}
+              kieslerkreisDataset={updatedData.behaviorKieslerkreis}
             />
           </EntryContent>
         </>
@@ -224,7 +224,7 @@ export default function EntryContentBlock({
             <p>{updatedData[analysisKey]}</p>
             <KieslerKreis
               analysisKey={analysisKey}
-              kieslerkreisData={updatedData.behaviorChangeKieslerkreis}
+              kieslerkreisDataset={updatedData.behaviorChangeKieslerkreis}
             />
           </EntryContent>
         </>
