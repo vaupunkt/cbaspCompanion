@@ -32,7 +32,7 @@ export default function ChatBotComponent({
       name: "intro",
 
       "cf-questions":
-        "Hallo! Schön, dass du heute eine Situation analysieren möchtest.&&Ich werde versuchen dir dabei zu helfen.",
+        "Hallo! Schön, dass du heute eine <strong>Situation</strong> analysieren möchtest.&&Ich werde versuchen dir dabei zu helfen.",
       children: [
         {
           tag: "input",
@@ -57,7 +57,7 @@ export default function ChatBotComponent({
           value: "goToForm",
           label: "goToForm",
           "cf-label":
-            "<a href='./newanalysisform'>lieber ohne Chatbot ausfüllen</a>",
+            "<a href='./newanalysisform'>lieber <strong>ohne Chatbot</strong> ausfüllen ✍️</a>",
         },
       ],
     },
