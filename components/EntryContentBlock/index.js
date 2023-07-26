@@ -6,6 +6,7 @@ import Button from "../Button";
 import { uid } from "uid";
 import { confirmAlert } from "react-confirm-alert";
 import KieslerKreis from "../KieslerKreis";
+import { allAnalysisFormHeadlines } from "@/lib/allAnalysisFormHeadlines";
 
 const InterpretationListItem = styled.li`
   position: relative;
@@ -16,13 +17,21 @@ const StyledList = styled.ol`
   margin: 0px;
 `;
 
+const AnalysisDescription = styled.p`
+  font-weight: 600;
+  padding-top: 5px;
+  font-size: 0.8em;
+`;
+
 export default function EntryContentBlock({
   children,
   editMode,
   analysisKey,
   updatedData,
   setUpdatedData,
+  allActionInterpretations,
 }) {
+  const analysisHeadlines = allAnalysisFormHeadlines[updatedData.type];
   function handleChange(analysisKey, value) {
     setUpdatedData((prevData) => ({ ...prevData, [analysisKey]: value }));
   }
@@ -88,12 +97,84 @@ export default function EntryContentBlock({
 
   if (editMode === true) {
     if (
+      analysisKey === "actionInterpretation" &&
+      Array.isArray(updatedData[analysisKey])
+    ) {
+      return (
+        <EntryContent>
+          <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+          <AnalysisDescription>
+            {analysisHeadlines[analysisKey].description}
+          </AnalysisDescription>
+          <StyledList>
+            {updatedData[analysisKey].map(
+              ({ id, actionInterpretation }, index) => (
+                <InterpretationListItem key={id}>
+                  <label htmlFor={id}>Handlungsaufruf:</label>
+
+                  <EntryInput
+                    type="text"
+                    name={analysisKey + " " + id}
+                    id={id}
+                    short
+                    list="allActionInterpretations"
+                    value={actionInterpretation}
+                    onChange={(event) =>
+                      handleArrayChange(analysisKey, index, event.target.value)
+                    }
+                  />
+                </InterpretationListItem>
+              )
+            )}
+          </StyledList>
+          <datalist id="allActionInterpretations">
+            {allActionInterpretations.map((actionInterpretationOption) => (
+              <option
+                key={actionInterpretationOption}
+                value={actionInterpretationOption}
+              />
+            ))}
+          </datalist>
+        </EntryContent>
+      );
+    } else if (
+      analysisKey === "actionInterpretation" &&
+      !Array.isArray(updatedData[analysisKey])
+    ) {
+      return (
+        <EntryContent>
+          <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+          <AnalysisDescription>
+            {analysisHeadlines[analysisKey].description}
+          </AnalysisDescription>
+          <EntryInput
+            type="text"
+            name={analysisKey}
+            short
+            list="allActionInterpretations"
+            value={updatedData[analysisKey]}
+            onChange={(event) => handleChange(analysisKey, event.target.value)}
+          />
+          <datalist id="allActionInterpretations">
+            {allActionInterpretations.map((actionInterpretationOption) => (
+              <option
+                key={actionInterpretationOption}
+                value={actionInterpretationOption}
+              />
+            ))}
+          </datalist>
+        </EntryContent>
+      );
+    } else if (
       analysisKey === "interpretations" &&
       Array.isArray(updatedData[analysisKey])
     ) {
       return (
         <EntryContent>
           <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+          <AnalysisDescription>
+            {analysisHeadlines[analysisKey].description}
+          </AnalysisDescription>
           <StyledList>
             {updatedData[analysisKey].map(({ id, interpretation }, index) => (
               <InterpretationListItem key={id}>
@@ -133,6 +214,9 @@ export default function EntryContentBlock({
       return (
         <EntryContent>
           <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+          <AnalysisDescription>
+            {analysisHeadlines[analysisKey].description}
+          </AnalysisDescription>
           {Array.isArray(updatedData.revision) &&
             updatedData.revision.map((item, index) => (
               <EntryInput
@@ -153,6 +237,9 @@ export default function EntryContentBlock({
       return (
         <EntryContent>
           <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+          <AnalysisDescription>
+            {analysisHeadlines[analysisKey].description}
+          </AnalysisDescription>
           <EntryInput
             long
             type="text"
@@ -172,6 +259,9 @@ export default function EntryContentBlock({
       return (
         <EntryContent>
           <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+          <AnalysisDescription>
+            {analysisHeadlines[analysisKey].description}
+          </AnalysisDescription>
           <EntryInput
             long
             type="text"
@@ -191,6 +281,9 @@ export default function EntryContentBlock({
       return (
         <EntryContent>
           <ContentHeadline htmlFor={analysisKey}>{children}</ContentHeadline>
+          <AnalysisDescription>
+            {analysisHeadlines[analysisKey].description}
+          </AnalysisDescription>
           <EntryInput
             long
             type="text"
@@ -208,6 +301,9 @@ export default function EntryContentBlock({
         <>
           <EntryContent>
             <ContentHeadline>{children}</ContentHeadline>
+            <AnalysisDescription>
+              {analysisHeadlines[analysisKey].description}
+            </AnalysisDescription>
             <p>{updatedData[analysisKey]}</p>
             <KieslerKreis
               analysisKey={analysisKey}
@@ -221,6 +317,9 @@ export default function EntryContentBlock({
         <>
           <EntryContent>
             <ContentHeadline>{children}</ContentHeadline>
+            <AnalysisDescription>
+              {analysisHeadlines[analysisKey].description}
+            </AnalysisDescription>
             <p>{updatedData[analysisKey]}</p>
             <KieslerKreis
               analysisKey={analysisKey}
@@ -234,12 +333,19 @@ export default function EntryContentBlock({
         <>
           <EntryContent>
             <ContentHeadline>{children}</ContentHeadline>
+            <AnalysisDescription>
+              {analysisHeadlines[analysisKey].description}
+            </AnalysisDescription>
             {Array.isArray(updatedData[analysisKey]) ? (
               <ol>
                 {updatedData[analysisKey].map(
-                  ({ id, interpretation, revision }) => (
+                  ({ id, interpretation, revision, actionInterpretation }) => (
                     <li key={id}>
-                      {interpretation ? interpretation : revision}
+                      {interpretation
+                        ? interpretation
+                        : revision
+                        ? revision
+                        : actionInterpretation}
                     </li>
                   )
                 )}

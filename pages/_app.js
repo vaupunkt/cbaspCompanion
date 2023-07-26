@@ -27,7 +27,16 @@ export default function App({ Component, pageProps }) {
   }
 
   const [allActionInterpretations, setAllActionInterpretations] = useState(
-    allEntries.map((entry) => entry.actionInterpretation)
+    allEntries
+      .flatMap(({ actionInterpretation }) =>
+        Array.isArray(actionInterpretation)
+          ? actionInterpretation.map(
+              (actionInterpretationsArray) =>
+                actionInterpretationsArray.actionInterpretation
+            )
+          : [actionInterpretation]
+      )
+      .filter((str) => str !== "")
   );
 
   function handleDelete(id, currentPage) {

@@ -21,4 +21,5 @@ export default createGlobalStyle`
 .conversational-form .cf-progressBar {
   top: 60px;
 }
+
 `;
