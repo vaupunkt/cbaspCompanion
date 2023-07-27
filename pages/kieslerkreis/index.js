@@ -43,7 +43,6 @@ export default function KieslerkreisPage({ allEntries }) {
       behaviorChangeKieslerkreisArray
     ),
   };
-  console.log(overviewDataset);
   return (
     <>
       <Header backButton title="Kieslerkreis"></Header>

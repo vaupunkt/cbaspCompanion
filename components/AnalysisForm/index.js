@@ -275,7 +275,6 @@ export default function AnalysisForm({
                 <label htmlFor="comparisonYes">Ja</label>
               </OutcomeReachedSection>
               <OutcomeReachedSection>
-                {" "}
                 <input
                   type="radio"
                   id="comparisonNo"

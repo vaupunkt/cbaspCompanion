@@ -8,6 +8,8 @@ export default function EntryPage({
   onDelete,
   allEntries,
   handleAllEntriesChange,
+  allActionInterpretations,
+  setAllActionInterpretations,
 }) {
   const router = useRouter();
   let entry = allEntries.find(
@@ -65,6 +67,8 @@ export default function EntryPage({
           onAllEntriesChange={handleAllEntriesChange}
           allEntries={allEntries}
           toggleEditMode={toggleEditMode}
+          allActionInterpretations={allActionInterpretations}
+          setAllActionInterpretations={setAllActionInterpretations}
         />
       )}
     </>

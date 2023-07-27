@@ -11,9 +11,21 @@ export default function Entry({
   allEntries,
   onAllEntriesChange,
   toggleEditMode,
+  setAllActionInterpretations,
+  allActionInterpretations,
 }) {
   const { type } = data;
   const analysisKeys = allAnalysisKeys[type];
+
+  function addActionInterpretation(newActionInterpretation) {
+    setAllActionInterpretations((previousActionInterpretation) => {
+      if (previousActionInterpretation.includes(newActionInterpretation)) {
+        return previousActionInterpretation;
+      } else {
+        return [...previousActionInterpretation, newActionInterpretation];
+      }
+    });
+  }
 
   const [updatedData, setUpdatedData] = useState(data);
   function handleSubmit(event) {
@@ -46,6 +58,7 @@ export default function Entry({
       (singleEntry) => singleEntry.id !== dataset.id
     );
     onAllEntriesChange([...filteredAllEntries, dataset]);
+    addActionInterpretation(dataset.actionInterpretation);
     setUpdatedData(dataset);
     toggleEditMode();
   }
@@ -65,6 +78,7 @@ export default function Entry({
                 analysisKey={analysisKey}
                 editMode={editMode}
                 updatedData={updatedData}
+                allActionInterpretations={allActionInterpretations}
                 setUpdatedData={setUpdatedData}
               >
                 {allAnalysisEntryHeadings[analysisKey]}
@@ -82,6 +96,7 @@ export default function Entry({
               editMode={editMode}
               updatedData={updatedData}
               setUpdatedData={setUpdatedData}
+              allActionInterpretations={allActionInterpretations}
             >
               {allAnalysisEntryHeadings[analysisKey]}
             </EntryContentBlock>

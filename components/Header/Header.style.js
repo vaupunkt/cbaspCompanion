@@ -8,7 +8,7 @@ export const HeaderContainer = styled.div`
   padding: 10px;
   width: 100%;
   height: 60px;
-  z-index: 1;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
