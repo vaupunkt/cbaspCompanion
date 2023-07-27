@@ -6,6 +6,7 @@ const StyledEntryInputTextarea = styled.textarea`
   font-size: 1em;
   margin-top: 15px;
   font-family: sans-serif;
+  resize: vertical;
   ${(prop) => (prop.long ? "height: 7em" : "")}
   ${(prop) => (prop.short ? "height: 1.5em" : "")}
 `;
@@ -14,6 +15,7 @@ const StyledEntryInput = styled.input`
   width: 100%;
   font-size: 1em;
   margin-top: 15px;
+  resize: none;
   font-family: sans-serif;
   ${(prop) => (prop.long ? "height: 7em" : "")}
   ${(prop) => (prop.short ? "height: 1.5em" : "")}
