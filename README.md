@@ -1,37 +1,30 @@
-# New Next Project
+# CBASP Companion
 
+CBASP Companion is an app designed to support people with chronic depression undergoing Cognitive Behavioral Analysis System of Psychotherapy (CBASP) therapy.
+
+## About CBASP Therapy
+
+CBASP is a therapeutic approach specifically developed for the treatment of patients with chronic depression. It is a highly structured and directive approach that integrates behavioral, cognitive, psychodynamic, and interpersonal approaches. CBASP was developed by James P. McCullough and has been empirically tested in scientific studies since 1980. It is the only psychotherapeutic approach for the treatment of long-lasting depressive disorders.
+
+## About the Kiesler Circle
+
+The Kiesler Circle is a communication model developed by the American psychologist Donald J. Kiesler in 1983. It describes how interpersonal interactions can be described on two axes: the axis of control with the poles “dominant” (open) and “submissive” (closed), and the axis of affiliation/relationship with the poles “friendly” (close) and “hostile” (distant). The Kiesler Circle graphically describes the taxonomy of interpersonal problems and plays a significant role in the psychotherapy of chronic depression with CBASP.
+
+## Features
+
+In the app, users can fill out and view various situation analyses, including future analysis, past analysis, and inner situation analysis. The app uses a chatbot from ConversationalForms and also has the Kiesler Circle implemented.
+
+## Repository
+
+The repository for the app can be found here: https://github.com/vaupunkt/cbaspCompanion
 This project was created from the neue fische `next` template.
 
-You can [🔗 **use this template on CodeSandbox**](https://codesandbox.io/p/sandbox/github/neuefische/web-exercises/tree/main/templates/next?file=/README.md) or locally by running this command in your Terminal:
+### ConversationalForms
 
-```bash
-npx -y ghcd@latest neuefische/web-exercises/tree/main/templates/next my-app -i
-```
+[ConversationalForms](https://space10.com/project/conversational-form/) is an open-source concept by SPACE10 that turns web forms into conversations. It features conversational replacement of all input elements, reusable variables from previous questions, and complete customization and control over the styling.
 
-## Development
+### Chart.js
 
-### Local Development
+[Chart.js](https://www.chartjs.org/) is an open-source JavaScript library for creating HTML5 charts. It is simple yet flexible and provides a wide range of chart types, plugins, and customization options. In the CBASP Companion app, it is used Chart.js to draw and make the Kiesler Circle interactive. This allows users to visualize their interpersonal interactions in a more engaging way.
 
-To work locally, please install the dependencies using `npm i` first.
-
-Run `npm run dev` to start a development server and open the displayed URL in a browser.
-
-Use `npm run test` to run the tests.
-
-### CodeSandbox Cloud
-
-Select the "Preview: 3000" tab to view this project.
-
-Select the "Tests: logs" tab to view the tests.
-
-> The `npm run dev` and `npm run test` scripts run automatically.
-
-### Scripts
-
-You can use the following commands:
-
-- `npm run dev` to start a development server
-- `npm run build` to build the project
-- `npm run start` to start a production server
-- `npm run test` to run the tests
-- `npm run lint` to run the linter
+We hope that this app will be a helpful tool for those undergoing CBASP therapy. If you have any questions or feedback, please don’t hesitate to reach out to me.
