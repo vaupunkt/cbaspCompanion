@@ -27,4 +27,4 @@ This project was created from the neue fische `next` template.
 
 [Chart.js](https://www.chartjs.org/) is an open-source JavaScript library for creating HTML5 charts. It is simple yet flexible and provides a wide range of chart types, plugins, and customization options. In the CBASP Companion app, it is used Chart.js to draw and make the Kiesler Circle interactive. This allows users to visualize their interpersonal interactions in a more engaging way.
 
-We hope that this app will be a helpful tool for those undergoing CBASP therapy. If you have any questions or feedback, please don’t hesitate to reach out to me.
+I hope that this app will be a helpful tool for those undergoing CBASP therapy. If you have any questions or feedback, please don’t hesitate to reach out to me.
