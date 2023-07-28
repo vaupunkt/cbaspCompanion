@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import { useEffect, useRef, useState } from "react";
 import { ConversationalForm } from "conversational-form";
 import { styled } from "styled-components";
