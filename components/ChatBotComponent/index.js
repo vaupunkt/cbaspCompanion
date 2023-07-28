@@ -6,7 +6,6 @@ import {
   innerSituationAnalysisFormFields,
   pastAnalysisFormFields,
 } from "@/lib/questionFormFields";
-import KieslerKreis from "../KieslerKreis";
 import { uid } from "uid";
 import { useRouter } from "next/router";
 
@@ -28,9 +27,6 @@ export default function ChatBotComponent({
   const formFields = [
     {
       tag: "fieldset",
-      type: "text",
-      name: "intro",
-
       "cf-questions":
         "Hallo! Schön, dass du heute eine <strong>Situation</strong> analysieren möchtest.&&Ich werde versuchen dir dabei zu helfen.",
       children: [
@@ -61,32 +57,21 @@ export default function ChatBotComponent({
       ],
     },
     {
+      "cf-conditional-intro": "goToForm",
+      tag: "input",
+      name: "redirectToForm",
+      "cf-questions":
+        "Ich werde dich jetzt weiterleiten. Wenn es nicht klappt, klicke den Link:&&<a href='./newanalysisform'>Link</a>",
+    },
+    {
       "cf-conditional-intro": "moreInformationForIntro",
-      tag: "fieldset",
-      type: "text",
-      name: "moreInformationForIntro",
+      tag: "cf-robot-message",
+      name: "moreInformation",
       "cf-questions":
         "Ich werde dir nacheinander verschiedene Fragen stellen, die zur jeweiligen <strong>Situationsanalyse</strong> gehören.&&Mit einem Klick auf deine gegebenen Antworten kannst du immer zu vorherigen Fragen zurückspringen und sie ändern.",
     },
     {
-      "cf-conditional-intro": "goToForm",
-      tag: "fieldset",
-      type: "text",
-      name: "redirectToForm",
-      "cf-questions":
-        "Ich werde jetzt weiterleiten. Wenn es nicht klappt, klicke den Link:",
-      children: [
-        {
-          tag: "input",
-          type: "radio",
-          name: "redirectToForm",
-          value: "redirectToForm",
-          label: "redirectToForm",
-          "cf-label": "<a href='./newanalysisform'>Link</a>",
-        },
-      ],
-    },
-    {
+      "cf-conditional-intro": "next",
       tag: "fieldset",
       type: "text",
       name: "type",
@@ -135,7 +120,7 @@ export default function ChatBotComponent({
     if (dto.tag.value[0] === "goToForm") {
       setTimeout(() => {
         router.push(`./newanalysisform`);
-      }, 2000);
+      }, 3000);
     }
     if (dto.tag.value[0] === "PastAnalysis") {
       window.ConversationalForm.addTags(pastAnalysisFormFields);
@@ -192,9 +177,9 @@ export default function ChatBotComponent({
       revisions[Number(dto.tag.name.match(/\d+/)[0]) - 1].revision =
         dto.tag.value;
     }
-    // We assume every answer is valid. If that wasnt the case we would call error()
     success();
   };
+
   useEffect(function mount() {
     cf = ConversationalForm.startTheConversation({
       options: {
