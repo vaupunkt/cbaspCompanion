@@ -82,6 +82,41 @@ const AddNewSymptomLink = styled.div`
   }
 `;
 
+const SeeMoreInformationLink = styled.div`
+  border-color: var(--mainDarkColor);
+  padding: 15px;
+  border-radius: 25px;
+  color: var(--mainLightColor);
+  background-color: var(--mainDarkColor);
+  text-decoration: none;
+  position: sticky;
+  top: 70px;
+  font-weight: 500;
+  font-size: 1em;
+  width: 150px;
+  margin: 9em auto 9em auto;
+  text-align: center;
+
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--mainDarkColor) 80%,
+      var(--mainLightColor)
+    );
+  }
+  &:active {
+    box-shadow: inset 0px 0px 5px var(--mainLightColor);
+  }
+`;
+
+const MoreInformationArticle = styled.article`
+  padding: 15px;
+  margin-bottom: 160px;
+  scroll-margin: 90px;
+  word-wrap: break-word;
+  hyphens: auto;
+`;
+
 export default function MySymptomsPage() {
   return (
     <>
@@ -119,6 +154,47 @@ export default function MySymptomsPage() {
       <Link href="./mysymptoms/all">
         <SeeAllSymptomLink>Alle</SeeAllSymptomLink>
       </Link>
+      <Link href="#moreInformation">
+        <SeeMoreInformationLink>mehr Infos</SeeMoreInformationLink>
+      </Link>
+      <MoreInformationArticle id="moreInformation">
+        <h2>Warum sollte man seine Symptome erfassen?</h2>
+        <section>
+          Depressionen sind eine ernsthafte psychische Erkrankung, die das
+          Denken, Fühlen und Verhalten der Betroffenen verändert. Depressionen
+          können verschiedene Ursachen haben, wie zum Beispiel genetische
+          Veranlagung, Stress, Traumata oder körperliche Erkrankungen.
+          Depressionen können auch unterschiedliche Symptome haben, wie zum
+          Beispiel Niedergeschlagenheit, Antriebslosigkeit, Schlafstörungen oder
+          körperliche Beschwerden. Um eine Depression zu erkennen und zu
+          behandeln, ist es wichtig, die Symptome zu erfassen und zu
+          dokumentieren.
+        </section>
+        <h3>Das hat mehrere Vorteile:</h3>
+        <ul>
+          <li>
+            Du kannst deine Stimmung und dein Befinden objektiv beurteilen und
+            Veränderungen feststellen.
+          </li>
+          <li>
+            Du kannst deinem Arzt oder Therapeuten einen besseren Einblick in
+            deine Situation geben und die passende Behandlung finden.
+          </li>
+          <li>
+            Du kannst deine Fortschritte und Erfolge sichtbar machen und dich
+            motivieren.
+          </li>
+          <li>
+            Du kannst deine eigenen Ressourcen und Strategien entdecken und
+            nutzen, um mit deiner Depression umzugehen.
+          </li>
+        </ul>
+        <section>
+          Die Symptom-Erfassung ist ein wichtiger Bestandteil der
+          CBASP-Therapie. Durch die Erfassung können die Patienten lernen, die
+          Konsequenzen ihres eigenen Verhaltens zu erkennen und zu beeinflussen.
+        </section>
+      </MoreInformationArticle>
     </>
   );
 }
