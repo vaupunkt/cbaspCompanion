@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Link from "next/link";
 import { styled, css } from "styled-components";
 
 const SymptomGrid = styled.section`
@@ -10,7 +11,6 @@ const SymptomGrid = styled.section`
   align-items: center;
   grid-gap: 10px;
   padding-top: 40px;
-  height: calc(100vh - 60px);
 `;
 
 const SymptomBlock = styled.div`
@@ -33,6 +33,31 @@ const SymptomBlock = styled.div`
     `}
 `;
 
+const AddNewSymptomLink = styled.div`
+  border-color: var(--mainDarkColor);
+  padding: 15px 40px 15px 15px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  color: var(--mainLightColor);
+  background-color: var(--mainDarkColor);
+  text-decoration: none;
+  position: fixed;
+  right: 0px;
+  font-weight: 800;
+  bottom: 80px;
+  font-size: 1.5em;
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--mainDarkColor) 80%,
+      var(--mainLightColor)
+    );
+  }
+  &:active {
+    box-shadow: inset 0px 0px 5px var(--mainLightColor);
+  }
+`;
+
 export default function MySymptomsPage() {
   return (
     <>
@@ -51,6 +76,9 @@ export default function MySymptomsPage() {
           <h3>Verhaltensebene</h3>
         </SymptomBlock>
       </SymptomGrid>
+      <Link href="./addsymptom">
+        <AddNewSymptomLink>+</AddNewSymptomLink>
+      </Link>
     </>
   );
 }

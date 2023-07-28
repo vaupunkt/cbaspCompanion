@@ -2,7 +2,6 @@ import GlobalStyle from "../styles";
 import initialEntries from "@/lib/initialEntries";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-
 import useLocalStorageState from "use-local-storage-state";
 import isPropValid from "@emotion/is-prop-valid";
 import { StyleSheetManager } from "styled-components";
@@ -12,6 +11,17 @@ export default function App({ Component, pageProps }) {
   const [allEntries, setAllEntries] = useLocalStorageState("Entries", {
     defaultValue: initialEntries,
   });
+  const [mySymptoms, setMySymptoms] = useLocalStorageState("Symptoms", {
+    defaultValue: [
+      { category: "physicalLevel", symptoms: {} },
+      { category: "emotionalLevel", symptoms: {} },
+      { category: "mentalLevel", symptoms: {} },
+      { category: "behavioralLevel", symptoms: {} },
+    ],
+  });
+  function handleSymptomChange(newSymptoms) {
+    setMySymptoms(newSymptoms);
+  }
   const allFutureAnalysisEntries = allEntries.filter(
     (initialEntry) => initialEntry.type === "FutureAnalysis"
   );
@@ -71,6 +81,8 @@ export default function App({ Component, pageProps }) {
           handleAllEntriesChange={handleAllEntriesChange}
           allActionInterpretations={allActionInterpretations}
           setAllActionInterpretations={setAllActionInterpretations}
+          handleSymptomChange={handleSymptomChange}
+          mySymptoms={mySymptoms}
         />
       </StyleSheetManager>
     </>
