@@ -43,6 +43,7 @@ export default function ChatBotComponent({
     const formData = new FormData(event.target);
     let dataset = Object.fromEntries(formData);
     handleKieslerkreisInputChange({ ...dataset });
+    console.log("Dataset from Kieslerkreis", dataset);
   }
 
   const formFields = [
@@ -252,6 +253,7 @@ export default function ChatBotComponent({
   function submitCallback() {
     console.log("kieslerkreisinput in callback: ", kieslerkreisInput);
     let dataset = cf.getFormData(true);
+
     dataset = {
       ...dataset,
       ...kieslerkreisInput,
@@ -318,17 +320,15 @@ export default function ChatBotComponent({
       </ConversationalFormSection>
       <BehaviorKieslerKreisSection
         onSubmit={handleNext}
+        id="behaviorKieslerkreisSection"
         style={visibility.behaviorKieslerkreis}
       >
-        <KieslerKreis
-          editMode
-          analysisKey="behavior"
-          handleKieslerkreisInputChange={handleKieslerkreisInputChange}
-        />
+        <KieslerKreis editMode analysisKey="behavior" />
         <Button
           variant="big"
           type="submit"
           name="next"
+          for="behaviorKieslerkreisSection"
           onClick={toggleVisibilityofChat}
         >
           Weiter ➡️
@@ -336,17 +336,15 @@ export default function ChatBotComponent({
       </BehaviorKieslerKreisSection>
       <BehaviorChangeKieslerKreisSection
         onSubmit={handleNext}
+        id="behaviorChangeKieslerkreisSection"
         style={visibility.behaviorChangeKieslerkreis}
       >
-        <KieslerKreis
-          editMode
-          analysisKey="behaviorChange"
-          handleKieslerkreisInputChange={handleKieslerkreisInputChange}
-        />
+        <KieslerKreis editMode analysisKey="behaviorChange" />
         <Button
           variant="big"
           type="submit"
           name="next"
+          for="behaviorChangeKieslerkreisSection"
           onClick={toggleVisibilityofChat}
         >
           Weiter ➡️
