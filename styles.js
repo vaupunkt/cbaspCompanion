@@ -4,6 +4,11 @@ export default createGlobalStyle`
   :root {
     --mainDarkColor: #0c0c0c;
     --mainLightColor: white;
+    --physicalLevel: #8FA8FF;
+    --emotionalLevel: #FF9191;
+    --mentalLevel: #FFEA9C;
+    --behavioralLevel: #92D58E;
+
   }
 
   *,
