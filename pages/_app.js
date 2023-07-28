@@ -26,6 +26,14 @@ export default function App({ Component, pageProps }) {
     setAllEntries(updatedEntries);
   }
 
+  const [kieslerkreisInput, setKieslerkreisInput] = useState({
+    behaviorKieslerkreis: "",
+    behaviorChangeKieslerkreis: "",
+  });
+  function handleKieslerkreisInputChange(input) {
+    setKieslerkreisInput({ ...input });
+  }
+
   const [allActionInterpretations, setAllActionInterpretations] = useState(
     allEntries
       .flatMap(({ actionInterpretation }) =>
@@ -71,6 +79,8 @@ export default function App({ Component, pageProps }) {
           handleAllEntriesChange={handleAllEntriesChange}
           allActionInterpretations={allActionInterpretations}
           setAllActionInterpretations={setAllActionInterpretations}
+          kieslerkreisInput={kieslerkreisInput}
+          handleKieslerkreisInputChange={handleKieslerkreisInputChange}
         />
       </StyleSheetManager>
     </>
