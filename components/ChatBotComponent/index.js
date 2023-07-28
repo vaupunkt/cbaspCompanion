@@ -117,7 +117,6 @@ export default function ChatBotComponent({
   ];
   const revisions = [];
   let flowCallback = function (dto, success, error) {
-    console.log(dto);
     if (dto.tag.value[0] === "goToForm") {
       setTimeout(() => {
         router.push(`./newanalysisform`);
