@@ -1,6 +1,7 @@
 # CBASP Companion
 
 CBASP Companion is an app designed to support people with chronic depression undergoing Cognitive Behavioral Analysis System of Psychotherapy (CBASP) therapy.
+![Bildschirmaufnahme-2023-07-29-um-12 38 14](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/3578ee5c-6821-44df-99e6-aa6453cd5955)
 
 ## About CBASP Therapy
 
