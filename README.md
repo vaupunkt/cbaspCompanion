@@ -22,6 +22,14 @@ In the app, users can fill out and view various situation analyses, including fu
 The repository for the app can be found here: https://github.com/vaupunkt/cbaspCompanion
 This project was created from the neue fische `next` template.
 
+### Project Setup
+
+1. Clone this repository
+2. `$ npm install` installs all the files and dependencies the app needs to run
+3. `$ npm run dev` runs the app in dev mode and opens http://localhost:3000 to view it in your browser. Or you will be asked to confirm another port if this one isn't available.
+
+
+
 ### ConversationalForms
 
 [ConversationalForms](https://space10.com/project/conversational-form/) is an open-source concept by SPACE10 that turns web forms into conversations. It features conversational replacement of all input elements, reusable variables from previous questions, and complete customization and control over the styling.
@@ -31,3 +39,4 @@ This project was created from the neue fische `next` template.
 [Chart.js](https://www.chartjs.org/) is an open-source JavaScript library for creating HTML5 charts. It is simple yet flexible and provides a wide range of chart types, plugins, and customization options. In the CBASP Companion app, it is used Chart.js to draw and make the Kiesler Circle interactive. This allows users to visualize their interpersonal interactions in a more engaging way.
 
 I hope that this app will be a helpful tool for those undergoing CBASP therapy. If you have any questions or feedback, please don’t hesitate to reach out to me.
+
