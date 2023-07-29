@@ -2,6 +2,7 @@ import Button from "@/components/Button";
 import Header from "@/components/Header";
 import Link from "next/link";
 import { useState } from "react";
+import { Fade } from "react-awesome-reveal";
 import { styled, css } from "styled-components";
 
 const EmptyMessage = styled.section`
@@ -84,7 +85,7 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
   ) {
     return (
       <>
-        <Header backButton title="Alle Symptome" />
+        <Header link="../mysymptoms" title="Alle Symptome" />
         <EmptyMessage>
           <h2>Noch keine Einträge</h2>
           <p>Füge neue Einträge hinzu:</p>
@@ -95,7 +96,7 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
   } else {
     return (
       <>
-        <Header backButton title="Alle Symptome" />
+        <Header link="../mysymptoms" title="Alle Symptome" />
 
         {editMode ? (
           <Button
@@ -117,10 +118,10 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
           </Button>
         )}
         <SymptomList>
-          {mySymptoms.map(({ symptoms, category }) =>
-            symptoms.length > 0
-              ? symptoms.map(({ symptom, id }) => (
-                  <>
+          <Fade cascade damping={0.2}>
+            {mySymptoms.map(({ symptoms, category }) =>
+              symptoms.length > 0
+                ? symptoms.map(({ symptom, id }) => (
                     <SymptomEntry key={id} category={category}>
                       {editMode ? (
                         <Button
@@ -134,10 +135,10 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
                       ) : null}
                       {symptom}
                     </SymptomEntry>
-                  </>
-                ))
-              : null
-          )}
+                  ))
+                : null
+            )}
+          </Fade>
         </SymptomList>
       </>
     );
