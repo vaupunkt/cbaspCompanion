@@ -1,13 +1,14 @@
 import Header from "@/components/Header";
 import { styled } from "styled-components";
 import Link from "next/link";
+import { Slide } from "react-awesome-reveal";
 
 const NavigationContainer = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  top: 80px;
+  gap: 50px;
+  top: 100px;
 `;
 
 const NavigationLink = styled(Link)`
@@ -38,16 +39,18 @@ export default function MyAnalysesPage() {
     <>
       <Header backButton title="Meine Situationsanalysen" />
       <NavigationContainer>
-        <NavigationLink href="./pastanalyses">
-          Vergangenheitsanalysen
-        </NavigationLink>
-        <NavigationLink href="./innersituationanalyses">
-          Innere Situationsanalysen
-        </NavigationLink>
-        <NavigationLink href="./futureanalyses">
-          Zukunftsanalysen
-        </NavigationLink>
-        <NavigationLink href="./allentries">Alle Analysen</NavigationLink>
+        <Slide duration={300} cascade>
+          <NavigationLink href="./pastanalyses">
+            Vergangenheitsanalysen
+          </NavigationLink>
+          <NavigationLink href="./innersituationanalyses">
+            Innere Situationsanalysen
+          </NavigationLink>
+          <NavigationLink href="./futureanalyses">
+            Zukunftsanalysen
+          </NavigationLink>
+          <NavigationLink href="./allentries">Alle Analysen</NavigationLink>
+        </Slide>
       </NavigationContainer>
     </>
   );
