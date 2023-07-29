@@ -1,5 +1,7 @@
+import Button from "@/components/Button";
 import Header from "@/components/Header";
 import Link from "next/link";
+import { useState } from "react";
 import { styled, css } from "styled-components";
 
 const EmptyMessage = styled.section`
@@ -41,6 +43,10 @@ const AddEntryLink = styled(Link)`
     box-shadow: inset 0px 0px 5px var(--mainDarkColor);
   }
 `;
+const SymptomDeleteButton = styled(Button)`
+  top: 0px;
+  right: 0px;
+`;
 const SymptomEntry = styled.li`
   ${(props) =>
     props.category &&
@@ -51,6 +57,7 @@ const SymptomEntry = styled.li`
       height: 3em;
       border-radius: 25px;
       display: flex;
+      position: relative;
       justify-content: space-around;
       align-items: center;
       list-style: none;
@@ -63,7 +70,11 @@ const SymptomEntry = styled.li`
       }
     `}
 `;
-export default function AllSymptoms({ mySymptoms }) {
+export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
+  const [editMode, setEditMode] = useState(false);
+  function toggleEditMode() {
+    setEditMode(!editMode);
+  }
   if (
     mySymptoms[0].symptoms.length +
       mySymptoms[1].symptoms.length +
@@ -72,23 +83,58 @@ export default function AllSymptoms({ mySymptoms }) {
     1
   ) {
     return (
-      <EmptyMessage>
-        <h2>Noch keine Einträge</h2>
-        <p>Füge neue Einträge hinzu:</p>
-        <AddEntryLink href="/addsymptom"> + </AddEntryLink>
-      </EmptyMessage>
+      <>
+        <Header backButton title="Alle Symptome" />
+        <EmptyMessage>
+          <h2>Noch keine Einträge</h2>
+          <p>Füge neue Einträge hinzu:</p>
+          <AddEntryLink href="/addsymptom"> + </AddEntryLink>
+        </EmptyMessage>
+      </>
     );
   } else {
     return (
       <>
         <Header backButton title="Alle Symptome" />
+
+        {editMode ? (
+          <Button
+            type="button"
+            name="save"
+            variant="big"
+            onClick={() => toggleEditMode()}
+          >
+            💾 Speichern
+          </Button>
+        ) : (
+          <Button
+            type="button"
+            name="edit"
+            variant="big"
+            onClick={() => toggleEditMode()}
+          >
+            ✍️ Bearbeiten
+          </Button>
+        )}
         <SymptomList>
           {mySymptoms.map(({ symptoms, category }) =>
             symptoms.length > 0
               ? symptoms.map(({ symptom, id }) => (
-                  <SymptomEntry key={id} category={category}>
-                    {symptom}
-                  </SymptomEntry>
+                  <>
+                    <SymptomEntry key={id} category={category}>
+                      {editMode ? (
+                        <Button
+                          type="button"
+                          name="deleteSymptom"
+                          variant="small"
+                          onClick={() => handleSymptomDelete(id)}
+                        >
+                          🗑️
+                        </Button>
+                      ) : null}
+                      {symptom}
+                    </SymptomEntry>
+                  </>
                 ))
               : null
           )}
