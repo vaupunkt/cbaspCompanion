@@ -41,6 +41,7 @@ export default function Home() {
         <NavigationLink href="./newanalysis">Neue Analyse ➕ </NavigationLink>
         <NavigationLink href="./myanalyses">Meine Analysen</NavigationLink>
         <NavigationLink href="./kieslerkreis">Kieslerkreis</NavigationLink>
+        <NavigationLink href="./moreinformation">Mehr Infos</NavigationLink>
       </NavigationContainer>
     </>
   );
