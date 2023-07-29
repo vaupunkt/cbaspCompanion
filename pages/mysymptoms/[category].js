@@ -66,7 +66,7 @@ const SymptomList = styled.ul`
   width: 100%;
   justify-content: space-evenly;
 `;
-export default function CategoryPage({ mySymptoms }) {
+export default function CategoryPage({ mySymptoms, handleSymptomDelete }) {
   const router = useRouter();
   const { category } = router.query;
   const [editMode, setEditMode] = useState(false);
