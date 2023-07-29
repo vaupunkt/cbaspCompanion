@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import EntryList from "@/components/EntryList";
+import { Fade } from "react-awesome-reveal";
 
 export default function FutureAnalysesPage({
   allFutureAnalysisEntries,
@@ -8,7 +9,9 @@ export default function FutureAnalysesPage({
   return (
     <>
       <Header backButton title="Zukunftsanalysen" />
-      <EntryList entries={allFutureAnalysisEntries} onDelete={onDelete} />
+      <Fade>
+        <EntryList entries={allFutureAnalysisEntries} onDelete={onDelete} />
+      </Fade>
     </>
   );
 }

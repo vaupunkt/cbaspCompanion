@@ -13,11 +13,11 @@ const SymptomGrid = styled.section`
   padding-top: 40px;
 `;
 
-const SymptomBlock = styled.div`
-  border: solid;
+const SymptomBlock = styled(Link)`
   text-align: center;
   border-radius: 25px;
-  border-width: 3px;
+  text-decoration: none;
+  color: black;
   padding: 10px;
   width: 100%;
   height: 100%;
@@ -31,6 +31,30 @@ const SymptomBlock = styled.div`
     css`
       background-color: ${props.color};
     `}
+`;
+const SeeAllSymptomLink = styled.div`
+  border-color: var(--mainDarkColor);
+  padding: 15px 40px 15px 15px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  color: var(--mainLightColor);
+  background-color: var(--mainDarkColor);
+  text-decoration: none;
+  position: fixed;
+  left: 0px;
+  font-weight: 500;
+  bottom: 80px;
+  font-size: 1.5em;
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--mainDarkColor) 80%,
+      var(--mainLightColor)
+    );
+  }
+  &:active {
+    box-shadow: inset 0px 0px 5px var(--mainLightColor);
+  }
 `;
 
 const AddNewSymptomLink = styled.div`
@@ -58,27 +82,119 @@ const AddNewSymptomLink = styled.div`
   }
 `;
 
+const SeeMoreInformationLink = styled.div`
+  border-color: var(--mainDarkColor);
+  padding: 15px;
+  border-radius: 25px;
+  color: var(--mainLightColor);
+  background-color: var(--mainDarkColor);
+  text-decoration: none;
+  position: sticky;
+  top: 70px;
+  font-weight: 500;
+  font-size: 1em;
+  width: 150px;
+  margin: 9em auto 9em auto;
+  text-align: center;
+
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--mainDarkColor) 80%,
+      var(--mainLightColor)
+    );
+  }
+  &:active {
+    box-shadow: inset 0px 0px 5px var(--mainLightColor);
+  }
+`;
+
+const MoreInformationArticle = styled.article`
+  padding: 15px;
+  margin-bottom: 160px;
+  scroll-margin: 90px;
+  word-wrap: break-word;
+  hyphens: auto;
+`;
+
 export default function MySymptomsPage() {
   return (
     <>
       <Header backButton title="Meine Symptome" />
       <SymptomGrid lang="de">
-        <SymptomBlock color="#8FA8FF">
+        <SymptomBlock
+          href={`/mysymptoms/physicalLevel`}
+          color="var(--physicalLevel)"
+        >
           <h3>Körperliche Ebene</h3>
         </SymptomBlock>
-        <SymptomBlock color="#FF9191">
+
+        <SymptomBlock
+          href={`/mysymptoms/emotionalLevel`}
+          color="var(--emotionalLevel)"
+        >
           <h3>Gefühlsebene</h3>
         </SymptomBlock>
-        <SymptomBlock color="#FFEA9C">
+        <SymptomBlock
+          href={`/mysymptoms/mentalLevel`}
+          color="var(--mentalLevel)"
+        >
           <h3>gedankliche Ebene</h3>
         </SymptomBlock>
-        <SymptomBlock color="#92D58E">
+        <SymptomBlock
+          href={`/mysymptoms/behavioralLevel`}
+          color="var(--behavioralLevel)"
+        >
           <h3>Verhaltensebene</h3>
         </SymptomBlock>
       </SymptomGrid>
       <Link href="./addsymptom">
         <AddNewSymptomLink>+</AddNewSymptomLink>
       </Link>
+      <Link href="./mysymptoms/all">
+        <SeeAllSymptomLink>Alle</SeeAllSymptomLink>
+      </Link>
+      <Link href="#moreInformation">
+        <SeeMoreInformationLink>mehr Infos</SeeMoreInformationLink>
+      </Link>
+      <MoreInformationArticle id="moreInformation">
+        <h2>Warum sollte man seine Symptome erfassen?</h2>
+        <section>
+          Depressionen sind eine ernsthafte psychische Erkrankung, die das
+          Denken, Fühlen und Verhalten der Betroffenen verändert. Depressionen
+          können verschiedene Ursachen haben, wie zum Beispiel genetische
+          Veranlagung, Stress, Traumata oder körperliche Erkrankungen.
+          Depressionen können auch unterschiedliche Symptome haben, wie zum
+          Beispiel Niedergeschlagenheit, Antriebslosigkeit, Schlafstörungen oder
+          körperliche Beschwerden. Um eine Depression zu erkennen und zu
+          behandeln, ist es wichtig, die Symptome zu erfassen und zu
+          dokumentieren.
+        </section>
+        <h3>Das hat mehrere Vorteile:</h3>
+        <ul>
+          <li>
+            Du kannst deine Stimmung und dein Befinden objektiv beurteilen und
+            Veränderungen feststellen.
+          </li>
+          <li>
+            Du kannst deinem Arzt oder Therapeuten einen besseren Einblick in
+            deine Situation geben und die passende Behandlung finden.
+          </li>
+          <li>
+            Du kannst deine Fortschritte und Erfolge sichtbar machen und dich
+            motivieren.
+          </li>
+          <li>
+            Du kannst deine eigenen Ressourcen und Strategien entdecken und
+            nutzen, um mit deiner Depression umzugehen.
+          </li>
+        </ul>
+        <section>
+          Die Symptom-Erfassung ist ein wichtiger Bestandteil der
+          CBASP-Therapie. Durch die Erfassung können die Patienten lernen, die
+          Konsequenzen ihres eigenen Verhaltens zu erkennen und zu beeinflussen.
+        </section>
+      </MoreInformationArticle>
     </>
   );
 }
