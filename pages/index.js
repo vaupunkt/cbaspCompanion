@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import { styled } from "styled-components";
 import Link from "next/link";
 import { Fade, Slide, Zoom } from "react-awesome-reveal";
@@ -68,7 +67,7 @@ export default function Home() {
         <meta charSet="UTF-8"></meta>
       </Head>
       <Zoom duration={300}>
-        <TitleBox>
+        <TitleBox onClick>
           <Fade>
             <Title>CBASP</Title>
             <Subtitle>Companion</Subtitle>

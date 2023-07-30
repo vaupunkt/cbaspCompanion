@@ -4,8 +4,8 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import useLocalStorageState from "use-local-storage-state";
 import isPropValid from "@emotion/is-prop-valid";
-import { StyleSheetManager } from "styled-components";
 import { useState } from "react";
+import { StyleSheetManager } from "styled-components";
 
 export default function App({ Component, pageProps }) {
   const [allEntries, setAllEntries] = useLocalStorageState("Entries", {
@@ -89,7 +89,6 @@ export default function App({ Component, pageProps }) {
       ],
     });
   }
-
   return (
     <>
       <GlobalStyle />

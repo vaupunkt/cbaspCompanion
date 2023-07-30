@@ -108,7 +108,6 @@ export default function KieslerKreis({
         type: "radar",
         label: "Einschätzung",
         data: kieslerkreisData,
-
         borderWidth: 2,
         pointRadius: 30,
         pointHoverRadius: 30,
@@ -123,17 +122,27 @@ export default function KieslerKreis({
     chartData.datasets[0].borderColor = "rgba(50, 168, 82, 1)";
   }
   const options = {
+    legend: { labels: { color: "#f7f7f7" } },
     scale: { min: 0, max: 3, stepSize: 1 },
     scales: {
       r: {
         max: 3,
         min: 0,
         stepSize: 1,
+        grid: {
+          circular: true,
+          color: ["#f7f7f7", "#f7f7f7", "#f7f7f7"],
+          lineWidth: 1.5,
+          drawOnChartArea: true,
+        },
+        gridLines: { color: "#262829" },
+        title: { FontColor: "#f7f7f7" },
       },
     },
     plugins: {
       legend: {
         display: false,
+        labels: { color: "#f7f7f7" },
       },
     },
   };

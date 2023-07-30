@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import KieslerKreis from "@/components/KieslerKreis";
+import Head from "next/head";
 import { Fade } from "react-awesome-reveal";
 import { styled } from "styled-components";
 
