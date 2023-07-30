@@ -86,18 +86,6 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
     return (
       <>
         <Header link="../mysymptoms" title="Alle Symptome" />
-        <EmptyMessage>
-          <h2>Noch keine Einträge</h2>
-          <p>Füge neue Einträge hinzu:</p>
-          <AddEntryLink href="/addsymptom"> + </AddEntryLink>
-        </EmptyMessage>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Header link="../mysymptoms" title="Alle Symptome" />
-
         {editMode ? (
           <Button
             type="button"
@@ -145,7 +133,7 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
   } else {
     return (
       <>
-        <Header backButton title="Alle Symptome" />
+        <Header link="../mysymptoms" title="Alle Symptome" />
         <EmptyMessage>
           <h2>Noch keine Einträge</h2>
           <p>Füge neue Einträge hinzu:</p>
