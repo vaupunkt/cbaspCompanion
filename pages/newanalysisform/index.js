@@ -6,21 +6,22 @@ import { uid } from "uid";
 import { useRouter } from "next/router";
 import AnalysisForm from "@/components/AnalysisForm";
 import Head from "next/head";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const TitleInput = styled.input`
   width: 50%;
   text-align: right;
   margin: 0;
   font-size: 1.3em;
-  background-color: var(--mainDarkColor);
-  color: var(--mainLightColor);
+  background-color: var(--primaryColor);
+  color: var(--secondaryColor);
   border: solid;
   border-width: 2px;
 `;
 
 const DateInput = styled.input`
-  background-color: var(--mainDarkColor);
-  color: var(--mainLightColor);
+  background-color: var(--primaryColor);
+  color: var(--secondaryColor);
   border: solid;
   text-align: right;
   border-width: 2px;
@@ -106,6 +107,7 @@ export default function NewAnalysisForm({
         <title>Neue Analyse</title>
         <meta charSet="UTF-8"></meta>
       </Head>
+      <ScrollToTop />
       <form onSubmit={handleSubmit}>
         <HeaderContainer>
           <Button

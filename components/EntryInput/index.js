@@ -7,6 +7,10 @@ const StyledEntryInputTextarea = styled.textarea`
   margin-top: 15px;
   font-family: sans-serif;
   resize: vertical;
+  background-color: color-mix(in srgb, var(--secondaryColor) 75%, white);
+  color: var(--primaryColor);
+  border-radius: 10px;
+  padding: 10px;
   ${(prop) => (prop.long ? "height: 7em" : "")}
   ${(prop) => (prop.short ? "height: 1.5em" : "")}
 `;
@@ -16,16 +20,20 @@ const StyledEntryInput = styled.input`
   font-size: 1em;
   margin-top: 15px;
   resize: none;
+  border-radius: 10px;
+  padding: 10px;
   font-family: sans-serif;
+  background-color: color-mix(in srgb, var(--secondaryColor) 75%, white);
+  color: var(--primaryColor);
   ${(prop) => (prop.long ? "height: 7em" : "")}
-  ${(prop) => (prop.short ? "height: 1.5em" : "")}
+  ${(prop) => (prop.short ? "height: 1.5em" : "")};
 `;
 
 const RemainingLength = styled.p`
   text-align: right;
   font-size: 0.8em;
   margin: 0;
-  color: color-mix(in srgb, var(--mainDarkColor) 50%, white);
+  color: color-mix(in srgb, var(--primaryColor) 50%, white);
 `;
 
 export default function EntryInput({

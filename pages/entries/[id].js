@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import Header from "@/components/Header";
 import { useState } from "react";
 import Head from "next/head";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function EntryPage({
   onDelete,
@@ -32,6 +33,7 @@ export default function EntryPage({
         title={entry && entry.title}
         date={entry && entry.date}
       ></Header>
+      <ScrollToTop />
 
       {editMode ? (
         <>

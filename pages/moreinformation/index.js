@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import ScrollToTop from "@/components/ScrollToTop";
 import Head from "next/head";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
@@ -6,35 +7,51 @@ import { styled, css } from "styled-components";
 
 const MoreInformationArticle = styled.article`
   padding: 15px;
-  margin-bottom: 160px;
+  margin-bottom: 20px;
   scroll-margin: 90px;
-  line-height: 1.5em;
+  line-height: 1.7em;
   word-wrap: break-word;
   hyphens: auto;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
 `;
 
 const MoreInformationSection = styled.section`
   scroll-margin: 80px;
   padding-bottom: 20px;
+`;
 
-  scroll-snap-align: start;
+const MoreInformationTextLink = styled(Link)`
+  color: var(--primaryColor);
+  text-decoration: dotted;
+
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--primaryColor) 50%,
+      var(--secondaryColor)
+    );
+  }
+  &:focus {
+    background-color: color-mix(
+      in srgb,
+      var(--primaryColor) 50%,
+      var(--secondaryColor)
+    );
+  }
 `;
 
 const InformationListLink = styled(Link)`
   text-decoration: none;
   border-radius: 25px;
-  color: var(--mainLightColor);
+  color: var(--secondaryColor);
 
   &:active {
-    color: var(--mainLightColor);
+    color: var(--secondaryColor);
   }
 `;
 
 const ListEntry = styled.li`
-  background-color: var(--mainDarkColor);
-  color: var(--mainLightColor);
+  background-color: var(--primaryColor);
+  color: var(--secondaryColor);
   padding: 0px 20px;
   height: 3em;
   border-radius: 25px;
@@ -46,8 +63,8 @@ const ListEntry = styled.li`
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--mainDarkColor) 50%,
-      var(--mainLightColor)
+      var(--primaryColor) 50%,
+      var(--secondaryColor)
     );
   }
 `;
@@ -71,6 +88,7 @@ export default function MoreInformationPage() {
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header link="./" title="mehr Informationen" />
+      <ScrollToTop />
       <InformationList>
         <Fade cascade damping={0.2}>
           <InformationListLink href="#depression">
@@ -174,15 +192,17 @@ export default function MoreInformationPage() {
                 kostenloser Service, der von der Stiftung Deutsche
                 Depressionshilfe angeboten wird. Du kannst das Info-Telefon
                 unter der Nummer{" "}
-                <Link href="tel:+498003344533">0800 / 33 44 533</Link>{" "}
+                <MoreInformationTextLink href="tel:+498003344533">
+                  0800 / 33 44 533
+                </MoreInformationTextLink>{" "}
                 erreichen. Die Sprechzeiten sind Mo, Di, Do – 13.00 bis 17.00
                 Uhr; Mi und Fr – 08.30 bis 12.30 Uhr.
               </li>
               <li>
                 <strong>Deutsche Depressionshilfe</strong>: Auf der Website der{" "}
-                <Link href="https://www.deutsche-depressionshilfe.de/depression-infos-und-hilfe/wo-finde-ich-hilfe">
+                <MoreInformationTextLink href="https://www.deutsche-depressionshilfe.de/depression-infos-und-hilfe/wo-finde-ich-hilfe">
                   Deutschen Depressionshilfe
-                </Link>{" "}
+                </MoreInformationTextLink>{" "}
                 findest du viele Informationen und Hilfsangebote bei Depression.
                 Dort gibt es auch eine Liste von Klinikadressen und
                 Krisendiensten in deiner Region.
@@ -190,20 +210,33 @@ export default function MoreInformationPage() {
               <li>
                 <strong>Telefonseelsorge</strong>: Die Telefonseelsorge ist rund
                 um die Uhr unter den Nummern{" "}
-                <Link href="tel:+498001110111">0800 / 11 10 111</Link> und{" "}
-                <Link href="tel:+498001110222">0800 / 11 10 222</Link>{" "}
+                <MoreInformationTextLink href="tel:+498001110111">
+                  0800 / 11 10 111
+                </MoreInformationTextLink>{" "}
+                und{" "}
+                <MoreInformationTextLink href="tel:+498001110222">
+                  0800 / 11 10 222
+                </MoreInformationTextLink>{" "}
                 erreichbar. Es gibt auch eine Mail- und Chatberatung über die{" "}
-                <Link href="https://www.telefonseelsorge.de/">Website</Link>.
+                <MoreInformationTextLink href="https://www.telefonseelsorge.de/">
+                  Website
+                </MoreInformationTextLink>
+                .
               </li>
               <li>
                 <strong>Kinder- und Jugendtelefon</strong>: Das Kinder- und
                 Jugendtelefon ist unter der Nummer{" "}
-                <Link href="tel:+49116111">11 61 11</Link> erreichbar. Die
-                Sprechzeiten sind Mo - Sa von 14:00 - 20:00 Uhr.
+                <MoreInformationTextLink href="tel:+49116111">
+                  11 61 11
+                </MoreInformationTextLink>{" "}
+                erreichbar. Die Sprechzeiten sind Mo - Sa von 14:00 - 20:00 Uhr.
               </li>
               <li>
                 <strong>Elterntelefon</strong>: Das Elterntelefon ist unter der
-                Nummer <Link href="tel:+498001110550">0800 11 10 55 0</Link>{" "}
+                Nummer{" "}
+                <MoreInformationTextLink href="tel:+498001110550">
+                  0800 11 10 55 0
+                </MoreInformationTextLink>{" "}
                 erreichbar. Die Sprechzeiten sind Mo - Fr von 9:00 - 17:00 Uhr,
                 Di+Do bis 19:00 Uhr.
               </li>
@@ -213,9 +246,9 @@ export default function MoreInformationPage() {
             <h2>Über diese App</h2>
             <p>
               Diese Webseite und App ist mein Abschlussprojekt für mein{" "}
-              <Link href="https://www.neuefische.de/bootcamp/web-development">
+              <MoreInformationTextLink href="https://www.neuefische.de/bootcamp/web-development">
                 Web-Development Bootcamp
-              </Link>{" "}
+              </MoreInformationTextLink>{" "}
               bei NeueFische. Ich entwickle die App{" "}
               <strong>CBASP Companion</strong>, in der man die
               Situationsanalysen der <strong>CBASP</strong>-Therapie durchführen
@@ -227,9 +260,9 @@ export default function MoreInformationPage() {
             </p>
             <p>
               Mehr Informationen zur App findest du auf meiner GitHub-Seite:{" "}
-              <Link href="https://github.com/vaupunkt/cbaspCompanion/">
+              <MoreInformationTextLink href="https://github.com/vaupunkt/cbaspCompanion/">
                 [cbaspCompanion]
-              </Link>
+              </MoreInformationTextLink>
               . Ich hoffe, dass meine App ein paar Menschen helfen kann, die an
               Depressionen leiden.
             </p>

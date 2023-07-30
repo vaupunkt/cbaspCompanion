@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import ScrollToTop from "@/components/ScrollToTop";
 import Head from "next/head";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
@@ -35,13 +36,11 @@ const SymptomBlock = styled(Link)`
     `}
 `;
 const SeeAllSymptomLink = styled.div`
-  border-color: var(--mainDarkColor);
   padding: 15px 40px 15px 15px;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-  color: var(--mainLightColor);
-  background-color: var(--mainDarkColor);
-  text-decoration: none;
+  color: var(--secondaryColor);
+  background-color: var(--primaryColor);
   position: fixed;
   left: 0px;
   font-weight: 500;
@@ -50,22 +49,21 @@ const SeeAllSymptomLink = styled.div`
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--mainDarkColor) 80%,
-      var(--mainLightColor)
+      var(--primaryColor) 80%,
+      var(--secondaryColor)
     );
   }
   &:active {
-    box-shadow: inset 0px 0px 5px var(--mainLightColor);
+    box-shadow: inset 0px 0px 5px var(--secondaryColor);
   }
 `;
 
 const AddNewSymptomLink = styled.div`
-  border-color: var(--mainDarkColor);
   padding: 15px 40px 15px 15px;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
-  color: var(--mainLightColor);
-  background-color: var(--mainDarkColor);
+  color: var(--secondaryColor);
+  background-color: var(--primaryColor);
   text-decoration: none;
   position: fixed;
   right: 0px;
@@ -75,39 +73,37 @@ const AddNewSymptomLink = styled.div`
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--mainDarkColor) 80%,
-      var(--mainLightColor)
+      var(--primaryColor) 80%,
+      var(--secondaryColor)
     );
   }
   &:active {
-    box-shadow: inset 0px 0px 5px var(--mainLightColor);
+    box-shadow: inset 0px 0px 5px var(--secondaryColor);
   }
 `;
 
 const SeeMoreInformationLink = styled.div`
-  border-color: var(--mainDarkColor);
   padding: 15px;
   border-radius: 25px;
-  color: var(--mainLightColor);
-  background-color: var(--mainDarkColor);
-  text-decoration: none;
-  position: sticky;
-  top: 70px;
-  font-weight: 500;
-  font-size: 1em;
-  width: 150px;
-  margin: 9em auto 9em auto;
+  color: var(--secondaryColor);
+  background-color: var(--primaryColor);
   text-align: center;
+  position: sticky;
+  top: 80px;
+  width: 150px;
+  font-weight: 700;
+  font-size: 1em;
+  margin: 150px auto 100px auto;
 
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--mainDarkColor) 80%,
-      var(--mainLightColor)
+      var(--primaryColor) 80%,
+      var(--secondaryColor)
     );
   }
   &:active {
-    box-shadow: inset 0px 0px 5px var(--mainLightColor);
+    box-shadow: inset 0px 0px 5px var(--secondaryColor);
   }
 `;
 
@@ -126,6 +122,7 @@ export default function MySymptomsPage() {
         <title>Meine Symptome</title>
         <meta charSet="UTF-8"></meta>
       </Head>
+      <ScrollToTop />
       <Header link="../mydata" title="Meine Symptome" />
       <Fade cascading damping={0.5}>
         <SymptomGrid lang="de">

@@ -69,6 +69,7 @@ export default function AddNewSymptom({ handleSymptomChange }) {
       options: {
         submitCallback: submitCallback,
         flowStepCallback: flowCallback,
+        theme: "dark",
       },
       tags: formFields,
     });

@@ -18,8 +18,8 @@ const AddEntryLink = styled(Link)`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color: var(--mainLightColor);
-  background-color: var(--mainDarkColor);
+  color: var(--secondaryColor);
+  background-color: var(--primaryColor);
   border: solid;
   font-weight: 900;
   border-radius: 50%;
@@ -29,12 +29,12 @@ const AddEntryLink = styled(Link)`
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--mainDarkColor) 80%,
-      var(--mainLightColor)
+      var(--primaryColor) 80%,
+      var(--secondaryColor)
     );
   }
   &:active {
-    box-shadow: inset 0px 0px 5px var(--mainDarkColor);
+    box-shadow: inset 0px 0px 5px var(--primaryColor);
   }
 `;
 const SymptomEntry = styled.li`
@@ -55,7 +55,7 @@ const SymptomEntry = styled.li`
         background-color: color-mix(
           in srgb,
           var(--${props.category}) 50%,
-          var(--mainLightColor)
+          var(--secondaryColor)
         );
       }
     `}

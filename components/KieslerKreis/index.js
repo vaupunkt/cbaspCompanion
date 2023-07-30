@@ -122,34 +122,34 @@ export default function KieslerKreis({
     chartData.datasets[0].borderColor = "rgba(50, 168, 82, 1)";
   }
   const options = {
-    legend: { labels: { color: "#f7f7f7" } },
     scale: { min: 0, max: 3, stepSize: 1 },
     scales: {
       r: {
         max: 3,
         min: 0,
         stepSize: 1,
+        angleLines: { color: "#8e8e8e" },
         grid: {
           circular: true,
-          color: ["#f7f7f7", "#f7f7f7", "#f7f7f7"],
+          color: "#8e8e8e",
           lineWidth: 1.5,
-          drawOnChartArea: true,
+          display: true,
         },
-        gridLines: { color: "#262829" },
-        title: { FontColor: "#f7f7f7" },
+        pointLabels: { color: "#f7f7f7" },
       },
     },
     plugins: {
       legend: {
         display: false,
-        labels: { color: "#f7f7f7" },
       },
+      colors: { enabled: false },
     },
   };
   if (overviewDataset) {
     options.plugins = {
       legend: {
         display: true,
+        labels: { color: "#f7f7f7" },
       },
       tooltip: {
         enabled: false,
