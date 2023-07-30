@@ -20,6 +20,7 @@ export default createGlobalStyle`
   body {
     margin: 0;
     color: var(--mainDarkColor);
+    background-color: var(--mainLightColor);
     font-family: system-ui;
   }
 

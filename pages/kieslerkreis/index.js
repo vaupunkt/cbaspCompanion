@@ -46,6 +46,10 @@ export default function KieslerkreisPage({ allEntries }) {
   };
   return (
     <>
+      <Head>
+        <title>Kieslerkreis</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Header backButton title="Kieslerkreis"></Header>
       <Fade>
         <KieslerKreis overviewDataset={overviewDataset} />

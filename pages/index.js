@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import { styled } from "styled-components";
 import Link from "next/link";
 import { Fade, Slide, Zoom } from "react-awesome-reveal";
+import Head from "next/head";
 
 const NavigationContainer = styled.div`
   position: fixed;
@@ -62,6 +63,10 @@ const Subtitle = styled.h2`
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>CBASP Companion</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Zoom duration={300}>
         <TitleBox>
           <Fade>

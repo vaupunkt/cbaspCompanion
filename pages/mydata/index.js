@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Head from "next/head";
 import Link from "next/link";
 import { Slide } from "react-awesome-reveal";
 import { styled } from "styled-components";
@@ -34,6 +35,10 @@ const NavigationLink = styled(Link)`
 export default function mydata() {
   return (
     <>
+      <Head>
+        <title>Meine Daten</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Header link="./" title="Meine Daten" />
       <NavigationContainer>
         <Slide duration={300} cascade>

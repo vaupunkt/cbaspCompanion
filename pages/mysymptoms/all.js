@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import Header from "@/components/Header";
+import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
@@ -27,7 +28,6 @@ const AddEntryLink = styled(Link)`
   align-items: center;
   color: var(--mainLightColor);
   background-color: var(--mainDarkColor);
-  border: solid;
   font-weight: 900;
   border-radius: 50%;
   height: 40px;
@@ -85,6 +85,10 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
   ) {
     return (
       <>
+        <Head>
+          <title>Alle Symptome</title>
+          <meta charSet="UTF-8"></meta>
+        </Head>
         <Header link="../mysymptoms" title="Alle Symptome" />
         {editMode ? (
           <Button

@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Head from "next/head";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
 import { styled, css } from "styled-components";
@@ -65,6 +66,10 @@ const InformationList = styled.ul`
 export default function MoreInformationPage() {
   return (
     <>
+      <Head>
+        <title>Mehr Informationen</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Header link="./" title="mehr Informationen" />
       <InformationList>
         <Fade cascade damping={0.2}>
@@ -133,9 +138,8 @@ export default function MoreInformationPage() {
               wird in der Regel über einen Zeitraum von mehreren Wochen oder
               Monaten durchgeführt und kann einzeln oder in Gruppen durchgeführt
               werden. Wenn du an chronischer <strong>Depression</strong> leidest
-              und an
-              <strong>CBASP</strong> interessiert bist, sprich mit deinem Arzt
-              oder Therapeuten über diese Behandlungsmöglichkeit.
+              und an <strong>CBASP</strong> interessiert bist, sprich mit deinem
+              Arzt oder Therapeuten über diese Behandlungsmöglichkeit.
             </p>
           </MoreInformationSection>
           <MoreInformationSection id="getHelp">

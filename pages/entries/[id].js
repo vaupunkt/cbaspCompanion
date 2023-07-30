@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import { useState } from "react";
+import Head from "next/head";
 
 export default function EntryPage({
   onDelete,
@@ -22,6 +23,10 @@ export default function EntryPage({
 
   return (
     <>
+      <Head>
+        <title>{entry && entry.title}</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Header
         backButton
         title={entry && entry.title}

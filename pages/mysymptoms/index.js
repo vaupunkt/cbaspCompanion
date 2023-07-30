@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Head from "next/head";
 import Link from "next/link";
 import { Fade } from "react-awesome-reveal";
 import { styled, css } from "styled-components";
@@ -121,6 +122,10 @@ const MoreInformationArticle = styled.article`
 export default function MySymptomsPage() {
   return (
     <>
+      <Head>
+        <title>Meine Symptome</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Header link="../mydata" title="Meine Symptome" />
       <Fade cascading damping={0.5}>
         <SymptomGrid lang="de">

@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import { styled } from "styled-components";
 import Link from "next/link";
 import { Slide } from "react-awesome-reveal";
+import Head from "next/head";
 
 const NavigationContainer = styled.div`
   position: fixed;
@@ -37,6 +38,10 @@ const NavigationLink = styled(Link)`
 export default function MyAnalysesPage() {
   return (
     <>
+      <Head>
+        <title>Meine Situationsanalysen</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Header backButton title="Meine Situationsanalysen" />
       <NavigationContainer>
         <Slide duration={300} cascade>

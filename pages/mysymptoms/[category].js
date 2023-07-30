@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import Header from "@/components/Header";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -83,6 +84,18 @@ export default function CategoryPage({ mySymptoms, handleSymptomDelete }) {
   ).symptoms;
   return (
     <>
+      <Head>
+        <title>
+          {router.query.category === "behavioralLevel"
+            ? "Verhaltensebene"
+            : router.query.category === "mentalLevel"
+            ? "gedankliche Ebene"
+            : router.query.category === "emotionalLevel"
+            ? "Gefühlsebene"
+            : "Körperliche Ebene"}
+        </title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Header
         link="../mysymptoms"
         title={

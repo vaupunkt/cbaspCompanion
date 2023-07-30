@@ -8,6 +8,10 @@ export default function InnerSituationAnalysisPage({
 }) {
   return (
     <>
+      <Head>
+        <title>Innere Situationsanalysen</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Header backButton title="Innere Situationsanalysen" />
       <Fade>
         <EntryList entries={allInnerAnalysisEntries} onDelete={onDelete} />
