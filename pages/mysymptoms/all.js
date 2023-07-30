@@ -68,17 +68,9 @@ export default function AllSymptoms({ mySymptoms }) {
     mySymptoms[0].symptoms.length +
       mySymptoms[1].symptoms.length +
       mySymptoms[2].symptoms.length +
-      mySymptoms[3].symptoms.length <
-    1
+      mySymptoms[3].symptoms.length >
+    0
   ) {
-    return (
-      <EmptyMessage>
-        <h2>Noch keine Einträge</h2>
-        <p>Füge neue Einträge hinzu:</p>
-        <AddEntryLink href="/addsymptom"> + </AddEntryLink>
-      </EmptyMessage>
-    );
-  } else {
     return (
       <>
         <Header backButton title="Alle Symptome" />
@@ -93,6 +85,17 @@ export default function AllSymptoms({ mySymptoms }) {
               : null
           )}
         </SymptomList>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Header backButton title="Alle Symptome" />
+        <EmptyMessage>
+          <h2>Noch keine Einträge</h2>
+          <p>Füge neue Einträge hinzu:</p>
+          <AddEntryLink href="/addsymptom"> + </AddEntryLink>
+        </EmptyMessage>
       </>
     );
   }
