@@ -27,7 +27,6 @@
     "react-hook-theme": "^1.2.6",
     "styled-components": "^6.0.2",
     "uid": "^2.0.2",
-    "use-dark-mode": "^2.3.1",
     "use-local-storage": "^3.0.0",
     "use-local-storage-state": "^18.3.3",
     "uuid": "^9.0.0",
