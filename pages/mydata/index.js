@@ -1,14 +1,13 @@
 import Header from "@/components/Header";
-import { styled } from "styled-components";
 import Link from "next/link";
 import { Slide } from "react-awesome-reveal";
-
+import { styled } from "styled-components";
 const NavigationContainer = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
   gap: 50px;
-  top: 100px;
+  bottom: 150px;
 `;
 
 const NavigationLink = styled(Link)`
@@ -21,7 +20,6 @@ const NavigationLink = styled(Link)`
   text-decoration: none;
   font-size: 1.3em;
   align-self: flex-start;
-
   &:hover {
     background-color: color-mix(
       in srgb,
@@ -33,23 +31,15 @@ const NavigationLink = styled(Link)`
     box-shadow: inset 0px 0px 5px var(--mainLightColor);
   }
 `;
-
-export default function MyAnalysesPage() {
+export default function mydata() {
   return (
     <>
-      <Header backButton title="Meine Situationsanalysen" />
+      <Header link="./" title="Meine Daten" />
       <NavigationContainer>
         <Slide duration={300} cascade>
-          <NavigationLink href="./pastanalyses">
-            Vergangenheitsanalysen
-          </NavigationLink>
-          <NavigationLink href="./innersituationanalyses">
-            Innere Situationsanalysen
-          </NavigationLink>
-          <NavigationLink href="./futureanalyses">
-            Zukunftsanalysen
-          </NavigationLink>
-          <NavigationLink href="./allentries">Alle Analysen</NavigationLink>
+          <NavigationLink href="./mysymptoms">Meine Symptome</NavigationLink>
+          <NavigationLink href="./myanalyses">Meine Analysen</NavigationLink>
+          <NavigationLink href="./kieslerkreis">Kieslerkreis</NavigationLink>
         </Slide>
       </NavigationContainer>
     </>

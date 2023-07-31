@@ -7,6 +7,7 @@ import { uid } from "uid";
 import { confirmAlert } from "react-confirm-alert";
 import KieslerKreis from "../KieslerKreis";
 import { allAnalysisFormHeadlines } from "@/lib/allAnalysisFormHeadlines";
+import { Fade } from "react-awesome-reveal";
 
 const InterpretationListItem = styled.li`
   position: relative;
@@ -106,6 +107,7 @@ export default function EntryContentBlock({
           <AnalysisDescription>
             {analysisHeadlines[analysisKey].description}
           </AnalysisDescription>
+
           <StyledList>
             {updatedData[analysisKey].map(
               ({ id, actionInterpretation }, index) => (
