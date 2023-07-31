@@ -27,7 +27,7 @@ export default function NewAnalysis({
   }
   return (
     <>
-      <Header backButton title="Neue Situationsanalyse" />
+      <Header link="./" title="Neue Situationsanalyse" />
       <ChatBotComponent
         handleAllEntriesChange={handleAllEntriesChange}
         allEntries={allEntries}

@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Link from "next/link";
+import { Fade } from "react-awesome-reveal";
 import { styled, css } from "styled-components";
 
 const SymptomGrid = styled.section`
@@ -120,34 +121,36 @@ const MoreInformationArticle = styled.article`
 export default function MySymptomsPage() {
   return (
     <>
-      <Header backButton title="Meine Symptome" />
-      <SymptomGrid lang="de">
-        <SymptomBlock
-          href={`/mysymptoms/physicalLevel`}
-          color="var(--physicalLevel)"
-        >
-          <h3>Körperliche Ebene</h3>
-        </SymptomBlock>
+      <Header link="../mydata" title="Meine Symptome" />
+      <Fade cascading damping={0.5}>
+        <SymptomGrid lang="de">
+          <SymptomBlock
+            href={`/mysymptoms/physicalLevel`}
+            color="var(--physicalLevel)"
+          >
+            <h3>Körperliche Ebene</h3>
+          </SymptomBlock>
 
-        <SymptomBlock
-          href={`/mysymptoms/emotionalLevel`}
-          color="var(--emotionalLevel)"
-        >
-          <h3>Gefühlsebene</h3>
-        </SymptomBlock>
-        <SymptomBlock
-          href={`/mysymptoms/mentalLevel`}
-          color="var(--mentalLevel)"
-        >
-          <h3>gedankliche Ebene</h3>
-        </SymptomBlock>
-        <SymptomBlock
-          href={`/mysymptoms/behavioralLevel`}
-          color="var(--behavioralLevel)"
-        >
-          <h3>Verhaltensebene</h3>
-        </SymptomBlock>
-      </SymptomGrid>
+          <SymptomBlock
+            href={`/mysymptoms/emotionalLevel`}
+            color="var(--emotionalLevel)"
+          >
+            <h3>Gefühlsebene</h3>
+          </SymptomBlock>
+          <SymptomBlock
+            href={`/mysymptoms/mentalLevel`}
+            color="var(--mentalLevel)"
+          >
+            <h3>gedankliche Ebene</h3>
+          </SymptomBlock>
+          <SymptomBlock
+            href={`/mysymptoms/behavioralLevel`}
+            color="var(--behavioralLevel)"
+          >
+            <h3>Verhaltensebene</h3>
+          </SymptomBlock>
+        </SymptomGrid>
+      </Fade>
       <Link href="./addsymptom">
         <AddNewSymptomLink>+</AddNewSymptomLink>
       </Link>

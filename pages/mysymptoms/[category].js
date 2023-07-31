@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { Fade } from "react-awesome-reveal";
 import { styled, css } from "styled-components";
 
 const EmptyMessage = styled.section`
@@ -83,7 +84,7 @@ export default function CategoryPage({ mySymptoms, handleSymptomDelete }) {
   return (
     <>
       <Header
-        backButton
+        link="../mysymptoms"
         title={
           router.query.category === "behavioralLevel"
             ? "Verhaltensebene"
@@ -116,23 +117,25 @@ export default function CategoryPage({ mySymptoms, handleSymptomDelete }) {
             </Button>
           )}
           <SymptomList>
-            {allSymptoms.map(({ symptom, id }) => {
-              return (
-                <SymptomEntry key={id} category={category}>
-                  {editMode ? (
-                    <Button
-                      type="button"
-                      name="deleteSymptom"
-                      variant="small"
-                      onClick={() => handleSymptomDelete(id)}
-                    >
-                      🗑️
-                    </Button>
-                  ) : null}
-                  {symptom}
-                </SymptomEntry>
-              );
-            })}
+            <Fade cascade damping={0.2}>
+              {allSymptoms.map(({ symptom, id }) => {
+                return (
+                  <SymptomEntry key={id} category={category}>
+                    {editMode ? (
+                      <Button
+                        type="button"
+                        name="deleteSymptom"
+                        variant="small"
+                        onClick={() => handleSymptomDelete(id)}
+                      >
+                        🗑️
+                      </Button>
+                    ) : null}
+                    {symptom}
+                  </SymptomEntry>
+                );
+              })}
+            </Fade>
           </SymptomList>
         </>
       ) : (

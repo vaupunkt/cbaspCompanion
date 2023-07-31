@@ -73,8 +73,7 @@ export default function Home() {
       <NavigationContainer>
         <Slide duration={300} cascade>
           <NavigationLink href="./newanalysis">Neue Analyse ➕ </NavigationLink>
-          <NavigationLink href="./myanalyses">Meine Analysen</NavigationLink>
-          <NavigationLink href="./kieslerkreis">Kieslerkreis</NavigationLink>
+          <NavigationLink href="./mydata">Meine Daten</NavigationLink>
           <NavigationLink href="./moreinformation">Mehr Infos</NavigationLink>
         </Slide>
       </NavigationContainer>
