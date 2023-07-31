@@ -3,9 +3,11 @@ import { styled } from "styled-components";
 
 const ScrollToTopElement = styled.div`
   position: fixed;
-  bottom: 40px;
-  left: 85vw;
-  font-size: 2.5em;
+  bottom: 10px;
+  left: calc(50% - 25px);
+  font-size: 1.5em;
+  width: 50px;
+  text-align: center;
   z-index: 999;
   cursor: pointer;
   color: var(--primaryColor);
@@ -13,25 +15,26 @@ const ScrollToTopElement = styled.div`
 
 export default function ScrollToTop() {
   const [visible, setVisible] = useState(false);
-
-  const toggleVisible = () => {
+  function toggleVisible() {
     const scrolled = document.documentElement.scrollTop;
     if (scrolled > 300) {
       setVisible(true);
     } else if (scrolled <= 300) {
       setVisible(false);
     }
-  };
+  }
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  window.addEventListener("scroll", toggleVisible);
-
+  function scrollToTop() {
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }
+  if (typeof window !== "undefined") {
+    window.addEventListener("scroll", toggleVisible);
+  }
   return (
     <ScrollToTopElement
       onClick={scrollToTop}
