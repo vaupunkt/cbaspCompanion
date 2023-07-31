@@ -4,6 +4,8 @@
 
 CBASP Companion is an app designed to support people with chronic depression undergoing Cognitive Behavioral Analysis System of Psychotherapy (CBASP) therapy.
 
+![CBASPCompanionAnimation](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/a53da82a-602b-486b-bf46-c015d1d6e093)
+
 ## About CBASP Therapy
 
 CBASP is a therapeutic approach specifically developed for the treatment of patients with chronic depression. It is a highly structured and directive approach that integrates behavioral, cognitive, psychodynamic, and interpersonal approaches. CBASP was developed by James P. McCullough and has been empirically tested in scientific studies since 1980. It is the only psychotherapeutic approach for the treatment of long-lasting depressive disorders.
@@ -18,7 +20,6 @@ The Kiesler Circle is a communication model developed by the American psychologi
 In the app, users can fill out and view various situation analyses, including future analysis, past analysis, and inner situation analysis. The app uses a chatbot from ConversationalForms and also has the Kiesler Circle implemented.
 
 ![image](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/92e0e6db-f650-447e-8998-724fb92a611c)
-
 
 ## Repository
 
