@@ -77,13 +77,17 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
   function toggleEditMode() {
     setEditMode(!editMode);
   }
-  if (
-    mySymptoms[0].symptoms.length +
-      mySymptoms[1].symptoms.length +
-      mySymptoms[2].symptoms.length +
-      mySymptoms[3].symptoms.length >
-    0
-  ) {
+  const sumSymptoms = mySymptoms[0].symptoms.length
+    ? mySymptoms[0].symptoms.length
+    : 0 + mySymptoms[1].symptoms.length
+    ? mySymptoms[1].symptoms.length
+    : 0 + mySymptoms[2].symptoms.length
+    ? mySymptoms[2].symptoms.length
+    : 0 + mySymptoms[3].symptoms.length
+    ? mySymptoms[3].symptoms.length
+    : 0;
+
+  if (sumSymptoms > 0) {
     return (
       <>
         <Head>
@@ -91,7 +95,6 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
           <meta charSet="UTF-8"></meta>
         </Head>
         <Header link="../mysymptoms" title="Alle Symptome" />
-
         {editMode ? (
           <Button
             type="button"
@@ -139,9 +142,7 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
   } else {
     return (
       <>
-
         <Header link="../mysymptoms" title="Alle Symptome" />
-
         <EmptyMessage>
           <h2>Noch keine Einträge</h2>
           <p>Füge neue Einträge hinzu:</p>

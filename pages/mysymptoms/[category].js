@@ -42,6 +42,7 @@ const SymptomEntry = styled.li`
     props.category &&
     css`
       background-color: var(--${props.category});
+      color: var(--secondaryColor);
       padding: 0px 20px;
       margin: 0;
       height: 3em;
