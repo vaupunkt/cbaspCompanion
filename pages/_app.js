@@ -6,8 +6,10 @@ import useLocalStorageState from "use-local-storage-state";
 import isPropValid from "@emotion/is-prop-valid";
 import { useState } from "react";
 import { StyleSheetManager } from "styled-components";
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
   const [allEntries, setAllEntries] = useLocalStorageState("Entries", {
     defaultValue: initialEntries,
   });
@@ -82,7 +84,7 @@ export default function App({ Component, pageProps }) {
           onClick: () => {
             setAllEntries(allEntries.filter((entry) => entry.id !== id));
             if (currentPage === "entry") {
-              history.back();
+              router.back();
             }
           },
         },

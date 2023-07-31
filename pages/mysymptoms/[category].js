@@ -98,7 +98,7 @@ export default function CategoryPage({ mySymptoms, handleSymptomDelete }) {
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header
-        link="../mysymptoms"
+        link="/mysymptoms"
         title={
           router.query.category === "behavioralLevel"
             ? "Verhaltensebene"

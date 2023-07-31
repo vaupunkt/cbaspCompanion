@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { styled } from "styled-components";
 
 const ScrollToTopElement = styled.div`
@@ -32,9 +32,14 @@ export default function ScrollToTop() {
       });
     }
   }
-  if (typeof window !== "undefined") {
+
+  useEffect(() => {
     window.addEventListener("scroll", toggleVisible);
-  }
+    return () => {
+      window.removeEventListener("scroll", toggleVisible);
+    };
+  }, []);
+
   return (
     <ScrollToTopElement
       onClick={scrollToTop}

@@ -21,6 +21,7 @@ const NavigationLink = styled(Link)`
   text-decoration: none;
   font-size: 1.3em;
   align-self: flex-start;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--secondaryColor) 20%, black);
   &:hover {
     background-color: color-mix(
       in srgb,
@@ -40,7 +41,7 @@ const TitleBox = styled.div`
   text-align: center;
   background-color: var(--primaryColor);
   color: var(--secondaryColor);
-  box-shadow: 0 0 5px var(--primaryColor);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--secondaryColor) 20%, black);
 `;
 
 const Title = styled.h1`
@@ -67,7 +68,7 @@ export default function Home() {
         <meta charSet="UTF-8"></meta>
       </Head>
       <Zoom duration={300}>
-        <TitleBox onClick>
+        <TitleBox>
           <Fade>
             <Title>CBASP</Title>
             <Subtitle>Companion</Subtitle>

@@ -22,6 +22,7 @@ const NavigationLink = styled(Link)`
   text-decoration: none;
   font-size: 1.3em;
   align-self: flex-start;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--secondaryColor) 20%, black);
 
   &:hover {
     background-color: color-mix(

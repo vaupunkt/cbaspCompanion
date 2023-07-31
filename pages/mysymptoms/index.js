@@ -29,6 +29,7 @@ const SymptomBlock = styled(Link)`
   word-wrap: break-word;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--secondaryColor) 20%, black);
   ${(props) =>
     props.color &&
     css`
@@ -123,7 +124,7 @@ export default function MySymptomsPage() {
         <meta charSet="UTF-8"></meta>
       </Head>
       <ScrollToTop />
-      <Header link="../mydata" title="Meine Symptome" />
+      <Header link="/mydata" title="Meine Symptome" />
       <Fade cascading damping={0.5}>
         <SymptomGrid lang="de">
           <SymptomBlock
@@ -153,10 +154,10 @@ export default function MySymptomsPage() {
           </SymptomBlock>
         </SymptomGrid>
       </Fade>
-      <Link href="./addsymptom">
+      <Link href="/addsymptom">
         <AddNewSymptomLink>+</AddNewSymptomLink>
       </Link>
-      <Link href="./mysymptoms/all">
+      <Link href="/mysymptoms/all">
         <SeeAllSymptomLink>Alle</SeeAllSymptomLink>
       </Link>
       <Link href="#moreInformation">

@@ -114,7 +114,7 @@ export default function NewAnalysisForm({
             type="button"
             variant="small"
             name="back"
-            onClick={() => history.back()}
+            onClick={() => router.back()}
           >
             ❮
           </Button>

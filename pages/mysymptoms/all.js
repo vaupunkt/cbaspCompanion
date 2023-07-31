@@ -142,7 +142,7 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
   } else {
     return (
       <>
-        <Header link="../mysymptoms" title="Alle Symptome" />
+        <Header link="/mysymptoms" title="Alle Symptome" />
         <EmptyMessage>
           <h2>Noch keine Einträge</h2>
           <p>Füge neue Einträge hinzu:</p>
