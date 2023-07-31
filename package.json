@@ -24,6 +24,7 @@
     "react-confirm-alert": "^3.0.6",
     "react-conversation-form": "^2.0.2",
     "react-dom": "18.2.0",
+    "react-hook-theme": "^1.2.6",
     "styled-components": "^6.0.2",
     "uid": "^2.0.2",
     "use-local-storage": "^3.0.0",

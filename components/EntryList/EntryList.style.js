@@ -17,18 +17,18 @@ export const EntryListItem = styled.li`
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--mainLightColor) 95%,
-      var(--mainDarkColor)
+      var(--secondaryColor) 95%,
+      var(--primaryColor)
     );
   }
   &:active {
-    background-color: var(--mainLightColor);
-    box-shadow: inset 0px 0px 5px var(--mainDarkColor);
+    background-color: var(--secondaryColor);
+    box-shadow: inset 0px 0px 5px var(--primaryColor);
   }
 `;
 
 export const EntryListItemLink = styled(Link)`
-  color: var(--mainDarkColor);
+  color: var(--primaryColor);
   text-decoration: none;
 `;
 

@@ -4,10 +4,12 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import useLocalStorageState from "use-local-storage-state";
 import isPropValid from "@emotion/is-prop-valid";
-import { StyleSheetManager } from "styled-components";
 import { useState } from "react";
+import { StyleSheetManager } from "styled-components";
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
   const [allEntries, setAllEntries] = useLocalStorageState("Entries", {
     defaultValue: initialEntries,
   });
@@ -82,14 +84,13 @@ export default function App({ Component, pageProps }) {
           onClick: () => {
             setAllEntries(allEntries.filter((entry) => entry.id !== id));
             if (currentPage === "entry") {
-              history.back();
+              router.back();
             }
           },
         },
       ],
     });
   }
-
   return (
     <>
       <GlobalStyle />

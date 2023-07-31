@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import Header from "@/components/Header";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -17,8 +18,8 @@ const AddEntryLink = styled(Link)`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color: var(--mainLightColor);
-  background-color: var(--mainDarkColor);
+  color: var(--secondaryColor);
+  background-color: var(--primaryColor);
   border: solid;
   font-weight: 900;
   border-radius: 50%;
@@ -28,12 +29,12 @@ const AddEntryLink = styled(Link)`
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--mainDarkColor) 80%,
-      var(--mainLightColor)
+      var(--primaryColor) 80%,
+      var(--secondaryColor)
     );
   }
   &:active {
-    box-shadow: inset 0px 0px 5px var(--mainDarkColor);
+    box-shadow: inset 0px 0px 5px var(--primaryColor);
   }
 `;
 const SymptomEntry = styled.li`
@@ -41,6 +42,7 @@ const SymptomEntry = styled.li`
     props.category &&
     css`
       background-color: var(--${props.category});
+      color: var(--secondaryColor);
       padding: 0px 20px;
       margin: 0;
       height: 3em;
@@ -54,7 +56,7 @@ const SymptomEntry = styled.li`
         background-color: color-mix(
           in srgb,
           var(--${props.category}) 50%,
-          var(--mainLightColor)
+          var(--secondaryColor)
         );
       }
     `}
@@ -83,8 +85,20 @@ export default function CategoryPage({ mySymptoms, handleSymptomDelete }) {
   ).symptoms;
   return (
     <>
+      <Head>
+        <title>
+          {router.query.category === "behavioralLevel"
+            ? "Verhaltensebene"
+            : router.query.category === "mentalLevel"
+            ? "gedankliche Ebene"
+            : router.query.category === "emotionalLevel"
+            ? "Gefühlsebene"
+            : "Körperliche Ebene"}
+        </title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Header
-        link="../mysymptoms"
+        link="/mysymptoms"
         title={
           router.query.category === "behavioralLevel"
             ? "Verhaltensebene"

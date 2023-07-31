@@ -186,6 +186,7 @@ export default function ChatBotComponent({
         submitCallback: submitCallback,
         flowStepCallback: flowCallback,
         showProgressBar: true,
+        theme: "dark",
       },
       tags: formFields,
     });

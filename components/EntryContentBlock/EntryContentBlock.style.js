@@ -8,7 +8,7 @@ export const EntryContent = styled.div`
 `;
 
 export const ContentHeadline = styled.label`
-  background-color: var(--mainLightColor);
+  background-color: var(--secondaryColor);
   text-align: center;
   font-size: 0.8em;
   margin: 0;

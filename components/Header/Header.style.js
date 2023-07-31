@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 
 export const HeaderContainer = styled.div`
-  background-color: var(--mainDarkColor);
-  color: var(--mainLightColor);
+  background-color: var(--primaryColor);
+  color: var(--secondaryColor);
   position: sticky;
   top: 0;
   padding: 10px;

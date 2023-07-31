@@ -1,5 +1,7 @@
 import Header from "@/components/Header";
 import KieslerKreis from "@/components/KieslerKreis";
+import ScrollToTop from "@/components/ScrollToTop";
+import Head from "next/head";
 import { Fade } from "react-awesome-reveal";
 import { styled } from "styled-components";
 
@@ -46,7 +48,12 @@ export default function KieslerkreisPage({ allEntries }) {
   };
   return (
     <>
+      <Head>
+        <title>Kieslerkreis</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Header backButton title="Kieslerkreis"></Header>
+      <ScrollToTop />
       <Fade>
         <KieslerKreis overviewDataset={overviewDataset} />
         <KieslerkreisTextArticle>

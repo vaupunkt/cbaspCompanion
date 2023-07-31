@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import Header from "@/components/Header";
+import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
@@ -25,9 +26,8 @@ const AddEntryLink = styled(Link)`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color: var(--mainLightColor);
-  background-color: var(--mainDarkColor);
-  border: solid;
+  color: var(--secondaryColor);
+  background-color: var(--primaryColor);
   font-weight: 900;
   border-radius: 50%;
   height: 40px;
@@ -36,12 +36,12 @@ const AddEntryLink = styled(Link)`
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--mainDarkColor) 80%,
-      var(--mainLightColor)
+      var(--primaryColor) 80%,
+      var(--secondaryColor)
     );
   }
   &:active {
-    box-shadow: inset 0px 0px 5px var(--mainDarkColor);
+    box-shadow: inset 0px 0px 5px var(--primaryColor);
   }
 `;
 const SymptomDeleteButton = styled(Button)`
@@ -53,6 +53,7 @@ const SymptomEntry = styled.li`
     props.category &&
     css`
       background-color: var(--${props.category});
+      color: var(--secondaryColor);
       padding: 0px 20px;
       margin: 0;
       height: 3em;
@@ -66,7 +67,7 @@ const SymptomEntry = styled.li`
         background-color: color-mix(
           in srgb,
           var(--${props.category}) 50%,
-          var(--mainLightColor)
+          var(--secondaryColor)
         );
       }
     `}
@@ -76,17 +77,24 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
   function toggleEditMode() {
     setEditMode(!editMode);
   }
-  if (
-    mySymptoms[0].symptoms.length +
-      mySymptoms[1].symptoms.length +
-      mySymptoms[2].symptoms.length +
-      mySymptoms[3].symptoms.length >
-    0
-  ) {
+  const sumSymptoms = mySymptoms[0].symptoms.length
+    ? mySymptoms[0].symptoms.length
+    : 0 + mySymptoms[1].symptoms.length
+    ? mySymptoms[1].symptoms.length
+    : 0 + mySymptoms[2].symptoms.length
+    ? mySymptoms[2].symptoms.length
+    : 0 + mySymptoms[3].symptoms.length
+    ? mySymptoms[3].symptoms.length
+    : 0;
+
+  if (sumSymptoms > 0) {
     return (
       <>
+        <Head>
+          <title>Alle Symptome</title>
+          <meta charSet="UTF-8"></meta>
+        </Head>
         <Header link="../mysymptoms" title="Alle Symptome" />
-
         {editMode ? (
           <Button
             type="button"
@@ -134,7 +142,7 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
   } else {
     return (
       <>
-        <Header backButton title="Alle Symptome" />
+        <Header link="/mysymptoms" title="Alle Symptome" />
         <EmptyMessage>
           <h2>Noch keine Einträge</h2>
           <p>Füge neue Einträge hinzu:</p>

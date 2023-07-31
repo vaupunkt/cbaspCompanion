@@ -1,35 +1,36 @@
-import Header from "@/components/Header";
 import { styled } from "styled-components";
 import Link from "next/link";
 import { Fade, Slide, Zoom } from "react-awesome-reveal";
+import Head from "next/head";
 
 const NavigationContainer = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
   gap: 50px;
-  bottom: 80px;
+  bottom: 15vh;
 `;
 
 const NavigationLink = styled(Link)`
-  border-color: var(--mainDarkColor);
+  border-color: var(--primaryColor);
   padding: 15px 15px 15px 15px;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-  color: var(--mainLightColor);
-  background-color: var(--mainDarkColor);
+  color: var(--secondaryColor);
+  background-color: var(--primaryColor);
   text-decoration: none;
   font-size: 1.3em;
   align-self: flex-start;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--secondaryColor) 20%, black);
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--mainDarkColor) 80%,
-      var(--mainLightColor)
+      var(--primaryColor) 80%,
+      var(--secondaryColor)
     );
   }
   &:active {
-    box-shadow: inset 0px 0px 5px var(--mainLightColor);
+    box-shadow: inset 0px 0px 5px var(--secondaryColor);
   }
 `;
 const TitleBox = styled.div`
@@ -38,9 +39,9 @@ const TitleBox = styled.div`
   padding: 40px;
   border-radius: 25px;
   text-align: center;
-  background-color: var(--mainDarkColor);
-  color: var(--mainLightColor);
-  box-shadow: 0 0 5px var(--mainDarkColor);
+  background-color: var(--primaryColor);
+  color: var(--secondaryColor);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--secondaryColor) 20%, black);
 `;
 
 const Title = styled.h1`
@@ -62,6 +63,10 @@ const Subtitle = styled.h2`
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>CBASP Companion</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
       <Zoom duration={300}>
         <TitleBox>
           <Fade>
