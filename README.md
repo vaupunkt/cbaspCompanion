@@ -26,7 +26,7 @@ The repository for the app can be found here: https://github.com/vaupunkt/cbaspC
 This project was created from the neue fische `next` template.
 
 ### Project Setup
-![CBASP Companion ReadmeTitle](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/a437f48a-35c2-49df-bec0-869739b42e99)
+![image](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/024e34ce-37a2-4e28-98a7-168bf7e3ff23)
 
 1. Clone this repository
 2. `$ npm install` installs all the files and dependencies the app needs to run
