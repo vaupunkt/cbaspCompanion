@@ -6,6 +6,7 @@ import Head from "next/head";
 export default function InnerSituationAnalysisPage({
   allInnerAnalysisEntries,
   onDelete,
+  isIOS,
 }) {
   return (
     <>
@@ -14,9 +15,13 @@ export default function InnerSituationAnalysisPage({
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header backButton title="Innere Situationsanalysen" />
-      <Fade>
+      {isIOS ? (
         <EntryList entries={allInnerAnalysisEntries} onDelete={onDelete} />
-      </Fade>
+      ) : (
+        <Fade>
+          <EntryList entries={allInnerAnalysisEntries} onDelete={onDelete} />
+        </Fade>
+      )}
     </>
   );
 }

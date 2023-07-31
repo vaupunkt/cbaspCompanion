@@ -7,6 +7,7 @@ import isPropValid from "@emotion/is-prop-valid";
 import { useState } from "react";
 import { StyleSheetManager } from "styled-components";
 import { useRouter } from "next/router";
+import { isIOS } from "react-device-detect";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -108,6 +109,7 @@ export default function App({ Component, pageProps }) {
           handleSymptomChange={handleSymptomChange}
           mySymptoms={mySymptoms}
           handleSymptomDelete={handleSymptomDelete}
+          isIOS={isIOS}
         />
       </StyleSheetManager>
     </>

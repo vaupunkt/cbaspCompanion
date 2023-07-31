@@ -6,6 +6,7 @@ import Head from "next/head";
 export default function FutureAnalysesPage({
   allFutureAnalysisEntries,
   onDelete,
+  isIOS,
 }) {
   return (
     <>
@@ -14,9 +15,13 @@ export default function FutureAnalysesPage({
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header backButton title="Zukunftsanalysen" />
-      <Fade>
+      {isIOS ? (
         <EntryList entries={allFutureAnalysisEntries} onDelete={onDelete} />
-      </Fade>
+      ) : (
+        <Fade>
+          <EntryList entries={allFutureAnalysisEntries} onDelete={onDelete} />
+        </Fade>
+      )}
     </>
   );
 }

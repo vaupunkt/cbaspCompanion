@@ -33,7 +33,7 @@ const NavigationLink = styled(Link)`
     box-shadow: inset 0px 0px 5px var(--secondaryColor);
   }
 `;
-export default function mydata() {
+export default function mydata({ isIOS }) {
   return (
     <>
       <Head>
@@ -41,13 +41,21 @@ export default function mydata() {
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header link="./" title="Meine Daten" />
-      <NavigationContainer>
-        <Slide duration={300} cascade>
+      {isIOS ? (
+        <NavigationContainer>
           <NavigationLink href="./mysymptoms">Meine Symptome</NavigationLink>
           <NavigationLink href="./myanalyses">Meine Analysen</NavigationLink>
           <NavigationLink href="./kieslerkreis">Kieslerkreis</NavigationLink>
-        </Slide>
-      </NavigationContainer>
+        </NavigationContainer>
+      ) : (
+        <NavigationContainer>
+          <Slide duration={300} cascade>
+            <NavigationLink href="./mysymptoms">Meine Symptome</NavigationLink>
+            <NavigationLink href="./myanalyses">Meine Analysen</NavigationLink>
+            <NavigationLink href="./kieslerkreis">Kieslerkreis</NavigationLink>
+          </Slide>
+        </NavigationContainer>
+      )}
     </>
   );
 }

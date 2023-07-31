@@ -24,6 +24,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-confirm-alert": "^3.0.6",
     "react-conversation-form": "^2.0.2",
+    "react-device-detect": "^2.2.3",
     "react-dom": "18.2.0",
     "react-hook-theme": "^1.2.6",
     "styled-components": "^6.0.2",

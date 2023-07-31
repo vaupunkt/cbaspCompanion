@@ -3,7 +3,11 @@ import EntryList from "@/components/EntryList";
 import { Fade } from "react-awesome-reveal";
 import Head from "next/head";
 
-export default function PastAnalysesPage({ allPastAnalysisEntries, onDelete }) {
+export default function PastAnalysesPage({
+  isIOS,
+  allPastAnalysisEntries,
+  onDelete,
+}) {
   return (
     <>
       <Head>
@@ -11,9 +15,13 @@ export default function PastAnalysesPage({ allPastAnalysisEntries, onDelete }) {
         <meta charset="UTF-8"></meta>
       </Head>
       <Header backButton title="Vergangenheitsanalysen" />
-      <Fade>
+      {isIOS ? (
         <EntryList entries={allPastAnalysisEntries} onDelete={onDelete} />
-      </Fade>
+      ) : (
+        <Fade>
+          <EntryList entries={allPastAnalysisEntries} onDelete={onDelete} />
+        </Fade>
+      )}
     </>
   );
 }
