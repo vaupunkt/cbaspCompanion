@@ -60,28 +60,51 @@ const Subtitle = styled.h2`
   text-transform: uppercase;
 `;
 
-export default function Home() {
+export default function Home({ isIOS }) {
   return (
     <>
       <Head>
         <title>CBASP Companion</title>
         <meta charSet="UTF-8"></meta>
       </Head>
-      <Zoom duration={300}>
-        <TitleBox>
-          <Fade>
+      {isIOS ? (
+        <>
+          <TitleBox>
             <Title>CBASP</Title>
             <Subtitle>Companion</Subtitle>
-          </Fade>
-        </TitleBox>
-      </Zoom>
-      <NavigationContainer>
-        <Slide duration={300} cascade>
-          <NavigationLink href="./newanalysis">Neue Analyse ➕ </NavigationLink>
-          <NavigationLink href="./mydata">Meine Daten</NavigationLink>
-          <NavigationLink href="./moreinformation">Mehr Infos</NavigationLink>
-        </Slide>
-      </NavigationContainer>
+          </TitleBox>
+
+          <NavigationContainer>
+            <NavigationLink href="./newanalysis">
+              Neue Analyse ➕{" "}
+            </NavigationLink>
+            <NavigationLink href="./mydata">Meine Daten</NavigationLink>
+            <NavigationLink href="./moreinformation">Mehr Infos</NavigationLink>
+          </NavigationContainer>
+        </>
+      ) : (
+        <>
+          <Zoom duration={300}>
+            <TitleBox>
+              <Fade>
+                <Title>CBASP</Title>
+                <Subtitle>Companion</Subtitle>
+              </Fade>
+            </TitleBox>
+          </Zoom>
+          <NavigationContainer>
+            <Slide duration={300} cascade>
+              <NavigationLink href="./newanalysis">
+                Neue Analyse ➕{" "}
+              </NavigationLink>
+              <NavigationLink href="./mydata">Meine Daten</NavigationLink>
+              <NavigationLink href="./moreinformation">
+                Mehr Infos
+              </NavigationLink>
+            </Slide>
+          </NavigationContainer>
+        </>
+      )}
     </>
   );
 }

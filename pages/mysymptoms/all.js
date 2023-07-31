@@ -72,7 +72,11 @@ const SymptomEntry = styled.li`
       }
     `}
 `;
-export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
+export default function AllSymptoms({
+  isIOS,
+  mySymptoms,
+  handleSymptomDelete,
+}) {
   const [editMode, setEditMode] = useState(false);
   function toggleEditMode() {
     setEditMode(!editMode);
@@ -115,8 +119,8 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
           </Button>
         )}
         <SymptomList>
-          <Fade cascade damping={0.2}>
-            {mySymptoms.map(({ symptoms, category }) =>
+          {isIOS ? (
+            mySymptoms.map(({ symptoms, category }) =>
               symptoms.length > 0
                 ? symptoms.map(({ symptom, id }) => (
                     <SymptomEntry key={id} category={category}>
@@ -134,8 +138,30 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
                     </SymptomEntry>
                   ))
                 : null
-            )}
-          </Fade>
+            )
+          ) : (
+            <Fade cascade damping={0.2}>
+              {mySymptoms.map(({ symptoms, category }) =>
+                symptoms.length > 0
+                  ? symptoms.map(({ symptom, id }) => (
+                      <SymptomEntry key={id} category={category}>
+                        {editMode ? (
+                          <Button
+                            type="button"
+                            name="deleteSymptom"
+                            variant="small"
+                            onClick={() => handleSymptomDelete(id)}
+                          >
+                            🗑️
+                          </Button>
+                        ) : null}
+                        {symptom}
+                      </SymptomEntry>
+                    ))
+                  : null
+              )}
+            </Fade>
+          )}
         </SymptomList>
       </>
     );

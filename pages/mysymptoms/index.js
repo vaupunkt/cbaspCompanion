@@ -59,7 +59,7 @@ const SeeAllSymptomLink = styled.div`
   }
 `;
 
-const AddNewSymptomLink = styled.div`
+const AddNewSymptomLink = styled.p`
   padding: 15px 40px 15px 15px;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
@@ -83,7 +83,7 @@ const AddNewSymptomLink = styled.div`
   }
 `;
 
-const SeeMoreInformationLink = styled.div`
+const SeeMoreInformationLink = styled.p`
   padding: 15px;
   border-radius: 25px;
   color: var(--secondaryColor);
@@ -116,7 +116,7 @@ const MoreInformationArticle = styled.article`
   hyphens: auto;
 `;
 
-export default function MySymptomsPage() {
+export default function MySymptomsPage({ isIOS }) {
   return (
     <>
       <Head>
@@ -125,7 +125,7 @@ export default function MySymptomsPage() {
       </Head>
       <ScrollToTop />
       <Header link="/mydata" title="Meine Symptome" />
-      <Fade cascading damping={0.5}>
+      {isIOS ? (
         <SymptomGrid lang="de">
           <SymptomBlock
             href={`/mysymptoms/physicalLevel`}
@@ -153,7 +153,37 @@ export default function MySymptomsPage() {
             <h3>Verhaltensebene</h3>
           </SymptomBlock>
         </SymptomGrid>
-      </Fade>
+      ) : (
+        <Fade cascading damping={0.5}>
+          <SymptomGrid lang="de">
+            <SymptomBlock
+              href={`/mysymptoms/physicalLevel`}
+              color="var(--physicalLevel)"
+            >
+              <h3>Körperliche Ebene</h3>
+            </SymptomBlock>
+
+            <SymptomBlock
+              href={`/mysymptoms/emotionalLevel`}
+              color="var(--emotionalLevel)"
+            >
+              <h3>Gefühlsebene</h3>
+            </SymptomBlock>
+            <SymptomBlock
+              href={`/mysymptoms/mentalLevel`}
+              color="var(--mentalLevel)"
+            >
+              <h3>gedankliche Ebene</h3>
+            </SymptomBlock>
+            <SymptomBlock
+              href={`/mysymptoms/behavioralLevel`}
+              color="var(--behavioralLevel)"
+            >
+              <h3>Verhaltensebene</h3>
+            </SymptomBlock>
+          </SymptomGrid>
+        </Fade>
+      )}
       <Link href="/addsymptom">
         <AddNewSymptomLink>+</AddNewSymptomLink>
       </Link>

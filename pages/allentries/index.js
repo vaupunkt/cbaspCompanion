@@ -3,7 +3,7 @@ import EntryList from "@/components/EntryList";
 import { Fade } from "react-awesome-reveal";
 import Head from "next/head";
 
-export default function AllEntriesPage({ allEntries, onDelete }) {
+export default function AllEntriesPage({ allEntries, onDelete, isIOS }) {
   return (
     <>
       <Head>
@@ -11,9 +11,13 @@ export default function AllEntriesPage({ allEntries, onDelete }) {
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header backButton title="Alle Einträge" />
-      <Fade>
+      {isIOS ? (
         <EntryList entries={allEntries} onDelete={onDelete} />
-      </Fade>
+      ) : (
+        <Fade>
+          <EntryList entries={allEntries} onDelete={onDelete} />
+        </Fade>
+      )}
     </>
   );
 }

@@ -69,7 +69,11 @@ const SymptomList = styled.ul`
   width: 100%;
   justify-content: space-evenly;
 `;
-export default function CategoryPage({ mySymptoms, handleSymptomDelete }) {
+export default function CategoryPage({
+  isIOS,
+  mySymptoms,
+  handleSymptomDelete,
+}) {
   const router = useRouter();
   const { category } = router.query;
   const [editMode, setEditMode] = useState(false);
@@ -131,8 +135,8 @@ export default function CategoryPage({ mySymptoms, handleSymptomDelete }) {
             </Button>
           )}
           <SymptomList>
-            <Fade cascade damping={0.2}>
-              {allSymptoms.map(({ symptom, id }) => {
+            {isIOS ? (
+              allSymptoms.map(({ symptom, id }) => {
                 return (
                   <SymptomEntry key={id} category={category}>
                     {editMode ? (
@@ -148,8 +152,28 @@ export default function CategoryPage({ mySymptoms, handleSymptomDelete }) {
                     {symptom}
                   </SymptomEntry>
                 );
-              })}
-            </Fade>
+              })
+            ) : (
+              <Fade cascade damping={0.2}>
+                {allSymptoms.map(({ symptom, id }) => {
+                  return (
+                    <SymptomEntry key={id} category={category}>
+                      {editMode ? (
+                        <Button
+                          type="button"
+                          name="deleteSymptom"
+                          variant="small"
+                          onClick={() => handleSymptomDelete(id)}
+                        >
+                          🗑️
+                        </Button>
+                      ) : null}
+                      {symptom}
+                    </SymptomEntry>
+                  );
+                })}
+              </Fade>
+            )}
           </SymptomList>
         </>
       ) : (

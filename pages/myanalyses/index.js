@@ -36,7 +36,7 @@ const NavigationLink = styled(Link)`
   }
 `;
 
-export default function MyAnalysesPage() {
+export default function MyAnalysesPage({ isIOS }) {
   return (
     <>
       <Head>
@@ -44,8 +44,8 @@ export default function MyAnalysesPage() {
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header backButton title="Meine Situationsanalysen" />
-      <NavigationContainer>
-        <Slide duration={300} cascade>
+      {isIOS ? (
+        <NavigationContainer>
           <NavigationLink href="./pastanalyses">
             Vergangenheitsanalysen
           </NavigationLink>
@@ -56,8 +56,23 @@ export default function MyAnalysesPage() {
             Zukunftsanalysen
           </NavigationLink>
           <NavigationLink href="./allentries">Alle Analysen</NavigationLink>
-        </Slide>
-      </NavigationContainer>
+        </NavigationContainer>
+      ) : (
+        <NavigationContainer>
+          <Slide duration={300} cascade>
+            <NavigationLink href="./pastanalyses">
+              Vergangenheitsanalysen
+            </NavigationLink>
+            <NavigationLink href="./innersituationanalyses">
+              Innere Situationsanalysen
+            </NavigationLink>
+            <NavigationLink href="./futureanalyses">
+              Zukunftsanalysen
+            </NavigationLink>
+            <NavigationLink href="./allentries">Alle Analysen</NavigationLink>
+          </Slide>
+        </NavigationContainer>
+      )}
     </>
   );
 }
