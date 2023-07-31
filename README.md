@@ -1,5 +1,4 @@
-![cbaspCompanion_Title_animated](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/a43f0bb0-1f9a-4f2d-8d4e-d8cf78f1d5e8)
-
+![CBASP Companion ReadmeTitle](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/1483213d-5879-4746-9570-d56ab70ac289)
 
 # CBASP Companion
 
