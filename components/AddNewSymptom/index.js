@@ -82,7 +82,9 @@ export default function AddNewSymptom({ handleSymptomChange }) {
 
   function submitCallback() {
     let dataset = cf.getFormData(true);
-    const newSymptoms = [...new Set(dataset.symptom.split(" "))];
+    const newSymptoms = [
+      ...new Set(dataset.symptom.split(",").map((symptom) => symptom.trim())),
+    ];
     const symptomCategory = dataset.symptomCategories[0];
     handleSymptomChange((prevMySymptoms) =>
       prevMySymptoms.map((category) =>
@@ -98,12 +100,13 @@ export default function AddNewSymptom({ handleSymptomChange }) {
       )
     );
     cf.addRobotChatResponse(
-      "<strong>Super 🎉</strong>&&Ich leite dich weiter deinen Symptomen.&&Dort kannst du deine Eingaben ansehen und auch bearbeiten."
+      "<strong>Super 🎉</strong>&&Ich leite dich weiter zu deinen Symptomen.&&Dort kannst du deine Eingaben ansehen und auch bearbeiten."
     );
     setTimeout(() => {
       router.push(`/mysymptoms`);
     }, 5000);
   }
+
   return (
     <>
       <ConversationalFormSection>

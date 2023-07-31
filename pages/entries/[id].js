@@ -41,7 +41,7 @@ export default function EntryPage({
           <Button
             name="delete"
             type="button"
-            variant="big"
+            variant="side"
             onClick={() => {
               onDelete(entry.id, "entry");
             }}

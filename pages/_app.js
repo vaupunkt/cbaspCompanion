@@ -49,6 +49,29 @@ export default function App({ Component, pageProps }) {
       .filter((str) => str !== "")
   );
 
+  function handleSymptomDelete(id) {
+    confirmAlert({
+      message: "Sicher, dass du diesen Eintrag löschen willst?",
+      buttons: [
+        { label: "Abbrechen" },
+        {
+          label: "Löschen",
+          onClick: () => {
+            handleSymptomChange((prevMySymptoms) =>
+              prevMySymptoms.map((category) => ({
+                ...category,
+                symptoms:
+                  category.symptoms.length > 0
+                    ? category.symptoms.filter((symptom) => symptom.id !== id)
+                    : [],
+              }))
+            );
+          },
+        },
+      ],
+    });
+  }
+
   function handleDelete(id, currentPage) {
     confirmAlert({
       message: "Sicher, dass du diesen Eintrag löschen willst?",
@@ -83,6 +106,7 @@ export default function App({ Component, pageProps }) {
           setAllActionInterpretations={setAllActionInterpretations}
           handleSymptomChange={handleSymptomChange}
           mySymptoms={mySymptoms}
+          handleSymptomDelete={handleSymptomDelete}
         />
       </StyleSheetManager>
     </>

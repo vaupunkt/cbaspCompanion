@@ -11,7 +11,7 @@ const AddNewSymptom = dynamic(
 export default function AddSymptomPage({ handleSymptomChange, mySymptoms }) {
   return (
     <>
-      <Header backButton title="Meine Symptome" />
+      <Header backButton title="Symptome hinzufügen" />
       <AddNewSymptom
         handleSymptomChange={handleSymptomChange}
         mySymptoms={mySymptoms}
