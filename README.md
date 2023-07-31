@@ -35,7 +35,7 @@ This project was created from the neue fische `next` template.
 ### Progressive Web App
 ![image](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/91021bce-7599-4266-9f36-ba9146d25b07)
 
-The app is available as a Progressive Web App (PWA), which means it can be installed on your device and used offline. To install the app, simply visit our website using a compatible browser and follow the prompts to add it to your home screen. Once installed, you’ll be able to use the app just like any other native app on your device.
+The app is available as a Progressive Web App (PWA), which means it can be installed on your device and used offline. To install the app, simply visit the website using a compatible browser and follow the prompts to add it to your home screen. Once installed, you’ll be able to use the app just like any other native app on your device.
 
 ### Used Packages and Tools
 
