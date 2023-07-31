@@ -90,6 +90,7 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
           <meta charSet="UTF-8"></meta>
         </Head>
         <Header link="../mysymptoms" title="Alle Symptome" />
+
         {editMode ? (
           <Button
             type="button"
@@ -137,7 +138,9 @@ export default function AllSymptoms({ mySymptoms, handleSymptomDelete }) {
   } else {
     return (
       <>
+
         <Header link="../mysymptoms" title="Alle Symptome" />
+
         <EmptyMessage>
           <h2>Noch keine Einträge</h2>
           <p>Füge neue Einträge hinzu:</p>
