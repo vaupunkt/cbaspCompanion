@@ -1,4 +1,4 @@
-![CBASP Companion ReadmeTitle](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/1483213d-5879-4746-9570-d56ab70ac289)
+![CBASP Companion ReadmeTitle](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/26cf464b-412d-492a-b107-9997921bad76)
 
 # CBASP Companion
 
@@ -9,6 +9,7 @@ CBASP Companion is an app designed to support people with chronic depression und
 CBASP is a therapeutic approach specifically developed for the treatment of patients with chronic depression. It is a highly structured and directive approach that integrates behavioral, cognitive, psychodynamic, and interpersonal approaches. CBASP was developed by James P. McCullough and has been empirically tested in scientific studies since 1980. It is the only psychotherapeutic approach for the treatment of long-lasting depressive disorders.
 
 ## About the Kiesler Circle
+![Kieslerkreis](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/335920c1-b318-4982-aa5b-8eaabfaeba0a)
 
 The Kiesler Circle is a communication model developed by the American psychologist Donald J. Kiesler in 1983. It describes how interpersonal interactions can be described on two axes: the axis of control with the poles “dominant” (open) and “submissive” (closed), and the axis of affiliation/relationship with the poles “friendly” (close) and “hostile” (distant). The Kiesler Circle graphically describes the taxonomy of interpersonal problems and plays a significant role in the psychotherapy of chronic depression with CBASP.
 
@@ -16,12 +17,16 @@ The Kiesler Circle is a communication model developed by the American psychologi
 
 In the app, users can fill out and view various situation analyses, including future analysis, past analysis, and inner situation analysis. The app uses a chatbot from ConversationalForms and also has the Kiesler Circle implemented.
 
+![image](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/92e0e6db-f650-447e-8998-724fb92a611c)
+
+
 ## Repository
 
 The repository for the app can be found here: https://github.com/vaupunkt/cbaspCompanion
 This project was created from the neue fische `next` template.
 
 ### Project Setup
+![CBASP Companion ReadmeTitle](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/a437f48a-35c2-49df-bec0-869739b42e99)
 
 1. Clone this repository
 2. `$ npm install` installs all the files and dependencies the app needs to run
