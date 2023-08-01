@@ -18,7 +18,7 @@ The Kiesler Circle is a communication model developed by the American psychologi
 ## Features
 ![image](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/92e0e6db-f650-447e-8998-724fb92a611c)
 
-Our app offers a variety of features to help users analyze their situation and gain insights into their thoughts and behaviors. With the app, users can fill out and view various situation analyses, including future analysis, past analysis, and inner situation analysis. These analyses allow users to reflect on their past experiences, plan for the future, and understand their current inner state.
+The app offers a variety of features to help users analyze their situation and gain insights into their thoughts and behaviors. With the app, users can fill out and view various situation analyses, including future analysis, past analysis, and inner situation analysis. These analyses allow users to reflect on their past experiences, plan for the future, and understand their current inner state.
 
 To make data entry easy and intuitive, the app uses a chatbot from ConversationalForms. This chatbot guides users through the process of entering their data and provides a conversational interface for interacting with the app.
 
@@ -43,13 +43,13 @@ This project was created from the neue fische `next` template.
 
 ### Used Packages and Tools
 
-- **React**: React is a JavaScript library for building user interfaces. It lets you create reusable components that can handle data and events. React also supports server-side rendering, which can improve the performance and SEO of your app.
+- **React**: React is a JavaScript library for building user interfaces. It lets you create reusable components that can handle data and events. React also supports server-side rendering, which can improve the performance and SEO of the app.
 - **Next.js**: Next.js is a framework for building web applications with React. It provides features such as routing, data fetching, image optimization, and more. Next.js also supports serverless functions, which let you write backend code without managing servers.
-- **styled-components**: styled-components is a library that allows you to write CSS code inside your React components. It makes it easier to style your app and avoid conflicts with other CSS rules. It also supports theming, dynamic styling, and server-side rendering.
+- **styled-components**: styled-components is a library that allows you to write CSS code inside the React components. It makes it easier to style the app and avoid conflicts with other CSS rules. It also supports theming, dynamic styling, and server-side rendering.
 - **Chart.js**: Chart.js is a library for creating HTML5 charts. It is simple yet flexible and provides a wide range of chart types, plugins, and customization options. In the CBASP Companion app, I used Chart.js to draw and make the Kiesler Circle interactive. This allows users to visualize their interpersonal interactions in a more engaging way.
 - **react-chartjs-2**: react-chartjs-2 is a React wrapper for Chart.js. It lets you use Chart.js elements as React components. It also handles updating and destroying the charts when the props change or the component unmounts.
 - **uid**: uid is a library that generates unique IDs. It can be useful for creating keys, identifiers, or tokens. In the CBASP Companion app, I used uid to generate unique keys for each situation analysis.
-- **react-awesome-reveal**: react-awesome-reveal is a library for adding reveal animations to your React components. It uses the Intersection Observer API to detect when the components appear in the viewport and applies CSS animations to them. It also supports custom animations, hooks, and TypeScript.
+- **react-awesome-reveal**: react-awesome-reveal is a library for adding reveal animations to the React components. It uses the Intersection Observer API to detect when the components appear in the viewport and applies CSS animations to them. It also supports custom animations, hooks, and TypeScript.
 - **react-confirm-alert**: react-confirm-alert is a library for creating confirm dialogs in React apps. It offers a promise-based API that works well with async/await syntax. It also allows you to customize the dialog style and content.
 conversationalform: conversationalform is a library that turns web forms into conversations. It uses a chatbot interface to ask questions and collect user input. It also supports validation, customization, and accessibility.
 - **react-device-detect**: This is an npm package that provides a simple way to detect the type of device a user is using in a React application. It provides a number of functions, such as isMobile, isTablet, and isDesktop, that you can use to conditionally render different components or styles based on the type of device the user is using.
