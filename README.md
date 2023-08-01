@@ -16,10 +16,18 @@ CBASP is a therapeutic approach specifically developed for the treatment of pati
 The Kiesler Circle is a communication model developed by the American psychologist Donald J. Kiesler in 1983. It describes how interpersonal interactions can be described on two axes: the axis of control with the poles “dominant” (open) and “submissive” (closed), and the axis of affiliation/relationship with the poles “friendly” (close) and “hostile” (distant). The Kiesler Circle graphically describes the taxonomy of interpersonal problems and plays a significant role in the psychotherapy of chronic depression with CBASP.
 
 ## Features
-
-In the app, users can fill out and view various situation analyses, including future analysis, past analysis, and inner situation analysis. The app uses a chatbot from ConversationalForms and also has the Kiesler Circle implemented.
-
 ![image](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/92e0e6db-f650-447e-8998-724fb92a611c)
+
+Our app offers a variety of features to help users analyze their situation and gain insights into their thoughts and behaviors. With the app, users can fill out and view various situation analyses, including future analysis, past analysis, and inner situation analysis. These analyses allow users to reflect on their past experiences, plan for the future, and understand their current inner state.
+
+To make data entry easy and intuitive, the app uses a chatbot from ConversationalForms. This chatbot guides users through the process of entering their data and provides a conversational interface for interacting with the app.
+
+In addition to the situation analyses, the app also has the Kiesler Circle implemented. The Kiesler Circle is a tool for understanding interpersonal behavior and relationships. It provides an overview of the user’s different positions in behavior and desired behavior, helping them to better understand their interactions with others.
+
+### Progressive Web App
+![image](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/91021bce-7599-4266-9f36-ba9146d25b07)
+
+The app is available as a Progressive Web App (PWA), which means it can be installed on your device and used offline. To install the app, simply visit the website using a compatible browser and follow the prompts to add it to your home screen. Once installed, you’ll be able to use the app just like any other native app on your device.
 
 ## Repository
 
@@ -32,11 +40,6 @@ This project was created from the neue fische `next` template.
 1. Clone this repository
 2. `$ npm install` installs all the files and dependencies the app needs to run
 3. `$ npm run dev` runs the app in dev mode and opens http://localhost:3000 to view it in your browser. Or you will be asked to confirm another port if this one isn't available.
-
-### Progressive Web App
-![image](https://github.com/vaupunkt/cbaspCompanion/assets/119793693/91021bce-7599-4266-9f36-ba9146d25b07)
-
-The app is available as a Progressive Web App (PWA), which means it can be installed on your device and used offline. To install the app, simply visit the website using a compatible browser and follow the prompts to add it to your home screen. Once installed, you’ll be able to use the app just like any other native app on your device.
 
 ### Used Packages and Tools
 
