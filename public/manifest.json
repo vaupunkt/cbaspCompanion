@@ -2,7 +2,7 @@
   "theme_color": "#262829",
   "background_color": "#262829",
   "display": "standalone",
-  "scope": "/CBASPComp/",
+  "scope": "/",
   "start_url": "/",
   "name": "CBASP Companion",
   "short_name": "CBASP Comp",

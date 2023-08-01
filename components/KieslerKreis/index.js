@@ -4,7 +4,8 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const DiagrammContainer = styled.div`
-  max-height: 80vh;
+  min-width: 300px;
+  max-width: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
