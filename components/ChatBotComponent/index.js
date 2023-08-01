@@ -34,6 +34,8 @@ export default function ChatBotComponent({
   kieslerkreisInput,
   handleKieslerkreisInputChange,
 }) {
+  const kieslerkreisInputRef = useRef(kieslerkreisInput);
+
   const router = useRouter();
   let cf = null;
   const ref = useRef(null);
@@ -42,8 +44,18 @@ export default function ChatBotComponent({
     event.preventDefault();
     const formData = new FormData(event.target);
     let dataset = Object.fromEntries(formData);
-    handleKieslerkreisInputChange({ ...dataset });
-    console.log("Dataset from Kieslerkreis", dataset);
+    if (dataset.behaviorKieslerkreis) {
+      handleKieslerkreisInputChange({
+        ...kieslerkreisInput,
+        behaviorKieslerkreis: dataset.behaviorKieslerkreis,
+      });
+    }
+    if (dataset.behaviorChangeKieslerkreis) {
+      handleKieslerkreisInputChange({
+        ...kieslerkreisInput,
+        behaviorChangeKieslerkreis: dataset.behaviorChangeKieslerkreis,
+      });
+    }
   }
 
   const formFields = [
@@ -127,6 +139,10 @@ export default function ChatBotComponent({
       ],
     },
   ];
+  useEffect(() => {
+    kieslerkreisInputRef.current = kieslerkreisInput;
+  }, [kieslerkreisInput]);
+
   const interpretationsAswerArray = [];
   const interpretationsToRevise = [
     {
@@ -251,12 +267,11 @@ export default function ChatBotComponent({
   }, []);
 
   function submitCallback() {
-    console.log("kieslerkreisinput in callback: ", kieslerkreisInput);
     let dataset = cf.getFormData(true);
 
     dataset = {
       ...dataset,
-      ...kieslerkreisInput,
+      ...kieslerkreisInputRef.current,
       id: uid(),
       date: date.toISOString().slice(0, 10),
       type: dataset.type[0],
@@ -296,7 +311,6 @@ export default function ChatBotComponent({
       }, []);
     dataset.revision = revisions;
     handleAllEntriesChange([...allEntries, dataset]);
-    console.log("Dataset: ", dataset);
     cf.addRobotChatResponse(
       "<strong>Du hast es geschafft 🎉</strong>&&Ich leite dich weiter zu deinem Eintrag.&&Dort kannst du deine Eingaben ansehen, bearbeiten und dich im Kieslerkreis einordnen."
     );
