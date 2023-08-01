@@ -104,8 +104,8 @@ export default function AddNewSymptom({ handleSymptomChange }) {
       "<strong>Super 🎉</strong>&&Ich leite dich weiter zu deinen Symptomen.&&Dort kannst du deine Eingaben ansehen und auch bearbeiten."
     );
     setTimeout(() => {
-      router.push(`/mysymptoms`);
-    }, 5000);
+      router.push(`/mysymptoms/all`);
+    }, 2500);
   }
 
   return (
