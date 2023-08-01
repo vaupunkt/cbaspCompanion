@@ -1,4 +1,5 @@
 import Button from "@/components/Button";
+import EmptyMessage from "@/components/EmptyMessage";
 import Header from "@/components/Header";
 import Head from "next/head";
 import { useState } from "react";
