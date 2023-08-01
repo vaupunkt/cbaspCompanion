@@ -8,10 +8,22 @@ import {
 } from "@/lib/questionFormFields";
 import { uid } from "uid";
 import { useRouter } from "next/router";
+import KieslerKreis from "@/components/KieslerKreis";
+import Button from "../Button";
 
 const ConversationalFormSection = styled.div`
-  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
   display: flex;
+`;
+
+const BehaviorKieslerKreisSection = styled.form`
+  padding: 10px;
+  min-height: calc(100vh - 50px);
+`;
+
+const BehaviorChangeKieslerKreisSection = styled.form`
+  padding: 10px;
+  min-height: calc(100vh - 50px);
 `;
 
 export default function ChatBotComponent({
@@ -19,10 +31,32 @@ export default function ChatBotComponent({
   allEntries,
   addActionInterpretation,
   allActionInterpretations,
+  kieslerkreisInput,
+  handleKieslerkreisInputChange,
 }) {
+  const kieslerkreisInputRef = useRef(kieslerkreisInput);
+
   const router = useRouter();
   let cf = null;
   const ref = useRef(null);
+
+  function handleNext(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    let dataset = Object.fromEntries(formData);
+    if (dataset.behaviorKieslerkreis) {
+      handleKieslerkreisInputChange({
+        ...kieslerkreisInput,
+        behaviorKieslerkreis: dataset.behaviorKieslerkreis,
+      });
+    }
+    if (dataset.behaviorChangeKieslerkreis) {
+      handleKieslerkreisInputChange({
+        ...kieslerkreisInput,
+        behaviorChangeKieslerkreis: dataset.behaviorChangeKieslerkreis,
+      });
+    }
+  }
 
   const formFields = [
     {
@@ -105,6 +139,10 @@ export default function ChatBotComponent({
       ],
     },
   ];
+  useEffect(() => {
+    kieslerkreisInputRef.current = kieslerkreisInput;
+  }, [kieslerkreisInput]);
+
   const interpretationsAswerArray = [];
   const interpretationsToRevise = [
     {
@@ -116,6 +154,13 @@ export default function ChatBotComponent({
     },
   ];
   const revisions = [];
+  const date = new Date();
+  const [visibility, setVisibility] = useState({
+    chatbot: { display: "flex" },
+    behaviorKieslerkreis: { display: "none" },
+    behaviorChangeKieslerkreis: { display: "none" },
+  });
+
   let flowCallback = function (dto, success, error) {
     if (dto.tag.value[0] === "goToForm") {
       setTimeout(() => {
@@ -177,8 +222,32 @@ export default function ChatBotComponent({
       revisions[Number(dto.tag.name.match(/\d+/)[0]) - 1].revision =
         dto.tag.value;
     }
+
+    if (dto.tag.name === "behavior") {
+      setVisibility({
+        chatbot: { display: "none" },
+        behaviorKieslerkreis: { display: "block" },
+        behaviorChangeKieslerkreis: { display: "none" },
+      });
+    }
+
+    if (dto.tag.name === "behaviorChange") {
+      setVisibility({
+        chatbot: { display: "none" },
+        behaviorKieslerkreis: { display: "none" },
+        behaviorChangeKieslerkreis: { display: "block" },
+      });
+    }
+
     success();
   };
+  function toggleVisibilityofChat() {
+    setVisibility({
+      chatbot: { display: "flex" },
+      behaviorKieslerkreis: { display: "none" },
+      behaviorChangeKieslerkreis: { display: "none" },
+    });
+  }
 
   useEffect(function mount() {
     cf = ConversationalForm.startTheConversation({
@@ -198,12 +267,12 @@ export default function ChatBotComponent({
     };
   }, []);
 
-  const date = new Date();
-  const [dataset, setDataset] = useState();
   function submitCallback() {
     let dataset = cf.getFormData(true);
+
     dataset = {
       ...dataset,
+      ...kieslerkreisInputRef.current,
       id: uid(),
       date: date.toISOString().slice(0, 10),
       type: dataset.type[0],
@@ -243,7 +312,6 @@ export default function ChatBotComponent({
       }, []);
     dataset.revision = revisions;
     handleAllEntriesChange([...allEntries, dataset]);
-    setDataset(dataset);
     cf.addRobotChatResponse(
       "<strong>Du hast es geschafft 🎉</strong>&&Ich leite dich weiter zu deinem Eintrag.&&Dort kannst du deine Eingaben ansehen, bearbeiten und dich im Kieslerkreis einordnen."
     );
@@ -253,16 +321,50 @@ export default function ChatBotComponent({
   }
 
   return (
-    <ConversationalFormSection>
-      <div ref={ref} />
-      <datalist id="allActionInterpretations">
-        {allActionInterpretations.map((actionInterpretationOption) => (
-          <option
-            key={actionInterpretationOption}
-            value={actionInterpretationOption}
-          />
-        ))}
-      </datalist>
-    </ConversationalFormSection>
+    <>
+      <ConversationalFormSection style={visibility.chatbot}>
+        <div ref={ref} />
+        <datalist id="allActionInterpretations">
+          {allActionInterpretations.map((actionInterpretationOption) => (
+            <option
+              key={actionInterpretationOption}
+              value={actionInterpretationOption}
+            />
+          ))}
+        </datalist>
+      </ConversationalFormSection>
+      <BehaviorKieslerKreisSection
+        onSubmit={handleNext}
+        id="behaviorKieslerkreisSection"
+        style={visibility.behaviorKieslerkreis}
+      >
+        <KieslerKreis editMode analysisKey="behavior" />
+        <Button
+          variant="big"
+          type="submit"
+          name="next"
+          for="behaviorKieslerkreisSection"
+          onClick={toggleVisibilityofChat}
+        >
+          Weiter ➡️
+        </Button>
+      </BehaviorKieslerKreisSection>
+      <BehaviorChangeKieslerKreisSection
+        onSubmit={handleNext}
+        id="behaviorChangeKieslerkreisSection"
+        style={visibility.behaviorChangeKieslerkreis}
+      >
+        <KieslerKreis editMode analysisKey="behaviorChange" />
+        <Button
+          variant="big"
+          type="submit"
+          name="next"
+          for="behaviorChangeKieslerkreisSection"
+          onClick={toggleVisibilityofChat}
+        >
+          Weiter ➡️
+        </Button>
+      </BehaviorChangeKieslerKreisSection>
+    </>
   );
 }

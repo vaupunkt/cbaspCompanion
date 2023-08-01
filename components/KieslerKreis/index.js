@@ -61,6 +61,7 @@ export default function KieslerKreis({
   const [kieslerkreisData, setKieslerkreisData] = useState(
     kieslerkreisDataset ? JSON.parse(kieslerkreisDataset) : null
   );
+
   const strengthDescriptions = [
     { number: 1, text: "schwach ausgeprägt" },
     { number: 2, text: "mittlere Ausprägung" },
@@ -165,6 +166,7 @@ export default function KieslerKreis({
         enabled: false,
       },
     };
+
     options.onClick = (event, element, chart) => {
       const x = event.x;
       const y = event.y;
@@ -226,9 +228,7 @@ export default function KieslerKreis({
         strengthDescription.number === kieslerkreisData[strengthOfCategory]
     );
     const descriptionText = kieslerKreisDescription[strengthOfCategory];
-    if (analysisKey === "behavior") {
-    } else if (analysisKey === "behaviorChange") {
-    }
+
     return (
       <>
         <DiagrammContainer>

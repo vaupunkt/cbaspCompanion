@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import React from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { styled } from "styled-components";
 import Head from "next/head";
@@ -16,6 +16,8 @@ export default function NewAnalysis({
   allEntries,
   setAllActionInterpretations,
   allActionInterpretations,
+  kieslerkreisInput,
+  handleKieslerkreisInputChange,
 }) {
   function addActionInterpretation(newActionInterpretation) {
     setAllActionInterpretations((previousActionInterpretation) => {
@@ -26,6 +28,7 @@ export default function NewAnalysis({
       }
     });
   }
+
   return (
     <>
       <Head>
@@ -38,6 +41,8 @@ export default function NewAnalysis({
         allEntries={allEntries}
         addActionInterpretation={addActionInterpretation}
         allActionInterpretations={allActionInterpretations}
+        kieslerkreisInput={kieslerkreisInput}
+        handleKieslerkreisInputChange={handleKieslerkreisInputChange}
       />
     </>
   );
