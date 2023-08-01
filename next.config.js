@@ -2,8 +2,8 @@
 const nextConfig = {
   compiler: {
     styledComponents: true,
+    reactStrictMode: true,
   },
-  reactStrictMode: true,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -16,3 +16,11 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+const withPWA = require("next-pwa");
+
+module.exports = withPWA({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === "development",
+});

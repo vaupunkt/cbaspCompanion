@@ -1,47 +1,110 @@
-import Header from "@/components/Header";
 import { styled } from "styled-components";
 import Link from "next/link";
+import { Fade, Slide, Zoom } from "react-awesome-reveal";
+import Head from "next/head";
 
 const NavigationContainer = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  bottom: 80px;
+  gap: 50px;
+  bottom: 15vh;
 `;
 
 const NavigationLink = styled(Link)`
-  border-color: var(--mainDarkColor);
+  border-color: var(--primaryColor);
   padding: 15px 15px 15px 15px;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-  color: var(--mainLightColor);
-  background-color: var(--mainDarkColor);
+  color: var(--secondaryColor);
+  background-color: var(--primaryColor);
   text-decoration: none;
   font-size: 1.3em;
   align-self: flex-start;
-
+  box-shadow: 0 0 20px color-mix(in srgb, var(--secondaryColor) 20%, black);
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--mainDarkColor) 80%,
-      var(--mainLightColor)
+      var(--primaryColor) 80%,
+      var(--secondaryColor)
     );
   }
   &:active {
-    box-shadow: inset 0px 0px 5px var(--mainLightColor);
+    box-shadow: inset 0px 0px 5px var(--secondaryColor);
   }
 `;
+const TitleBox = styled.div`
+  width: 220px;
+  margin: 15vh auto;
+  padding: 40px;
+  border-radius: 25px;
+  text-align: center;
+  background-color: var(--primaryColor);
+  color: var(--secondaryColor);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--secondaryColor) 20%, black);
+`;
 
-export default function Home() {
+const Title = styled.h1`
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 2em;
+  text-transform: uppercase;
+`;
+
+const Subtitle = styled.h2`
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-size: 1.1em;
+  text-transform: uppercase;
+`;
+
+export default function Home({ isIOS }) {
   return (
     <>
-      <Header title="CBASP Companion" />
-      <NavigationContainer>
-        <NavigationLink href="./newanalysis">Neue Analyse ➕ </NavigationLink>
-        <NavigationLink href="./myanalyses">Meine Analysen</NavigationLink>
-        <NavigationLink href="./kieslerkreis">Kieslerkreis</NavigationLink>
-      </NavigationContainer>
+      <Head>
+        <title>CBASP Companion</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
+      {isIOS ? (
+        <>
+          <TitleBox>
+            <Title>CBASP</Title>
+            <Subtitle>Companion</Subtitle>
+          </TitleBox>
+
+          <NavigationContainer>
+            <NavigationLink href="./newanalysis">
+              Neue Analyse ➕{" "}
+            </NavigationLink>
+            <NavigationLink href="./mydata">Meine Daten</NavigationLink>
+            <NavigationLink href="./moreinformation">Mehr Infos</NavigationLink>
+          </NavigationContainer>
+        </>
+      ) : (
+        <>
+          <Zoom duration={300}>
+            <TitleBox>
+              <Fade>
+                <Title>CBASP</Title>
+                <Subtitle>Companion</Subtitle>
+              </Fade>
+            </TitleBox>
+          </Zoom>
+          <NavigationContainer>
+            <Slide duration={300} cascade>
+              <NavigationLink href="./newanalysis">
+                Neue Analyse ➕{" "}
+              </NavigationLink>
+              <NavigationLink href="./mydata">Meine Daten</NavigationLink>
+              <NavigationLink href="./moreinformation">
+                Mehr Infos
+              </NavigationLink>
+            </Slide>
+          </NavigationContainer>
+        </>
+      )}
     </>
   );
 }

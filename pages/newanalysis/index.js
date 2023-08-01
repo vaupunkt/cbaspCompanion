@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { styled } from "styled-components";
+import Head from "next/head";
 
 const ChatBotComponent = dynamic(
   () => {
@@ -30,7 +31,11 @@ export default function NewAnalysis({
 
   return (
     <>
-      <Header backButton title="Neue Situationsanalyse" />
+      <Head>
+        <title>Neue Analyse</title>
+        <meta charSet="UTF-8"></meta>
+      </Head>
+      <Header link="./" title="Neue Situationsanalyse" />
       <ChatBotComponent
         handleAllEntriesChange={handleAllEntriesChange}
         allEntries={allEntries}

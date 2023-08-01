@@ -67,7 +67,7 @@ export default function Entry({
     <>
       {editMode ? (
         <form id="editEntryForm" onSubmit={handleSubmit}>
-          <Button name="save" variant="big" form="editEntryForm" type="submit">
+          <Button name="save" variant="side" form="editEntryForm" type="submit">
             💾 Speichern
           </Button>
           {analysisKeys.map((analysisKey) => {

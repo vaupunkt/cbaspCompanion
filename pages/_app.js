@@ -2,16 +2,29 @@ import GlobalStyle from "../styles";
 import initialEntries from "@/lib/initialEntries";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-
 import useLocalStorageState from "use-local-storage-state";
 import isPropValid from "@emotion/is-prop-valid";
-import { StyleSheetManager } from "styled-components";
 import { useState } from "react";
+import { StyleSheetManager } from "styled-components";
+import { useRouter } from "next/router";
+import { isIOS } from "react-device-detect";
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
   const [allEntries, setAllEntries] = useLocalStorageState("Entries", {
     defaultValue: initialEntries,
   });
+  const [mySymptoms, setMySymptoms] = useLocalStorageState("Symptoms", {
+    defaultValue: [
+      { category: "physicalLevel", symptoms: {} },
+      { category: "emotionalLevel", symptoms: {} },
+      { category: "mentalLevel", symptoms: {} },
+      { category: "behavioralLevel", symptoms: {} },
+    ],
+  });
+  function handleSymptomChange(newSymptoms) {
+    setMySymptoms(newSymptoms);
+  }
   const allFutureAnalysisEntries = allEntries.filter(
     (initialEntry) => initialEntry.type === "FutureAnalysis"
   );
@@ -47,6 +60,29 @@ export default function App({ Component, pageProps }) {
       .filter((str) => str !== "")
   );
 
+  function handleSymptomDelete(id) {
+    confirmAlert({
+      message: "Sicher, dass du diesen Eintrag löschen willst?",
+      buttons: [
+        { label: "Abbrechen" },
+        {
+          label: "Löschen",
+          onClick: () => {
+            handleSymptomChange((prevMySymptoms) =>
+              prevMySymptoms.map((category) => ({
+                ...category,
+                symptoms:
+                  category.symptoms.length > 0
+                    ? category.symptoms.filter((symptom) => symptom.id !== id)
+                    : [],
+              }))
+            );
+          },
+        },
+      ],
+    });
+  }
+
   function handleDelete(id, currentPage) {
     confirmAlert({
       message: "Sicher, dass du diesen Eintrag löschen willst?",
@@ -57,14 +93,13 @@ export default function App({ Component, pageProps }) {
           onClick: () => {
             setAllEntries(allEntries.filter((entry) => entry.id !== id));
             if (currentPage === "entry") {
-              history.back();
+              router.back();
             }
           },
         },
       ],
     });
   }
-
   return (
     <>
       <GlobalStyle />
@@ -81,6 +116,10 @@ export default function App({ Component, pageProps }) {
           setAllActionInterpretations={setAllActionInterpretations}
           kieslerkreisInput={kieslerkreisInput}
           handleKieslerkreisInputChange={handleKieslerkreisInputChange}
+          handleSymptomChange={handleSymptomChange}
+          mySymptoms={mySymptoms}
+          handleSymptomDelete={handleSymptomDelete}
+          isIOS={isIOS}
         />
       </StyleSheetManager>
     </>
