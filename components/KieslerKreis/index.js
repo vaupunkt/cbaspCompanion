@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const DiagrammContainer = styled.div`
   min-width: 300px;
-  max-height: 600px;
+  max-width: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
