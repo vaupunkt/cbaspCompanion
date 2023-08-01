@@ -1,42 +1,11 @@
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { styled, css } from "styled-components";
 
-const EmptyMessage = styled.section`
-  padding: 50px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
-const AddEntryLink = styled(Link)`
-  text-decoration: none;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: var(--secondaryColor);
-  background-color: var(--primaryColor);
-  border: solid;
-  font-weight: 900;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  align-self: center;
-  &:hover {
-    background-color: color-mix(
-      in srgb,
-      var(--primaryColor) 80%,
-      var(--secondaryColor)
-    );
-  }
-  &:active {
-    box-shadow: inset 0px 0px 5px var(--primaryColor);
-  }
-`;
 const SymptomEntry = styled.li`
   ${(props) =>
     props.category &&
@@ -177,11 +146,7 @@ export default function CategoryPage({
           </SymptomList>
         </>
       ) : (
-        <EmptyMessage>
-          <h2>Noch keine Einträge</h2>
-          <p>Füge neue Einträge hinzu:</p>
-          <AddEntryLink href="/addsymptom"> + </AddEntryLink>
-        </EmptyMessage>
+        <EmptyMessage link="/addsymptom" />
       )}
     </>
   );

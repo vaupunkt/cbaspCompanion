@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import EntryList from "@/components/EntryList";
 import { Fade } from "react-awesome-reveal";
 import Head from "next/head";
+import EmptyMessage from "@/components/EmptyMessage";
 
 export default function FutureAnalysesPage({
   allFutureAnalysisEntries,
@@ -15,12 +16,16 @@ export default function FutureAnalysesPage({
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header backButton title="Zukunftsanalysen" />
-      {isIOS ? (
-        <EntryList entries={allFutureAnalysisEntries} onDelete={onDelete} />
-      ) : (
-        <Fade>
+      {allFutureAnalysisEntries > 0 ? (
+        isIOS ? (
           <EntryList entries={allFutureAnalysisEntries} onDelete={onDelete} />
-        </Fade>
+        ) : (
+          <Fade>
+            <EntryList entries={allFutureAnalysisEntries} onDelete={onDelete} />
+          </Fade>
+        )
+      ) : (
+        <EmptyMessage link="/newanalysis" />
       )}
     </>
   );

@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import EntryList from "@/components/EntryList";
 import { Fade } from "react-awesome-reveal";
 import Head from "next/head";
+import EmptyMessage from "@/components/EmptyMessage";
 
 export default function AllEntriesPage({ allEntries, onDelete, isIOS }) {
   return (
@@ -11,12 +12,16 @@ export default function AllEntriesPage({ allEntries, onDelete, isIOS }) {
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header backButton title="Alle Einträge" />
-      {isIOS ? (
-        <EntryList entries={allEntries} onDelete={onDelete} />
-      ) : (
-        <Fade>
+      {allEntries > 0 ? (
+        isIOS ? (
           <EntryList entries={allEntries} onDelete={onDelete} />
-        </Fade>
+        ) : (
+          <Fade>
+            <EntryList entries={allEntries} onDelete={onDelete} />
+          </Fade>
+        )
+      ) : (
+        <EmptyMessage link="/newanalysis" />
       )}
     </>
   );
