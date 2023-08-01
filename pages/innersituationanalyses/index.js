@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import EntryList from "@/components/EntryList";
 import { Fade } from "react-awesome-reveal";
 import Head from "next/head";
+import EmptyMessage from "@/components/EmptyMessage";
 
 export default function InnerSituationAnalysisPage({
   allInnerAnalysisEntries,
@@ -15,12 +16,16 @@ export default function InnerSituationAnalysisPage({
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header backButton title="Innere Situationsanalysen" />
-      {isIOS ? (
-        <EntryList entries={allInnerAnalysisEntries} onDelete={onDelete} />
-      ) : (
-        <Fade>
+      {allInnerAnalysisEntries > 0 ? (
+        isIOS ? (
           <EntryList entries={allInnerAnalysisEntries} onDelete={onDelete} />
-        </Fade>
+        ) : (
+          <Fade>
+            <EntryList entries={allInnerAnalysisEntries} onDelete={onDelete} />
+          </Fade>
+        )
+      ) : (
+        <EmptyMessage link="/newanalysis" />
       )}
     </>
   );

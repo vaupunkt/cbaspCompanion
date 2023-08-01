@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import EntryList from "@/components/EntryList";
 import { Fade } from "react-awesome-reveal";
 import Head from "next/head";
+import EmptyMessage from "@/components/EmptyMessage";
 
 export default function PastAnalysesPage({
   isIOS,
@@ -15,12 +16,16 @@ export default function PastAnalysesPage({
         <meta charset="UTF-8"></meta>
       </Head>
       <Header backButton title="Vergangenheitsanalysen" />
-      {isIOS ? (
-        <EntryList entries={allPastAnalysisEntries} onDelete={onDelete} />
-      ) : (
-        <Fade>
+      {allPastAnalysisEntries > 0 ? (
+        isIOS ? (
           <EntryList entries={allPastAnalysisEntries} onDelete={onDelete} />
-        </Fade>
+        ) : (
+          <Fade>
+            <EntryList entries={allPastAnalysisEntries} onDelete={onDelete} />
+          </Fade>
+        )
+      ) : (
+        <EmptyMessage link="/newanalysis" />
       )}
     </>
   );

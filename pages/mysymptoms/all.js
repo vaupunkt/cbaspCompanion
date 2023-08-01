@@ -1,17 +1,10 @@
 import Button from "@/components/Button";
+import EmptyMessage from "@/components/EmptyMessage";
 import Header from "@/components/Header";
 import Head from "next/head";
-import Link from "next/link";
 import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { styled, css } from "styled-components";
-
-const EmptyMessage = styled.section`
-  padding: 50px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
 
 const SymptomList = styled.ul`
   display: flex;
@@ -21,33 +14,7 @@ const SymptomList = styled.ul`
   width: 100%;
   justify-content: space-evenly;
 `;
-const AddEntryLink = styled(Link)`
-  text-decoration: none;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: var(--secondaryColor);
-  background-color: var(--primaryColor);
-  font-weight: 900;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  align-self: center;
-  &:hover {
-    background-color: color-mix(
-      in srgb,
-      var(--primaryColor) 80%,
-      var(--secondaryColor)
-    );
-  }
-  &:active {
-    box-shadow: inset 0px 0px 5px var(--primaryColor);
-  }
-`;
-const SymptomDeleteButton = styled(Button)`
-  top: 0px;
-  right: 0px;
-`;
+
 const SymptomEntry = styled.li`
   ${(props) =>
     props.category &&
@@ -169,11 +136,7 @@ export default function AllSymptoms({
     return (
       <>
         <Header link="/mysymptoms" title="Alle Symptome" />
-        <EmptyMessage>
-          <h2>Noch keine Einträge</h2>
-          <p>Füge neue Einträge hinzu:</p>
-          <AddEntryLink href="/addsymptom"> + </AddEntryLink>
-        </EmptyMessage>
+        <EmptyMessage link="/addsymptom" />
       </>
     );
   }
