@@ -3,6 +3,8 @@
   "rules": {
     "react/no-unescaped-entities": "off",
     "react/display-name": "off",
-    "@next/next/no-page-custom-font": "off"
+    "@next/next/no-page-custom-font": "off",
+    "react/jsx-key": "warn",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }
