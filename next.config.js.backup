@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
-const withPWA = require("next-pwa");
-
 const nextConfig = {
   compiler: {
     styledComponents: true,
+    reactStrictMode: true,
   },
   experimental: {
     forceSwcTransforms: true,
@@ -14,17 +13,16 @@ const nextConfig = {
       issuer: /\.[jt]sx?$/,
       use: ["@svgr/webpack"],
     });
+    withPWA({
+      dest: "public",
+      register: true,
+      skipWaiting: true,
+      disable: process.env.NODE_ENV === "development",
+    });
 
     return config;
   },
 };
 
-module.exports = withPWA({
-  ...nextConfig,
-  pwa: {
-    dest: "public",
-    register: true,
-    skipWaiting: true,
-    disable: process.env.NODE_ENV === "development",
-  },
-});
+const withPWA = require("next-pwa");
+module.exports = nextConfig;

@@ -16,7 +16,7 @@ export default function InnerSituationAnalysisPage({
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header backButton title="Innere Situationsanalysen" />
-      {allInnerAnalysisEntries > 0 ? (
+      {allInnerAnalysisEntries .length > 0 ? (
         isIOS ? (
           <EntryList entries={allInnerAnalysisEntries} onDelete={onDelete} />
         ) : (

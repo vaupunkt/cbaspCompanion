@@ -12,7 +12,7 @@ export default function AllEntriesPage({ allEntries, onDelete, isIOS }) {
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header backButton title="Alle Einträge" />
-      {allEntries > 0 ? (
+      {allEntries .length > 0 ? (
         isIOS ? (
           <EntryList entries={allEntries} onDelete={onDelete} />
         ) : (

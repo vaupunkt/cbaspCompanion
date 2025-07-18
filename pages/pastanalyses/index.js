@@ -13,10 +13,10 @@ export default function PastAnalysesPage({
     <>
       <Head>
         <title>Vergangenheitsanalysen</title>
-        <meta charset="UTF-8"></meta>
+        <meta charSet="UTF-8"></meta>
       </Head>
       <Header backButton title="Vergangenheitsanalysen" />
-      {allPastAnalysisEntries > 0 ? (
+      {allPastAnalysisEntries .length > 0 ? (
         isIOS ? (
           <EntryList entries={allPastAnalysisEntries} onDelete={onDelete} />
         ) : (

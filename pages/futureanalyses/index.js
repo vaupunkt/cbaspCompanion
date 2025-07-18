@@ -16,7 +16,7 @@ export default function FutureAnalysesPage({
         <meta charSet="UTF-8"></meta>
       </Head>
       <Header backButton title="Zukunftsanalysen" />
-      {allFutureAnalysisEntries > 0 ? (
+      {allFutureAnalysisEntries .length > 0 ? (
         isIOS ? (
           <EntryList entries={allFutureAnalysisEntries} onDelete={onDelete} />
         ) : (

@@ -1,19 +1,8 @@
 {
-  "env": {
-    "jest": true
-  },
-  "extends": ["next/babel", "next/core-web-vitals"],
+  "extends": ["next/core-web-vitals"],
   "rules": {
-    "import/no-anonymous-default-export": [
-      "error",
-      {
-        "allowObject": true
-      }
-    ]
-  },
-  "plugins": ["jest"]
+    "react/no-unescaped-entities": "off",
+    "react/display-name": "off",
+    "@next/next/no-page-custom-font": "off"
+  }
 }
-
-// {
-//   "extends": ["next/babel", "next/core-web-vitals"]
-// }
